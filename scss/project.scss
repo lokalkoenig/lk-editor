@@ -1,0 +1,910 @@
+
+$doc_pdf_width: 1122px;
+$doc_pdf_height: 794px;
+$doc_header_height: 125px;
+$doc_footer_height: 95px;
+
+// PXEdit
+
+$doc_content_height: 560px;
+
+$doc_30: 30px;
+$doc_content_spacing: $doc_30;
+$doc_80: 80px;
+
+
+$doc_pdf_zoom: 0.8;
+
+$doc_80: $doc_80 * $doc_pdf_zoom;
+$doc_content_height: $doc_content_height * $doc_pdf_zoom;
+$doc_footer_height: $doc_footer_height * $doc_pdf_zoom;
+$doc_footer_height: $doc_footer_height * $doc_pdf_zoom;
+$doc_content_spacing: $doc_content_spacing * $doc_pdf_zoom; 
+
+$doc_30: $doc_30 * $doc_pdf_zoom;
+$doc_header_height: $doc_header_height * $doc_pdf_zoom;
+$doc_pdf_width: $doc_pdf_width * $doc_pdf_zoom;
+$doc_pdf_height: $doc_pdf_height * $doc_pdf_zoom;
+
+
+$doc_h1_size: (28px * $doc_pdf_zoom);
+$doc_h2_size: (22px * $doc_pdf_zoom);
+$doc_hx_margin: (12px * $doc_pdf_zoom);
+$doc_p_margin: (10px * $doc_pdf_zoom);
+$doc_p_size: (16px * $doc_pdf_zoom);
+
+
+@import 'modules/fileupload';
+@import 'modules/inplace';
+
+
+.pdf-editor {
+     background: #34495e; 
+}
+
+
+
+ .editableform .control-group {
+		    margin-bottom: 0;
+		    white-space: nowrap;
+		    line-height: 20px;
+		    position: relative;
+		    width: 100%;
+		    display: block;
+	}
+	.editable-buttons {
+	    display: none;
+	}
+
+	.editable-container.editable-inline, .editable-input {
+			display: block;
+			width:100%;
+	}
+
+	.editable-unsaved {
+		font-weight: inherit;
+	}
+
+	.editable-click, a.editable-click, a.editable-click:hover {
+		border: none;
+	}
+
+
+
+	
+
+	.editableform .control-group, body {
+		line-height: 1.2;
+	}
+
+
+
+.trumbowyg-button-pane {
+	background: White;
+	border: 1px Silver solid;
+}
+
+
+#PXEdit {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0px;
+    display: none;
+    
+    &[data-change-layout='0']{
+        #vkudoc-option-change-layout {
+            display: none;
+        }
+     }
+    
+     &[data-change-input='0']{
+        #PXEdit-change-input {
+             display: none;
+        }
+     }
+     
+     
+    #document-save-settings {
+        display: none;
+    }
+    
+    &.pdf-editor-changed {
+        #document-save-settings {
+            display: inline-block;
+        }
+    }
+    
+    
+    &.loading {
+        #pdf-visibile-editor {
+           background: url(/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif);
+           background-position: center center;
+           background-repeat: no-repeat;
+        }
+        
+        .settings-panel {
+            pointer-events: none;
+        }
+    }
+    
+    .backdrop {
+            position: fixed;
+            top: 0;
+            background: rgba(0,0,0,0.5);
+            bottom: 0;
+            left: 0;    
+            right: 0;
+            z-index: 99;
+    }
+    
+}
+
+
+.pdf {
+	position:relative;
+        z-index: 100;
+        width: $doc_pdf_width;
+	height: $doc_pdf_height;
+	max-width: none;
+        margin-top: 0px;
+        background: White;
+        padding: 0;
+        
+       
+        
+        .alert {
+           border-top-left-radius: 0;
+           border-top-right-radius: 0;
+           z-index: 10000;
+           position: absolute;
+           left: 20%;
+           right: 20%;
+           top: 0;
+           transition: 0.4s top ease-in-out;
+           
+           &.slideUp {
+              top: -150px; 
+           }
+        }
+        
+        
+        .editor-widget {
+            position: relative;
+            
+            &.editor-widget-image {
+                cursor: pointer; 
+                
+                .progress {
+                    position: absolute;
+                    top: 0;
+                    height: 5px;
+                    border-radius: 0;
+                    width: 100%;
+                    display: none;
+                }
+                
+                &.in-progress {
+                    .progress {
+                        display: block;
+                    }
+                    
+                    img {
+                       opacity: 0.2; 
+                    }
+                }
+                
+                .btn {
+                    position: absolute;
+                    bottom: -40px;
+                    border-radius: 0;
+                    left: 0;
+                    opacity: 0;
+                    transition: bottom .4s ease;
+                }
+                
+                &:hover {
+                    .btn {
+                        opacity: 1;
+                        bottom: 0;
+                    }
+                    
+                    img {
+                        box-shadow: 1px 1px 1px 1px #ccc;
+                    }
+                }
+            }
+        }
+        
+        
+        .settings-panel {
+            position: absolute;
+            top: 4px;
+            /* left: -5px; */
+            width: 35px;
+            z-index: 100;
+            margin-left: -38px;
+            
+            button {
+                margin-bottom: 2px;
+                max-width: 32px;
+                overflow: hidden;
+                min-width: 32px;
+                transition: 0.2s min-width ease-in-out;
+                 
+                .label-in {
+                    display:none;
+                    margin-left: 5px;
+                }
+                
+                &:hover {
+                    min-width: 130px;
+                    
+                    .label-in {
+                        display: inline;
+                    }     
+                }
+            }
+            
+            
+            
+        }
+        
+	header {
+		height: $doc_header_height;
+		margin-bottom: $doc_30;
+		border-bottom: 1px Silver solid;
+                
+                .logo {
+                    margin-left: $doc_80;
+                    padding-top: 20px;
+                }
+                
+                .label-editor {
+                    position: absolute;
+                    top: 42px;
+                    border-radius: 0;
+                    transform: rotate(270deg);
+                    margin-left: -43px;
+                    width: $doc_header_height;
+                    text-align: center;
+                }
+   	}
+        
+        .float-2 {
+            width: 50%;
+            float: left;
+        }
+        
+        .float-3 {
+            float: left;
+            width: 33.33333333%;
+            
+            
+            
+        }
+        
+        .float-xs-8 {
+            float: left;
+            width: 80%;
+        }
+        
+        .float-xs-4 {
+            float: left;
+            width: 20%;
+        }
+        
+        .footer-logos {
+            margin-left: $doc_80;
+            padding-top: 15px;
+            
+            img {
+                height: auto;
+                margin-right: 5px;
+                width: 90px;
+            }
+        }
+        
+        
+        
+	footer {
+		position: absolute;
+		bottom: 0;
+                border-top: 1px Silver solid;
+		left: 0;
+		right: 0;
+		height: $doc_footer_height;
+		background: #eee;
+        }	
+}
+
+
+.trumbowyg-box {
+    border: none;
+    padding: 0;
+    margin: 0;
+    
+    .trumbowyg-editor {
+        padding: 0px;
+    }
+    
+    .trumbowyg-button-pane {
+        position: relative;
+    	margin-top: -36px;
+    	top: -10px;
+        
+        button {
+            width: 25px;
+        }
+    }    
+}
+
+
+#pdf-visibile-editor {
+    height: $doc_content_height;
+    background: White;
+    margin: 0 ($doc_80);     
+    position: relative;
+    
+    .widget-placeholder {
+        background: rgba(240,240,240, 0.1);
+        border: 1px #EEE dashed;
+        position: relative;
+        
+        &:before {
+            content: 'Platzhalter';
+            text-transform: uppercase;
+            font-size: 9px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    }
+    
+    
+    .editor-widget {
+        position: relative;
+    }
+    
+    .editor-widget-editor {
+        .editable-container.editable-inline {
+            position: absolute;
+        }
+    }
+    
+    .editor-widget-image {
+        overflow: hidden;
+        
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    
+    div[data-height="50"]{
+        height: ($doc_content_height / 2) - $doc_content_spacing;
+    }
+    
+    div[data-height="100"]{
+        height: ($doc_content_height) - $doc_content_spacing;
+        
+        div[data-height="50"]{
+            height: ($doc_content_height / 2) - ($doc_content_spacing);
+            
+            .trumbowyg-editor, .editable-container {
+                min-height: ($doc_content_height / 2) - $doc_content_spacing;
+            }
+        }    
+        
+        .trumbowyg-editor {
+            min-height: ($doc_content_height) - $doc_content_spacing;
+            overflow: hidden;
+        }
+    }
+    
+    .float-2, .float-3 {
+        .widget, .widget-placeholder {
+            margin-bottom: $doc_content_spacing;  
+        }
+    }
+    
+   .float-2:not(:last-child), .float-3:not(:last-child) {
+        &>div {
+          margin-right: $doc_content_spacing;  
+          position: relative;
+        }
+   }    
+}
+
+
+// PDF Typo
+.pdf {
+    
+    h1 {
+        margin: 0;
+        font-size: $doc_h1_size;
+         margin-bottom: $doc_hx_margin;
+         font-weight: bold;
+         
+         strong, span {
+            font-weight: bold !important;
+         }
+    }
+    
+    h2 {
+        margin: 0;
+        font-size: $doc_h2_size;
+         margin-bottom: $doc_hx_margin;
+         
+         strong, span {
+            font-weight: normal !important;
+         }
+    }
+    
+    
+    p, ul, ol, .footnote-table {
+        margin: 0;
+        font-size: $doc_p_size;
+        margin-bottom: $doc_p_margin;
+    } 
+    
+    .footnote-table {
+        display: table;
+      
+        height: 60px;
+        margin-right: $doc_80;
+        
+        .footnote-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+    
+}
+
+
+#pdfdoc-alter-layout {
+    .layout-template {
+         &:hover, 
+         &.active {
+            .widget { 
+                background: lightblue;
+            }
+        }
+    }      
+}
+
+
+#pdf-current-layout {
+    .layout-template {
+        .widget {
+          position: relative;  
+          
+            .label {
+                position: absolute;
+                display: block;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: White;
+                border: 1px Silver solid;
+                text-align: center;
+                transition: background 0.2s ease;
+                line-height: 35px;
+                color: Black;
+                border-radius: 0;
+                padding: 0;
+                font-size: 9px;
+                font-weight: normal;
+            }
+
+        &.changed {
+            .label {
+                 color: Black;
+                 font-weight: bold;
+                 background: #ebebeb;
+            }    
+        }     
+        &:hover, &.selected {
+            .label {
+                 background: #428bca;
+                 color: white;
+            }
+        }
+
+        
+      }
+    }
+}
+
+#layoutModal .layout-template {
+    width: 120px;
+    height: 100px;
+    float: left;
+    margin-right: 10px;
+    border: 1px Silver solid;
+    cursor: pointer;
+    margin-bottom: 10px;
+    
+    .widget {
+        margin: 5px;
+        margin-right: 0;
+        background: #EEE; 
+        height: 90px;
+        float: left;
+        transition: 0.2s background ease;
+        width: 110px;
+        
+        &.selected {
+            background: #428bca;
+        }
+        
+        &.changed {
+            background: lightsalmon;
+        }
+        
+    }    
+    
+    &.layout-50-50 {
+        .widget {
+           width: 52px;
+        }
+    }
+    
+    .float-2 {
+      width: 52px;
+      float: left;
+      
+      .float-100[data-height="50"] {
+            height: 42px;
+            width: 52px;
+            margin-bottom: 0;
+      }
+    }
+    
+    &.layout-50-50-double, &.layout-50-50-left {
+        .float-2:not(.widget) {
+            margin-right: 5px;
+        }    
+    }
+    
+    
+   
+    
+    &.layout-tripple {
+        position: relative;
+            
+        .float-3 {
+           width: 37.5px;
+           float: left;
+        }
+        
+        .widget {
+           width: 32.5px;
+           float: none;
+           height: 42px; 
+           margin-bottom: 0;
+        }
+    }  
+}
+
+
+.message-overlay-in {
+    .message-overlay {
+        &>div {
+           
+        }    
+    }
+}
+
+// PDF 
+.message-overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5000;
+    bottom: 0;
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+    
+    &>div {
+        display: table;
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        -webkit-transform: translate(0, -20%);
+        -webkit-transition: -webkit-transform 0.2s ease-in-out;
+        
+        &.in {
+             -webkit-transform: translate(0, 0%);
+        }
+        
+        
+        &>div {
+            display: table-cell;
+            vertical-align: top;
+        }
+    }
+    
+    
+    .well {
+        border: 0;
+        border-radius: 0;
+        background: White;
+    }    
+}
+
+
+.pdf {
+    
+    .widget[data-widget="table"] {
+        position: relative;    
+        
+        .editable-container {
+            min-height: 0 !important;
+        }
+        
+       .glyphicon {
+           display: none;
+           position: absolute;
+           right: 0px;
+           font-size: 10px;
+           border: 1px #CCC solid;
+           color: #CCC;
+           padding: 5px;
+           cursor: pointer;
+           transition: all 0.2s ease-in;
+           top: 2px;
+           
+           &:hover {
+               color: #333;
+               border-color: #333; 
+           }
+        }
+        
+        .option, .option2 {
+            display: none;
+            position: absolute;
+        }
+        
+        .option-table {
+            width: 1px;
+            transition: width 0.2s ease-in;
+            overflow: hidden;
+            display: block;
+            z-index: 200;
+            position: absolute;
+            right: 22px;
+            height: 22px;
+            top: 0;
+            margin: 0;
+            
+             li {
+                        display: inline-block;
+                        border: 1px Silver solid;
+                        padding: 2px 4px;
+                        font-size: 9px;
+                        color: Silver;
+                        background: White;
+                        transition: color 0.2s ease-in;
+                        cursor: pointer;
+                        line-height: 16px;
+                        border-right: 0;
+                        &:hover, 
+                        &.active {
+                            color: #333;
+                        }
+                    }
+        }
+       
+        
+        
+        .glyphicon-cog {
+            right: 0px;
+            display: inline-block;
+            left: auto;
+            top: 0px;
+            color: #EEE;
+            border-color: White;
+            z-index: 2;
+            
+           
+        }
+        
+         &.widget-options {
+            .glyphicon {
+                display: inline-block;
+            }
+            
+            .option-table {
+                visibility: visible;
+                width: 170px;
+                right: 20px;
+                z-index: 1;
+                text-align: right;
+            }
+            
+            .option2 {
+                display: block;
+                z-index: 200;
+                right: 0;
+                
+                .glyphicon {
+                    top: 0px;
+                }
+            }
+            
+            .option {
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                
+                .glyphicon-minus {
+                    display: inline-block;
+                    position: static;
+                }
+            }
+            
+            .glyphicon-cog {
+               color: Silver;
+               border-color: Silver; 
+            }
+            
+            table {
+                border-bottom: 1px #EEE solid;
+            }
+            
+            table + .glyphicon-plus {
+                top: auto;
+            }
+            
+            .PXEdit-table-col.glyphicon-minus {
+                right: auto;
+                left: 0px;
+                top: -20px;
+                background: white;
+            }
+         }
+        
+        
+        &:not(.widget-options){
+             div.text.editable-empty {
+              display: none !important;
+            } 
+        }
+        
+        div.text {
+          min-height: 20px;  
+            
+          &.editable-open {
+                display: block !important;
+                visibility: hidden;
+          }  
+        }
+        
+        
+        .table-edit {
+            display: block;
+            min-height: 15px;
+            cursor: text;
+        
+            &.editable-open {
+                display: block !important;
+                visibility: hidden;
+            }
+            
+            
+            
+        }
+        
+        .editable-buttons {
+            display: none;
+        }
+        
+        .editableform .control-group {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+        }
+        
+        .editable-inline {
+            textarea {
+                border: 0;
+                padding: 2.5px !important;
+                font-size: ($doc_p_size - 1px);
+                line-height: 1.2;
+                min-height: 20px;
+                height: 100px;
+                box-shadow: none;
+                resize: none;
+                position: absolute;
+                border: 1px Silver dotted;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.5);
+            }
+            
+            input {
+                border: 0;
+                padding: 0;
+                box-shadow: none;
+                font-size: $doc_h2_size;
+                margin-bottom: $doc_hx_margin;
+                margin-top: -5px;
+                width: 100%;
+            }
+        }
+    }
+    
+    
+
+table.table {
+    margin: 0;
+    
+    &.table-options {
+        .glyphicon {
+            display: inline-block;
+        }
+    }
+    
+    tr td {
+     font-size: ($doc_p_size - 1px);
+     padding: 5px 2.5px;
+     word-break: break-word;
+     vertical-align: top;
+     line-height: 1.3;
+     border: 0;
+     position: relative;
+     white-space: pre;
+    }
+    
+    &.table-2 {
+        td {
+            width: 50%;
+        }
+    }
+    
+    &.table-3 {
+        td {
+            width: 33.3333334%;
+        }
+    }
+    
+    &.table-4 {
+        td {
+            width: 25%;
+        }
+    }
+    
+    &[data-preset='table-normal'],
+    &[data-preset='table-advanced']{
+        tr:first-child {
+            td {
+                font-weight: bold;
+                vertical-align: bottom;
+            } 
+        }
+    }
+ 
+    &[data-preset='table-advanced'] {
+        tr {
+            td:first-child {
+                font-weight: bold;
+            } 
+        }
+    }    
+ 
+    
+    tr:nth-child(even) {
+        td {
+            background: #eee;
+        }
+    }    
+        
+    
+    
+  }
+}
