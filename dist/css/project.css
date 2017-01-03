@@ -201,8 +201,81 @@ a.editable-click.editable-disabled:hover {
   padding-top: 5px;
   display: inline-block; }
 
+.small-format-presentation .layout-template {
+  width: 120px;
+  height: 100px;
+  float: left;
+  margin-right: 10px;
+  border: 1px Silver solid;
+  cursor: pointer;
+  margin-bottom: 10px; }
+  .small-format-presentation .layout-template .widget {
+    margin: 5px;
+    margin-right: 0;
+    background: #EEE;
+    height: 90px;
+    float: left;
+    transition: 0.2s background ease;
+    width: 110px; }
+    .small-format-presentation .layout-template .widget.selected {
+      background: #428bca; }
+    .small-format-presentation .layout-template .widget.changed {
+      background: lightsalmon; }
+  .small-format-presentation .layout-template.layout-50-50 .widget {
+    width: 52px; }
+  .small-format-presentation .layout-template .float-2 {
+    width: 52px;
+    float: left; }
+    .small-format-presentation .layout-template .float-2 .float-100[data-height="50"] {
+      height: 42px;
+      width: 52px;
+      margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-50-50-double .float-2:not(.widget), .small-format-presentation .layout-template.layout-50-50-left .float-2:not(.widget) {
+    margin-right: 5px; }
+  .small-format-presentation .layout-template.layout-tripple {
+    position: relative; }
+    .small-format-presentation .layout-template.layout-tripple .float-3 {
+      width: 37.5px;
+      float: left; }
+    .small-format-presentation .layout-template.layout-tripple .widget {
+      width: 32.5px;
+      float: none;
+      height: 42px;
+      margin-bottom: 0; }
+
 .pdf-editor {
   background: #34495e; }
+
+#PXEdit .layout-menu {
+  position: fixed;
+  right: -300px;
+  width: 300px;
+  background: White;
+  z-index: 200;
+  margin-top: 10px;
+  opacity: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: right 0.5s ease-in-out, opacity 0.2s ease;
+  z-index: 300; }
+  #PXEdit .layout-menu:hover {
+    opacity: 1; }
+  #PXEdit .layout-menu.open {
+    right: 0; }
+    #PXEdit .layout-menu.open + .layout-menu-backdrop {
+      display: block; }
+  #PXEdit .layout-menu .layout-template.active .widget, #PXEdit .layout-menu .layout-template:hover .widget {
+    background: lightblue; }
+
+#PXEdit .layout-menu-backdrop {
+  z-index: 299;
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5); }
 
 .editableform .control-group {
   margin-bottom: 0;
@@ -406,6 +479,11 @@ a.editable-click.editable-disabled:hover {
     position: absolute; }
   #pdf-visibile-editor .editor-widget-image {
     overflow: hidden; }
+    #pdf-visibile-editor .editor-widget-image[data-fid="0"] {
+      background: url("placeholder.jpg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center; }
     #pdf-visibile-editor .editor-widget-image img {
       height: 100%;
       width: 100%; }
@@ -480,48 +558,6 @@ a.editable-click.editable-disabled:hover {
   #pdf-current-layout .layout-template .widget:hover .label, #pdf-current-layout .layout-template .widget.selected .label {
     background: #428bca;
     color: white; }
-
-#layoutModal .layout-template {
-  width: 120px;
-  height: 100px;
-  float: left;
-  margin-right: 10px;
-  border: 1px Silver solid;
-  cursor: pointer;
-  margin-bottom: 10px; }
-  #layoutModal .layout-template .widget {
-    margin: 5px;
-    margin-right: 0;
-    background: #EEE;
-    height: 90px;
-    float: left;
-    transition: 0.2s background ease;
-    width: 110px; }
-    #layoutModal .layout-template .widget.selected {
-      background: #428bca; }
-    #layoutModal .layout-template .widget.changed {
-      background: lightsalmon; }
-  #layoutModal .layout-template.layout-50-50 .widget {
-    width: 52px; }
-  #layoutModal .layout-template .float-2 {
-    width: 52px;
-    float: left; }
-    #layoutModal .layout-template .float-2 .float-100[data-height="50"] {
-      height: 42px;
-      width: 52px;
-      margin-bottom: 0; }
-  #layoutModal .layout-template.layout-50-50-double .float-2:not(.widget), #layoutModal .layout-template.layout-50-50-left .float-2:not(.widget) {
-    margin-right: 5px; }
-  #layoutModal .layout-template.layout-tripple {
-    position: relative; }
-    #layoutModal .layout-template.layout-tripple .float-3 {
-      width: 37.5px;
-      float: left; }
-    #layoutModal .layout-template.layout-tripple .widget {
-      width: 32.5px;
-      float: none;
-      height: 42px;
-      margin-bottom: 0; }
 
 .message-overlay {
   top: 0;

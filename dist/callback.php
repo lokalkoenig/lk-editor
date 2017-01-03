@@ -18,6 +18,7 @@ $callback['version'] = 1;
 $callback['PDXEditor'] = __DIR__;
 $callback['args'] = $_GET;
 
+$docs = new LK\PDF\DyanmicLayout();
 
 if(isset($_GET['preset']) 
     && is_string($_GET['preset'])){
@@ -30,7 +31,20 @@ if(isset($_GET['preset'])
         
         $callback['values'] = $obj -> getDefaultValues();
         $callback['options'] = $obj -> getOptions();
-        //$callback['mockup'] = $obj -> getMockup();
+        
+        $html = array();
+        $layouts = $obj -> getAvailableLayouts();
+        
+        $callback['test'] = $docs;
+        
+        foreach ($layouts as $layout){
+            $type = $docs ->getDefintion($layout);
+            $callback['type'] = $layout;
+            
+            $html[] = (string)$type;
+        }
+        
+        $callback['layouts'] = implode('', $html);
     }
 }
 

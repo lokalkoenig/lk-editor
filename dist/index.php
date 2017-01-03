@@ -1,9 +1,7 @@
 <?php
 
 require_once 'autoload.php';
-
 $docs = new LK\PDF\DyanmicLayout();
-$html = $docs ->getDefinitions();
 $image_presets = $docs -> getImagePresets();
 
         $footer_logos = array(
@@ -54,7 +52,18 @@ $image_presets = $docs -> getImagePresets();
     
     
       <div id="PXEdit" data-callback="callback.php">
-        <div class="backdrop"></div>    
+            <div class="backdrop"></div>    
+            
+            <div class="layout-menu well well-white">
+              <p><strong>Wählen Sie ein Layout für das Dokument aus</strong></p>
+              <p>Das Layout können Sie später jederzeit über <button class="btn btn-default btn-sm" style="pointer-events: none;"><span class="glyphicon glyphicon-cog"></span></button> Einstellungen verändern.</p>
+              <hr />
+              
+              <div class="layouts small-format-presentation"></div>
+              <button type="button" class="btn btn-default close-layout-menu"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>
+            </div>
+            <div class="layout-menu-backdrop"></div>
+           
             <div class="container pdf">
                 
                 <div class="settings-panel">
@@ -146,13 +155,23 @@ $image_presets = $docs -> getImagePresets();
       
     <div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content small-format-presentation">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Layout auswählen</h4>
             </div>
             <div class="modal-body">
                 <p>Sie können andere Eingeformate für die Regionen das Layouts auswählen.</p>
+                
+                <div id="vkudoc-option-change-layout">
+                    <p><strong>Layout festlegen</strong></p>
+                    <div class="clearfix" id="change-layout">
+                        <p>Bitte wählen Sie ein Layout für Ihr Dokument aus.</p>
+                        <div id="pdfdoc-alter-layout"></div>
+                    </div>
+                    
+                    <hr />
+                </div>
                 
                
                 <div class="clearfix collapse in" id="current-layout">
@@ -179,14 +198,7 @@ $image_presets = $docs -> getImagePresets();
                     </div>
                 </div>    
                 
-                <div id="vkudoc-option-change-layout">
-                    <hr />
-                    <p><a role="button" data-toggle="collapse" href="#change-layout"><span class="glyphicon glyphicon-chevron-right"></span> <strong>Anderes Layout auswählen</strong></a></p>
-                    <div class="clearfix collapse" id="change-layout">
-                        <p>Bitte wählen Sie ein anderes Layout für Ihr Dokument aus.</p>
-                        <div id="pdfdoc-alter-layout"></div>
-                    </div>
-                </div>
+                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
@@ -196,10 +208,24 @@ $image_presets = $docs -> getImagePresets();
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
     </div>  
-    <div id="available-layouts" class="hidden">
-         <?php print $html; ?> 
-    </div>
+  
+    <div id="available-layouts" class="hidden"></div>
    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
     
     <div class="well well-sm demo">
         <h2 class="text-center">Prototyp: PXEditor</h2>
@@ -212,7 +238,9 @@ $image_presets = $docs -> getImagePresets();
         </ul>
         <p>  
             
-            <button class="btn btn-default PXEdit-create" data-preset="OnlineMedium">Online-Medium</button>
+            <button class="btn btn-default PXEdit-create" data-preset="OnlineMedium">Online-Medium (Part)</button>
+            
+            <button class="btn btn-default PXEdit-create" data-preset="OnlineArgumentation">Online Argumentation</button>
             <button class="btn btn-default PXEdit-create" data-preset="RegionalArgumentation">Regional Argumentation</button>
         </p>      
         <p>      

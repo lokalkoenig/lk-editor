@@ -41,7 +41,10 @@ abstract class Preset {
     function getCategory(){
         return $this -> category;
     }
-  
+    
+    public function getAvailableLayouts(){
+      return array();
+    }
     
     abstract function getWidgetOptions();
     abstract function getDefaultValues();
@@ -83,7 +86,22 @@ class DyanmicLayout {
     }
     
     function addLayout(\LK\PDF\Doctypes\Doctype $doctype){
-        $this -> types[] = $doctype;
+        $key = $doctype ->getId();
+        $this -> types[$key] = $doctype;
+    }
+    
+    /**
+     * Gets a single Layout
+     * 
+     * @param string $id Layout-Definition
+     */
+    function getDefintion($id){
+      
+      if(!isset($this->types[$id])){
+        return false;
+      }
+      
+      return $this->types[$id];
     }
     
     function getDefinitions(){

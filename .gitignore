@@ -2,3 +2,5 @@
 nbproject/
 node_modules/
 x-editable/
+dist/files/
+dist/saves/
