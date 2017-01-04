@@ -12,7 +12,6 @@ $doc_30: 30px;
 $doc_content_spacing: $doc_30;
 $doc_80: 80px;
 
-
 $doc_pdf_zoom: 0.8;
 
 $doc_80: $doc_80 * $doc_pdf_zoom;
@@ -38,7 +37,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
 @import 'modules/inplace';
 
 @import 'modules/small_layouts';
-
 
 .pdf-editor {
      background: #34495e; 
@@ -817,7 +815,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
                 font-size: $doc_h2_size;
                 margin-bottom: $doc_hx_margin;
                 margin-top: -5px;
-                width: 100%;
+                width: 100%;           
             }
         }
     }
@@ -886,8 +884,43 @@ table.table {
             background: #eee;
         }
     }    
-        
-    
-    
+  }
+}
+
+#footnote {
+  top: -18px;
+  position: relative;
+  font-size: ($doc_p_size - 2px);
+  color: #888;
+  margin: 0 ($doc_80);  
+  text-align: right;
+  z-index: 100;
+  
+  input {
+    background: transparent;
+    display: block;
+    border: 0;
+    font-size: ($doc_p_size - 2px);
+    color: #888;
+    width: 100%;
+    text-align: right;
+    padding: 0;
+    top: -9px;
+    position: relative;
+    box-shadow: none;
+    padding-right: 0 !important;
+  }
+  
+  >div {
+    height: 17px;
+    display: block;
+  
+    &.editable-empty {
+      &:after {
+        content: 'Fusszeile (optional)';
+        color: #888;
+        cursor: pointer;
+      }
+    }
   }
 }

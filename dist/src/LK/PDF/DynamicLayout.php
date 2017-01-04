@@ -13,6 +13,31 @@ abstract class Preset {
     // category
     var $category;
     var $title;
+    var $manager;
+    
+    
+    function __construct(\LK\PDF\DyanmicLayout $manager) {
+      $this ->setManager($manager);
+    }
+    
+    /**
+     * Gets the Manager
+     * 
+     * @return \LK\PDF\DyanmicLayout
+     */
+    function getManager(){
+      return $this -> manager;
+    }
+    
+    
+    /**
+     * Sets the Manager
+     * 
+     * @param \LK\PDF\DyanmicLayout $manager
+     */
+    function setManager(\LK\PDF\DyanmicLayout $manager){
+      $this -> manager = $manager;
+    }
     
     /**
      * Get Editor Options
@@ -25,6 +50,8 @@ abstract class Preset {
             'change_layout' => 1,
             'change_input' => 1,
             'change_category' => 0,
+            'table_text' => false,
+            'table_columns' => 'flexibile'
         ];
         
         $options = $this ->getWidgetOptions();

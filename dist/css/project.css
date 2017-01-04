@@ -232,6 +232,25 @@ a.editable-click.editable-disabled:hover {
       margin-bottom: 0; }
   .small-format-presentation .layout-template.layout-50-50-double .float-2:not(.widget), .small-format-presentation .layout-template.layout-50-50-left .float-2:not(.widget) {
     margin-right: 5px; }
+  .small-format-presentation .layout-template.layout-preistable_one .widget {
+    height: 42px;
+    margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-preistable_two .widget-flexibile, .small-format-presentation .layout-template.layout-preistable_three .widget-flexibile {
+    height: 42px;
+    margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-preistable_two .float-3, .small-format-presentation .layout-template.layout-preistable_three .float-3 {
+    margin-right: 5px;
+    width: 33.5px;
+    float: left; }
+    .small-format-presentation .layout-template.layout-preistable_two .float-3 .widget, .small-format-presentation .layout-template.layout-preistable_three .float-3 .widget {
+      width: 32.5px;
+      float: none;
+      height: 42px;
+      margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-preistable_two .float-2, .small-format-presentation .layout-template.layout-preistable_three .float-2 {
+    margin-right: 5px; }
+    .small-format-presentation .layout-template.layout-preistable_two .float-2 .widget, .small-format-presentation .layout-template.layout-preistable_three .float-2 .widget {
+      width: 52px; }
   .small-format-presentation .layout-template.layout-tripple {
     position: relative; }
     .small-format-presentation .layout-template.layout-tripple .float-3 {
@@ -740,3 +759,32 @@ a.editable-click.editable-disabled:hover {
     font-weight: bold; }
   .pdf table.table tr:nth-child(even) td {
     background: #eee; }
+
+#footnote {
+  top: -18px;
+  position: relative;
+  font-size: 10.8px;
+  color: #888;
+  margin: 0 64px;
+  text-align: right;
+  z-index: 100; }
+  #footnote input {
+    background: transparent;
+    display: block;
+    border: 0;
+    font-size: 10.8px;
+    color: #888;
+    width: 100%;
+    text-align: right;
+    padding: 0;
+    top: -9px;
+    position: relative;
+    box-shadow: none;
+    padding-right: 0 !important; }
+  #footnote > div {
+    height: 17px;
+    display: block; }
+    #footnote > div.editable-empty:after {
+      content: 'Fusszeile (optional)';
+      color: #888;
+      cursor: pointer; }

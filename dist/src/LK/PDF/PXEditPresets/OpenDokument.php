@@ -8,7 +8,7 @@
 
 namespace LK\PDF\PXEditPresets;
 
-class OpenDokument extends \LK\PDF\Preset {
+class OpenDokument extends OnlineArgumentation {
     //put your code here
     
     var $category = '';
@@ -16,11 +16,8 @@ class OpenDokument extends \LK\PDF\Preset {
     
     function getDefaultValues(){
         
-        $value = new \stdClass();
+        $value = parent::getDefaultValues();
         $value -> layout = 'layout-full';
-        $value -> title = 'Neues Dokument';
-        $value -> active = 0;
-        $value -> content = array();
         $value -> content[] = [
             'id' => 1,
             'widget' => 'editor',

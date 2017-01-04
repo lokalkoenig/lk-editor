@@ -86,6 +86,9 @@ $image_presets = $docs -> getImagePresets();
           	</header>
             
                 <div id="pdf-visibile-editor"></div>
+                <div id="footnote" title="">
+                  
+                </div>
                 <footer>
                         <div class="float-xs-8">
                             <div class="footer-logos">
@@ -94,13 +97,6 @@ $image_presets = $docs -> getImagePresets();
                                 <?php endforeach; ?>
                             </div> 
                         </div>
-                         <div class="float-xs-4 text-right">
-                             <div class="footnote-table" style="display: none;">
-                                 <div class="footnote-cell">
-                                    <div id="footnote" title="Die Fussnote wird in allen Dokumente angezeigt und kann nicht entfernt werden" class="editor-widget" data-widget="text">Footnote</div>
-                                 </div>
-                             </div>
-                        </div>    
                 </footer>
 	</div>
      
@@ -270,7 +266,7 @@ $image_presets = $docs -> getImagePresets();
                 PDFForm.image_presets['<?php print $key ?>'] = '<?php print $val; ?>';   
            <?php endwhile; ?>  
                
-           //$('.btn-2click').trigger('click');    
+           $('.btn-2click').trigger('click');    
         });
     </script>  
       

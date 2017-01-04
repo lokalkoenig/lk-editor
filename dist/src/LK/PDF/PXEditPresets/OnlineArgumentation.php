@@ -11,7 +11,7 @@ class OnlineArgumentation extends \LK\PDF\Preset {
     //put your code here
     
     var $category = 'print';
-    var $title = 'Regional-Argumentationen';
+    var $title = 'Onlineargumentation';
     
     function getDefaultValues(){
         
@@ -26,11 +26,11 @@ class OnlineArgumentation extends \LK\PDF\Preset {
                 ]
         ];
         
-        $text_value = '<h1>Onlineargumentation</h1><h2>Subtitel</h2><p>Text</p>';
+        $text_value = '<h1>'. $this -> title .'</h1><h2>Subtitel</h2><p>Text</p>';
         
         $value = new \stdClass();
         $value -> layout = 'layout-50-50-right';
-        $value -> title = 'Onlineargumnetation';
+        $value -> title = $this -> title;
         $value -> active = 0;
         
         $value -> content = array();

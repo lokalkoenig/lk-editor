@@ -83,8 +83,6 @@
                 return ;
             }
             
-            
-            
             $('#available-layouts').html(layouts);
             $('#PXEdit').attr('data-change-layout', this.options.change_layout);
             $('#PXEdit').attr('data-change-input', this.options.change_input);
@@ -162,6 +160,7 @@
               'title':  $('#dokument-title').val(),
               'active': $('#dokument-freigabe').prop('checked'),
               'layout': $('.row-editor').attr('data-layout'),
+              'footnote': $('#footnote').text(),
               'content': data
             };
             
@@ -182,6 +181,12 @@
         init: function(saved_content){
             this.current_layout = saved_content.layout;
             this.data = saved_content.content;
+            
+            // footnote
+            $('#footnote').html('<div class="widget"></div>');  
+            $('#footnote .widget').editable({
+               type: 'text',
+            });
             
             jQuery('.row-editor').remove();
             jQuery('#pdf-visibile-editor').html("<div class='row-editor'><div>");
@@ -223,31 +228,91 @@
             });
         },
         // saves the layout and rerender
-        saveLayoutChanges: function (){
-            var data = this.data;
+        saveLayoutChanges: function (element){
+            var save = this.generateSave();
+            var data = save.content;
+            
             var new_data = {};
+            var layout = $(element).attr('data-id');
+            
+            
+            
             this.changed = true;
+            var reference = this;
             
             var x = 0;
-            $('#pdf-current-layout .widget').each(function(){
-                  if($(this).hasClass("changed")){
-                        new_data[x] = {'id': (x + 1), 'widget': $(this).attr('data-change-widget')} 
-                  }  
-                  else {
-                      new_data[x] = data[x]; 
-                  }
-                  x++;
+            $(element).find('.widget').each(function(){
+              var widget_type = $(this).attr('data-widget');
+              var widget_type_change = $(this).attr('data-change-widget');
+              
+              if(widget_type_change){
+                widget_type = widget_type_change;
+              }
+              
+              // find the widget-type in the sample-data
+              if(!widget_type){
+                widget_type = reference.options.sample_data[layout][x]['widget'];
+              }
+              
+              var new_data_item = {};
+              var result = reference.searchWidget(widget_type, data);
+             
+              //console.log(result);
+              //typeof data[x] === 'object' && data[x]['widget'] === widget_type
+              if(result){
+                  new_data_item = result;
+              }
+              else {
+                // get sample-data if available
+                new_data_item.widget = widget_type;
+                
+                // get sample-data if type is not matching
+                if(
+                  typeof reference.options.sample_data[layout] === 'object' 
+                  && reference.options.sample_data[layout][x]['widget'] === widget_type
+                  ){
+                    new_data_item = reference.options.sample_data[layout][x];
+                }
+              }
+              
+              new_data[x] = new_data_item;
+              x++;
             });
             
-            var layout = $('#pdf-current-layout .layout-template').attr('data-id');
+            this.loading(500);
             this.init({'layout': layout, 'content': new_data });
-            
-            $('#layoutModal').modal('hide');
         },
         
-        loading: function(){
+        loading: function(timeout){
+           $('#PXEdit').addClass('loading');   
           
+           setTimeout(function(){
+               $('#PXEdit').removeClass('loading');   
+           }, timeout);
+        },
+        
+        /**
+         * TBI
+         * 
+         * @param {type} widget_type
+         * @param {type} data
+         * @returns {Boolean}
+         */
+        searchWidget: function(widget_type, data){
           
+          if(typeof data !== "object"){
+            return false;
+          }
+          
+          var length = Object.keys(data).length;
+          
+          for (var i = 0; i < length; i++) {
+            if(widget_type === data[i]['widget']){
+              return data[i];
+            }
+          }
+          
+        return false;
         },
         
         openSettings: function(options){
@@ -281,7 +346,6 @@
                         $(this).attr("data-widget", "").html("<span class='label label-primary'>???</span>");
                    }
                    else {
-                       
                        $(this).attr("data-widget", data[index].widget);
                        var label = reference.formats[data[index].widget];
                        
@@ -308,8 +372,15 @@
             $('#pdf-current-layout .widget:first-child').click();
             $('#pdfdoc-alter-layout .layout-template:not(.active)').click(function(event){
                    event.stopPropagation();
-                   //$(".pdf").createMessage('Das Layout wurde ausgewaehlt. Bitte waehlen Sie die Felder aus.');
-                   reference.openSettings({'layout': $(this).attr('data-id'), 'content': {} });
+                   
+                  var id = $(this).attr('data-id');
+                  var content = {};
+                  if(typeof reference.options.sample_data[id]){
+                    content = reference.options.sample_data[id];
+                  }
+                  
+                  $("#document-save-settings").show();
+                  reference.openSettings({'layout': $(this).attr('data-id'), 'content': content });
             });
             
             // Click on a change button
@@ -344,7 +415,9 @@
                 
                 $(this).off();
                 
-                reference.saveLayoutChanges();
+                reference.saveLayoutChanges($('#pdf-current-layout'));
+                $('#layoutModal').modal('hide');
+                $("#document-save-settings").show();
             });
         }
     };
@@ -380,35 +453,30 @@
          }
       };  
       
-      // press CTRL + I
       document.onkeyup = function(e) {
-             
+            // CTR + I
             if(e.ctrlKey && e.keyCode == 73) {
                 var data = PDFForm.generateSave();
                 console.clear();
                 console.log(JSON.stringify(data, null, 4));
+            }
+            // CTR + Q
+            if(e.ctrlKey && e.keyCode == 81) {
+                console.clear();
                 console.log(JSON.stringify(PDFForm, null, 4));
             }
       }
-        
         
         $('#PXEdit .close-layout-menu').click(function(){
             $('.layout-menu').removeClass('open');
         });
         
         $('#PXEdit .layout-menu').on("click", ".layout-template:not(.active)", function(){
-             var id = $(this).attr('data-id');
-             $('#PXEdit').addClass('loading');
              $('#PXEdit .layout-menu .layout-template.active').removeClass('active');
-             
-             var data = PDFForm.options['sample_data'][id];
              $(this).addClass('active');
-             
-             setTimeout(function(){
-                PDFForm.init({'layout': id, 'content': data });
-                $('#PXEdit').removeClass('loading');        
-             }, 500);
-             
+            
+            // call layout-changes to set the new Layout
+            PDFForm.saveLayoutChanges(this);
         });
         
         $('#PXEdit-save-document').click(function(){

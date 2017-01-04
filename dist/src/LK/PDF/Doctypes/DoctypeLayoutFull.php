@@ -142,6 +142,70 @@ class Layout_triple_one extends Doctype {
 }
 
 
+class Layout_preistable_three extends Doctype {
+    //put your code here
+    
+    var $id = 'layout-preistable_three';
+    var $field_instances = 4;
+    
+    function isGeneralDoctype(){
+        return false;
+    }
+    
+    function getMockup(){
+      return '<div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
+    
+              <div class="float-3 float-col" data-height="50">
+                   <div class="float-100 widget" data-height="50" data-width="33" data-index="2" data-widget="table"></div>   
+               </div>
+                <div class="float-3 float-col" data-height="50">
+                   <div class="float-100 widget" data-height="50" data-width="33" data-index="3" data-widget="table"></div>   
+               </div>
+               <div class="float-3 float-col" data-height="80">
+                   <div class="float-100 widget" data-height="50" data-width="33" data-index="4" data-widget="table"></div>   
+               </div>';  
+    }
+}
+
+class Layout_preistable_two extends Doctype {
+    //put your code here
+    
+    var $id = 'layout-preistable_two';
+    var $field_instances = 4;
+    
+    function isGeneralDoctype(){
+        return false;
+    }
+    
+    function getMockup(){
+      return '<div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
+        
+              <div class="float-2 float-col" data-height="50">
+                   <div class="float-100 widget" data-height="50" data-width="50" data-index="2" data-widget="table"></div>   
+               </div>
+                <div class="float-2 float-col" data-height="50">
+                   <div class="float-100 widget" data-height="50" data-width="50" data-index="3" data-widget="table"></div>   
+               </div>';  
+    }
+}
+
+
+class Layout_preistable_one extends Doctype {
+    //put your code here
+    
+    var $id = 'layout-preistable_one';
+    var $field_instances = 4;
+    
+    function isGeneralDoctype(){
+        return false;
+    }
+    
+    function getMockup(){
+      return '<div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
+              <div class="float-100 widget" data-height="50" data-width="100" data-index="2" data-widget="table"></div>   
+      ';  
+    }
+}
 
 abstract class Doctype {
     

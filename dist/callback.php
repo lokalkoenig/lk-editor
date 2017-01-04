@@ -27,7 +27,7 @@ if(isset($_GET['preset'])
     $callback['preset_class'] = $preset;
  
     if(class_exists($preset)){
-        $obj = new $preset();
+        $obj = new $preset($docs);
         
         $callback['values'] = $obj -> getDefaultValues();
         $callback['options'] = $obj -> getOptions();
