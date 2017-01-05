@@ -1,13 +1,14 @@
 <?php
 
-namespace LK\PDF\PXEditPresets;
+namespace LK\PXEdit\Presets;
+use LK\PXEdit\Preset;
 
 /**
  * Description of OnlineArgumentation
  *
  * @author Maikito
  */
-class OnlineArgumentation extends \LK\PDF\Preset {
+class OnlineArgumentation extends Preset {
     //put your code here
     
     var $category = 'print';

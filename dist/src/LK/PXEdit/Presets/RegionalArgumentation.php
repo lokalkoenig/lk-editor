@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 
-namespace LK\PDF\PXEditPresets;
+namespace LK\PXEdit\Presets;
+use LK\PXEdit\Presets\OnlineArgumentation;
 
 /**
  * Description of RegionalArgumentation

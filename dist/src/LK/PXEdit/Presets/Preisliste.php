@@ -1,8 +1,9 @@
 <?php
 
-namespace LK\PDF\PXEditPresets;
+namespace LK\PXEdit\Presets;
+use LK\PXEdit\Preset;
 
-class Preisliste extends \LK\PDF\Preset {
+class Preisliste extends Preset {
     //put your code here
     
     var $category = 'sonstiges';
@@ -74,10 +75,11 @@ class Preisliste extends \LK\PDF\Preset {
     
     function getWidgetOptions(){
         return array(
-            'change_layout' => 1,
+            'change_layout' => 0,
             'change_input' => 0,
-            'table_text' => false,
-            'table_columns' => 'fixed'
+            'table_text' => 0,
+            'table_columns' => 0,
+            'change_layout_via_menu' => 1
         );
     }   
     
@@ -85,7 +87,7 @@ class Preisliste extends \LK\PDF\Preset {
       return [
         'layout-preistable_three',
         'layout-preistable_two',
-        'layout-preistable_one',
+        'layout-preistable_one',  
       ];
     }
     

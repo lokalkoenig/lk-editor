@@ -1,6 +1,7 @@
 <?php
 
-namespace LK\PDF\PXEditPresets;
+namespace LK\PXEdit\Presets;
+use LK\PXEdit\Preset;
 
 
 /**
@@ -8,7 +9,7 @@ namespace LK\PDF\PXEditPresets;
  *
  * @author Maikito
  */
-class OnlineMedium extends \LK\PDF\Preset {
+class OnlineMedium extends Preset {
     //put your code here
     var $category = 'online';
     var $title = 'Online-Medien';

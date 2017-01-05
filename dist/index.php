@@ -70,7 +70,7 @@ $image_presets = $docs -> getImagePresets();
                     <button class="btn btn-default btn-sm" title="Schliessen" id="document-reset">
                             <span class="glyphicon glyphicon-remove"></span><span class="label-in">Editor schliessen<span
                     </button>
-                    <button id="PXEdit-change-input" class="btn btn-default btn-sm" onclick="PDFForm.openSettings();">
+                    <button id="PXEdit-change-input" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-cog"></span><span class="label-in">Einstellungen<span
                     </button>
                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#saveModal" title="Speichern Sie hier ihr Dokument" id="document-save">
@@ -168,7 +168,6 @@ $image_presets = $docs -> getImagePresets();
                     
                     <hr />
                 </div>
-                
                
                 <div class="clearfix collapse in" id="current-layout">
                     <div class="row">
@@ -206,22 +205,6 @@ $image_presets = $docs -> getImagePresets();
     </div>  
   
     <div id="available-layouts" class="hidden"></div>
-   
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
     
     <div class="well well-sm demo">
         <h2 class="text-center">Prototyp: PXEditor</h2>
@@ -266,7 +249,7 @@ $image_presets = $docs -> getImagePresets();
                 PDFForm.image_presets['<?php print $key ?>'] = '<?php print $val; ?>';   
            <?php endwhile; ?>  
                
-           $('.btn-2click').trigger('click');    
+           //$('.btn-2click').trigger('click');    
         });
     </script>  
       

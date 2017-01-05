@@ -34,6 +34,7 @@
           'change_catgegory': 0,
           'change_layout': 1,
           'change_input': 1,
+          'change_layout_via_menu': 0,
           'sample_data': {}
         },
         
@@ -64,6 +65,70 @@
             }
         },
         
+        
+        /**
+         * Resets the Editor-Interface 
+         */
+        resetEditor: function(){
+          this.changed = false;
+          
+          $('#PXEdit #PXEdit-change-input, #current-layout').hide();
+          $('#PXEdit #footnote').html('<div class="widget"></div>');  
+          
+          // Change layout
+          if(this.options.change_layout == 1 || this.options.change_layout_via_menu == 1){
+            $('#PXEdit #PXEdit-change-input').show();
+          }
+          
+          // Show input-changer 
+         if(this.options.change_input == 1){
+            $('#PXEdit #current-layout').show();
+          }
+        },
+        
+        addListener: function() {
+          var reference = this;
+          
+            // cta change layout
+            $('#PXEdit #PXEdit-change-input').click(function(){
+                if(reference.options.change_layout_via_menu){
+                  jQuery('.layout-menu').addClass('open');
+                }
+                if(reference.options.change_layout){
+                  reference.openSettings();
+                } 
+            });
+
+            // close the layout-menu
+            $('#PXEdit .close-layout-menu').click(function(){
+              $('#PXEdit .layout-menu').removeClass('open');
+            });
+          
+            // close
+            $('#PXEdit #document-reset').click(function(){
+              if(reference.changed == false){
+                  $('#PXEdit').fadeOut();
+              }
+              else {
+                 $("#PXEdit").createMessage('Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?<br /></br ><button class="btn btn-danger" onclick=" $(\'#PXEdit\').fadeOut();">Änderungen verwerfen</button>');  
+              }
+            });
+
+            // change layout
+            $('#PXEdit .layout-menu').on("click", ".layout-template:not(.active)", function(){
+               $('#PXEdit .layout-menu .layout-template.active').removeClass('active');
+               $(this).addClass('active');
+
+              // call layout-changes to set the new Layout
+              reference.saveLayoutChanges(this);
+          });
+
+          $('#PXEdit-save-document').click(function(){
+              reference.saveTitleForm();
+          });
+        
+        },
+        
         /**
          * Sets up the Editor-App
          * 
@@ -71,7 +136,7 @@
          * @returns {undefined}
          */
         setup: function(data, layouts){
-            this.callback_url = $("#PXEdit").attr('data-callback'); //'callback.php';
+            this.callback_url = $("#PXEdit").attr('data-callback');
             
             if(typeof data == 'string' && data == 'loading'){
                 $('#PXEdit').addClass('loading');
@@ -83,11 +148,9 @@
                 return ;
             }
             
-            $('#available-layouts').html(layouts);
-            $('#PXEdit').attr('data-change-layout', this.options.change_layout);
-            $('#PXEdit').attr('data-change-input', this.options.change_input);
+            this.resetEditor();
             
-            this.changed = false;
+            $('#available-layouts').html(layouts);
             
             if(this.options.verlagsmodus){
                 $('#dokument-title').val(data.title);
@@ -183,7 +246,7 @@
             this.data = saved_content.content;
             
             // footnote
-            $('#footnote').html('<div class="widget"></div>');  
+            
             $('#footnote .widget').editable({
                type: 'text',
             });
@@ -202,7 +265,6 @@
                 
                jQuery('.row-editor').attr("data-layout", saved_content.layout).html(jQuery('#available-layouts .layout-template.' + saved_content.layout).html());
             }
-            
             
             if(typeof saved_content.sample == 'object'){
                 this.options['sample_data'] = saved_content.sample;   
@@ -235,8 +297,6 @@
             var new_data = {};
             var layout = $(element).attr('data-id');
             
-            
-            
             this.changed = true;
             var reference = this;
             
@@ -256,8 +316,8 @@
               
               var new_data_item = {};
               var result = reference.searchWidget(widget_type, data);
-             
-              //console.log(result);
+              
+              console.log(result);
               //typeof data[x] === 'object' && data[x]['widget'] === widget_type
               if(result){
                   new_data_item = result;
@@ -415,12 +475,15 @@
                 
                 $(this).off();
                 
-                reference.saveLayoutChanges($('#pdf-current-layout'));
+                reference.saveLayoutChanges($('#pdf-current-layout .layout-template'));
+                
                 $('#layoutModal').modal('hide');
                 $("#document-save-settings").show();
             });
         }
     };
+    
+    
     
     $(document).ready(function(){
         $('body').on("click", ".message-overlay", function(){
@@ -433,17 +496,9 @@
             $(this).parent().addClass('slideUp');
         });
         
-        $('#document-reset').click(function(){
-            if(PDFForm.changed == false){
-                $('#PXEdit').fadeOut();
-            }
-            else {
-               $(".pdf").createMessage('Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?<br /></br ><button class="btn btn-danger" onclick=" $(\'#PXEdit\').fadeOut();">Änderungen verwerfen</button>');  
-            }
-        });
+        
         
      $.fn.PXEditor = function(action, message) {
-         
          if(action === 'changed'){
              PDFForm.setChanged();
          }
@@ -452,36 +507,6 @@
             $("#PXEdit").createMessage(message);
          }
       };  
-      
-      document.onkeyup = function(e) {
-            // CTR + I
-            if(e.ctrlKey && e.keyCode == 73) {
-                var data = PDFForm.generateSave();
-                console.clear();
-                console.log(JSON.stringify(data, null, 4));
-            }
-            // CTR + Q
-            if(e.ctrlKey && e.keyCode == 81) {
-                console.clear();
-                console.log(JSON.stringify(PDFForm, null, 4));
-            }
-      }
-        
-        $('#PXEdit .close-layout-menu').click(function(){
-            $('.layout-menu').removeClass('open');
-        });
-        
-        $('#PXEdit .layout-menu').on("click", ".layout-template:not(.active)", function(){
-             $('#PXEdit .layout-menu .layout-template.active').removeClass('active');
-             $(this).addClass('active');
-            
-            // call layout-changes to set the new Layout
-            PDFForm.saveLayoutChanges(this);
-        });
-        
-        $('#PXEdit-save-document').click(function(){
-            PDFForm.saveTitleForm();
-        });
         
         // react on Document-Create
         $('.PXEdit-create').click(function(){
@@ -500,5 +525,25 @@
             });
         });
     });
+    
+    // selfregister events & listeners
+    jQuery(document).ready(function(){
+      PDFForm.addListener();
+      
+      // debug
+      document.onkeyup = function(e) {
+            // CTR + I
+            if(e.ctrlKey && e.keyCode == 73) {
+                var data = PDFForm.generateSave();
+                console.clear();
+                console.log(JSON.stringify(data, null, 4));
+            }
+            // CTR + Q
+            if(e.ctrlKey && e.keyCode == 81) {
+                console.clear();
+                console.log(JSON.stringify(PDFForm, null, 4));
+            }
+      }
+    });   
 }( jQuery ));    
 

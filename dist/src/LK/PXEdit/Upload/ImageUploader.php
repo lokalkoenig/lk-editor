@@ -1,4 +1,7 @@
 <?php
+
+namespace LK\PXEdit\Upload;
+
 /*
  * jQuery File Upload Plugin PHP Class
  * https://github.com/blueimp/jQuery-File-Upload
@@ -12,7 +15,7 @@
 
 require_once __DIR__ .'/server.class.php';
 
-class LK_UploadHandler extends UploadHandler {
+class ImageUploader extends UploadHandler {
     
     function construct(){
         parent::__construct();

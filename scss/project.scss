@@ -138,19 +138,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     right: 0px;
     display: none;
     
-    &[data-change-layout='0']{
-        #vkudoc-option-change-layout {
-            display: none;
-        }
-     }
-    
-     &[data-change-input='0']{
-        #PXEdit-change-input {
-             display: none;
-        }
-     }
-     
-     
     #document-save-settings {
         display: none;
     }
