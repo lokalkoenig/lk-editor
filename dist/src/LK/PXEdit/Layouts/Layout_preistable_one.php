@@ -16,7 +16,7 @@ class Layout_preistable_one extends Doctype {
     
     function getMockup(){
       return '<div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
-              <div class="float-100 widget" data-height="50" data-width="100" data-index="2" data-widget="table"></div>   
+              <div class="float-100 widget widget-table-fixed" data-height="50" data-width="100" data-index="2" data-widget="table"></div>   
       ';  
     }
 }

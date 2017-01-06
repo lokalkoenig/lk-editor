@@ -1,9 +1,4 @@
 <?php
-
-require_once 'autoload.php';
-$docs = new LK\PDF\DyanmicLayout();
-$image_presets = $docs -> getImagePresets();
-
         $footer_logos = array(
             "/sites/default/files/styles/verlags-logos-klein/public/verlagslogo/ft.png",
             '/sites/default/files/styles/verlags-logos-klein/public/verlagslogo/br.png?itok=cu0U17XP',
@@ -26,24 +21,14 @@ $image_presets = $docs -> getImagePresets();
         <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         
         <!-- Editor -->
-        <script type="text/javascript" src="js/trumbowyg/trumbowyg.js"></script>
-	<link rel="stylesheet" type="text/css" href="js/trumbowyg/ui/trumbowyg.css"></rel>
+        <script type="text/javascript" src="js/trumbowyg-min.js"></script>
+	<!--<link rel="stylesheet" type="text/css" href="js/trumbowyg/ui/trumbowyg.css"></rel>-->
         
         <!-- FILEUpload -->
-        <script src="js/fileupload/jquery.ui.widget.js"></script>
-        <script src="js/fileupload//jquery.iframe-transport.js"></script>
-        <script src="js/fileupload/jquery.fileupload.js"></script>
+        <script src="js/jquery.fileupload-min.js"></script>
         
         <!-- Inplace Editor -->
-        <script type="text/javascript" src="js/bootstrap-editable.js"></script>
-        
-        <script type="text/javascript" src="js/x-edit-editor.js?<?php print time(); ?>"></script>
-        <script type="text/javascript" src="js/PXEdit/editor.js?<?php print time(); ?>"></script>
-        <script type="text/javascript" src="js/PXEdit/image.js?<?php print time(); ?>"></script>
-        <script type="text/javascript" src="js/PXEdit/cell.js?<?php print time(); ?>"></script>
-        <script type="text/javascript" src="js/PXEdit/table.js?<?php print time(); ?>"></script>
-        <script type="text/javascript" src="js/LK-PDF-Editor.js?<?php print time(); ?>"></script>
-     
+        <script type="text/javascript" src="js/PXEdit-packed-min.js?<?php print time(); ?>"></script>
         <link rel="stylesheet" type="text/css" href="css/project.css?<?php print time(); ?>"></link>
  </head>
 <body class="pdf-editor">
@@ -52,7 +37,7 @@ $image_presets = $docs -> getImagePresets();
     
     
       <div id="PXEdit" data-callback="callback.php">
-            <div class="backdrop"></div>    
+            <div class="backdrop"></div>   
             
             <div class="layout-menu well well-white">
               <p><strong>Wählen Sie ein Layout für das Dokument aus</strong></p>
@@ -202,11 +187,17 @@ $image_presets = $docs -> getImagePresets();
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
+      
+      
+      <div id="available-layouts" class="hidden"></div>
     </div>  
-  
-    <div id="available-layouts" class="hidden"></div>
     
-    <div class="well well-sm demo">
+
+  
+  
+  
+  
+  <div class="well well-sm demo">
         <h2 class="text-center">Prototyp: PXEditor</h2>
        
         <ul class="small">
@@ -241,18 +232,11 @@ $image_presets = $docs -> getImagePresets();
             margin: 0 auto;
             margin-top: 100px; 
           }
+          
+          .pdf-editor {
+              background: #34495e; 
+          }
         </style>  
-      
-     <script>    
-        jQuery(document).ready(function(){
-           <?php while(list($key, $val) = each($image_presets)) :?> 
-                PDFForm.image_presets['<?php print $key ?>'] = '<?php print $val; ?>';   
-           <?php endwhile; ?>  
-               
-           //$('.btn-2click').trigger('click');    
-        });
-    </script>  
-      
 </body>
 </html>
 

@@ -1,7 +1,6 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * PXEdit Version 1.0
+ * @author maiktito
  */
 
  var PDFForm = null;
@@ -16,9 +15,6 @@
        
         // Data
         data: null,
-        
-        // image formats
-        image_presets: {},
         
         // Changed
         changed: false,
@@ -35,7 +31,8 @@
           'change_layout': 1,
           'change_input': 1,
           'change_layout_via_menu': 0,
-          'sample_data': {}
+          'sample_data': {},
+          'image_presets': {},
         },
         
         callback_url: '',
@@ -74,6 +71,9 @@
           
           $('#PXEdit #PXEdit-change-input, #current-layout').hide();
           $('#PXEdit #footnote').html('<div class="widget"></div>');  
+          $('#PXEdit #pdf-visibile-editor').html('');
+             
+          this.setPreset('');
           
           // Change layout
           if(this.options.change_layout == 1 || this.options.change_layout_via_menu == 1){
@@ -91,12 +91,14 @@
           
             // cta change layout
             $('#PXEdit #PXEdit-change-input').click(function(){
+                if(reference.options.change_layout){
+                  reference.openSettings();
+                  return ;
+                }
+                
                 if(reference.options.change_layout_via_menu){
                   jQuery('.layout-menu').addClass('open');
                 }
-                if(reference.options.change_layout){
-                  reference.openSettings();
-                } 
             });
 
             // close the layout-menu
@@ -136,18 +138,6 @@
          * @returns {undefined}
          */
         setup: function(data, layouts){
-            this.callback_url = $("#PXEdit").attr('data-callback');
-            
-            if(typeof data == 'string' && data == 'loading'){
-                $('#PXEdit').addClass('loading');
-                this.changed = false;
-                this.setPreset('');
-                
-                $('#pdf-visibile-editor').html('');
-                $('#PXEdit').fadeIn();
-                return ;
-            }
-            
             this.resetEditor();
             
             $('#available-layouts').html(layouts);
@@ -173,17 +163,20 @@
                 $('#saveModal').modal('hide');
             }
             
+            var reference = this;
             var data = this.generateSave();
             data.preset = this.preset;
-            //data.debug = this;
             
             $.ajax({
                 type: "POST",
                 url: this.callback_url + "?save=1",
                 data: {'data': data},
                 success: function(){
-                    $('#PXEdit').fadeOut();
-                    $('#PXEdit').createMessage("Wir speichern die Daten gerade."); 
+                    reference.createMessage("Das Dokument wurde gespeichert.", 2000); 
+                    
+                    setTimeout(function(){
+                       jQuery('#PXEdit').fadeOut();
+                    }, 500);
                 },
                 dataType: 'json'
               });
@@ -209,6 +202,7 @@
                       'url': $(this).find('img').attr('src'),
                       'fid': $(this).children('.editor-widget-image').attr('data-fid'),
                       'preset': $(this).children('.editor-widget-image').attr('data-image-present'),
+                      'versions': JSON.parse($(this).children('.editor-widget-image').attr('data-versions'))
                     };
                 }
                 
@@ -216,6 +210,7 @@
                     data[x] = $(this).createTableWdiget('serialize');
                 }
                 
+                data[x].id = (x + 1);
                 x++;    
             });
            
@@ -271,7 +266,6 @@
             
                 jQuery('.layout-menu').addClass('open');
                 jQuery('.layout-menu .layouts').html(jQuery('#available-layouts').html());
-                
                 jQuery('.layout-menu .layouts .layout-template[data-id="'+ saved_content.layout +'"]').addClass('active');
                 jQuery('.row-editor').addClass('editor-' +  saved_content.layout);
             }
@@ -284,7 +278,7 @@
                    reference.openSettings();
                } 
                else {
-                   $(this).createWidget(data[x]);
+                   reference.createNewWidget(this, data[x]);
                } 
                x++;
             });
@@ -314,24 +308,20 @@
                 widget_type = reference.options.sample_data[layout][x]['widget'];
               }
               
-              var new_data_item = {};
-              var result = reference.searchWidget(widget_type, data);
+              var new_data_item = {'widget': widget_type};
+              var result = reference.searchWidget(widget_type, data, x, true);
               
-              console.log(result);
-              //typeof data[x] === 'object' && data[x]['widget'] === widget_type
               if(result){
                   new_data_item = result;
               }
               else {
-                // get sample-data if available
-                new_data_item.widget = widget_type;
-                
                 // get sample-data if type is not matching
-                if(
-                  typeof reference.options.sample_data[layout] === 'object' 
-                  && reference.options.sample_data[layout][x]['widget'] === widget_type
-                  ){
-                    new_data_item = reference.options.sample_data[layout][x];
+                if(typeof reference.options.sample_data[layout] === 'object'){
+                    var result = reference.searchWidget(widget_type, reference.options.sample_data[layout], x);
+                    
+                    if(result){
+                      new_data_item = result;
+                    }
                 }
               }
               
@@ -346,9 +336,49 @@
         loading: function(timeout){
            $('#PXEdit').addClass('loading');   
           
-           setTimeout(function(){
+           if(typeof timeout === 'number'){
+            setTimeout(function(){
                $('#PXEdit').removeClass('loading');   
-           }, timeout);
+            }, timeout);
+           } 
+        },
+        
+        /**
+         * Creates a message
+         * 
+         * @param {string} $message
+         * @param {number} timeout
+         */
+        createMessage: function($message, timeout){
+           $("#PXEdit").createMessage($message, timeout);
+        },
+        
+        
+        /**
+         * Creates a new input-widget
+         * 
+         * @param {reference} element
+         * @param {Object} options
+         * @returns {undefined}
+         */
+        createNewWidget: function(element, options){
+          $(element).attr('data-widget', options.widget);
+
+          if(options.widget === 'image'){
+            $(element).createImageWidget(options);
+          }
+
+          if(options.widget === 'editor'){
+            $(element).createEditorWdiget(options);
+          }
+        
+          if(options.widget === 'table'){
+            $(element).createTableWdiget(options);
+          }
+          
+          if(!$(element).hasClass("widget-flexibile")){
+            $(element).children('div').height($(element).height());
+          }
         },
         
         /**
@@ -358,13 +388,25 @@
          * @param {type} data
          * @returns {Boolean}
          */
-        searchWidget: function(widget_type, data){
+        searchWidget: function(widget_type, data, position, mustbeposition){
           
           if(typeof data !== "object"){
             return false;
           }
           
           var length = Object.keys(data).length;
+          
+          if(typeof position === 'number'){
+            for (var i = 0; i < length; i++) {
+              if(widget_type === data[i]['widget'] && i === position){
+                return data[i];
+              }
+            } 
+          }
+          
+          if(typeof mustbeposition === 'boolean' && mustbeposition){
+            return false;
+          }
           
           for (var i = 0; i < length; i++) {
             if(widget_type === data[i]['widget']){
@@ -450,7 +492,18 @@
                 $('.col-select button').removeClass('active');
                 $(this).addClass('active');
                 
-                $('#pdf-current-layout .widget.selected').changeWidgetForm($(this).attr('data-widget'));
+                var element = $('#pdf-current-layout .widget.selected');
+                var selected = $(this).attr('data-widget');
+                var current = $(element).attr('data-widget');
+                
+                $(element).children('.label').text(PDFForm.formats[selected]); 
+                $(element).attr("data-change-widget", "").removeClass('changed');
+                
+                if(current !== selected){
+                    $(element).attr("data-change-widget", selected).addClass('changed');
+                }
+                
+                $("#document-save-settings").show();
             });
             
             $('#document-save-settings').click(function(event){
@@ -468,7 +521,7 @@
                 });
                 
                 if(isError === true){
-                    $('#PXEditor').PXEditor('message', 'Bitte definieren Sie alle Regionen Ihres Layouts.');
+                    reference.createMessage('Bitte definieren Sie alle Regionen Ihres Layouts.');
                     return ;
                 }
                 
@@ -497,38 +550,38 @@
         });
         
         
-        
-     $.fn.PXEditor = function(action, message) {
-         if(action === 'changed'){
-             PDFForm.setChanged();
-         }
-         
-         if(action === 'message'){
-            $("#PXEdit").createMessage(message);
-         }
-      };  
-        
         // react on Document-Create
         $('.PXEdit-create').click(function(){
-            PDFForm.setup('loading');
+            PDFForm.loading();
             var preset = $(this).attr('data-preset');
-            PDFForm.setPreset(preset);
             
             $.ajax({
                 dataType: "json",
                 url: PDFForm.callback_url,
                 data: {'preset': preset},
                 success: function(data){
-                     PDFForm.setOptions(data.options);
-                     PDFForm.setup(data.values, data.layouts);
+                    if(data.error){
+                      PDFForm.createMessage(data.message);
+                      return ;
+                    }
+                  
+                    PDFForm.setPreset(preset);
+                    PDFForm.setOptions(data.options);
+                    PDFForm.setup(data.values, data.layouts);
                 }
             });
         });
     });
     
+     // Editable Defaults
+    $.fn.editable.defaults.mode = "inline";
+    $.fn.editable.defaults.onblur = "submit";
+    $.fn.editable.defaults.emptytext = "";
+    
     // selfregister events & listeners
     jQuery(document).ready(function(){
       PDFForm.addListener();
+      PDFForm.callback_url = $("#PXEdit").attr('data-callback');
       
       // debug
       document.onkeyup = function(e) {
@@ -544,6 +597,32 @@
                 console.log(JSON.stringify(PDFForm, null, 4));
             }
       }
-    });   
+    });  
+    
+    
+    /**
+     * Creates a message, which can be auto-closed automatically
+     * 
+     * @param {string} message
+     * @param {number} autoclose
+     */
+    $.fn.createMessage = function(message, autoclose){
+        $("<div class='message-overlay'><div><div><div class='well well-white'><span class='close'>&times;</span>" +  message + "</div></div></div></div>").insertAfter(this);
+        setTimeout(function(){
+            $(".message-overlay>div").addClass('in');
+        }, 200);
+        
+        if(typeof autoclose === 'number'){
+            setTimeout(function(){
+              $(".message-overlay").addClass('slideUp');
+              
+              setTimeout(function(){
+                $(".message-overlay").addClass('slideUp');
+              }, 500);
+              
+            }, autoclose);
+        }
+    };
+    
 }( jQuery ));    
 

@@ -24,16 +24,11 @@ abstract class Doctype {
         return $this -> id;
     }    
     
-    function isGeneralDoctype(){
-        return true;
-    }
-    
     function __toString() {
         
         $id = $this ->getId();
         $mockup = $this ->getMockup();
-        $general = $this ->isGeneralDoctype();
-        $html = '<div class="layout-template ' . $id . '" data-id="'. $id .'" data-general="'. $general .'">' . $mockup . '</div>';
+        $html = '<div class="layout-template ' . $id . '" data-id="'. $id .'">' . $mockup . '</div>';
  
     return $html;    
     }  

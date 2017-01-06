@@ -45,7 +45,6 @@ class OnlineArgumentation extends Preset {
         $value -> content[] = [
             'id' => 2,
             'widget' => 'image',
-            'fid' => 0
         ];
         
         $value -> content[] = [

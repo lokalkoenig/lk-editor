@@ -28,7 +28,7 @@ class OnlineMedium extends Preset {
         $value -> active = 0;
         $value -> content = array();
         
-        $module = new \LK\PDF\Doctypes\Layout_triple_one();
+        $module = new \LK\PXEdit\Layouts\Layout_triple_one();
         $value -> mockup = $module ->getMockup();
         
         $value -> content[] = [

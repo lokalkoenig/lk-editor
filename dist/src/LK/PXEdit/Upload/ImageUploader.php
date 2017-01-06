@@ -15,7 +15,7 @@ namespace LK\PXEdit\Upload;
 
 require_once __DIR__ .'/server.class.php';
 
-class ImageUploader extends UploadHandler {
+class ImageUploader extends \UploadHandler {
     
     function construct(){
         parent::__construct();
@@ -24,23 +24,28 @@ class ImageUploader extends UploadHandler {
     function generate_response($content, $print_response = true){
            // one file
            
+           $manager = new \LK\PXEdit\DyanmicLayout();
+           $derivates = $manager ->getImagePresets();
+      
            foreach ($content["files"] as $file){
                $json = [];
                $json['image_id'] = time();
                $json['image_url'] = $file -> url;
+               
+               $json['versions'] = [];
+               while(list($key, $val) = each($derivates)){
+                  $json['versions'][$key] = $file -> url;
+               }
+               
                // set Chmod
                chmod("files/" . $file -> name, 0644);
-               
-               $json['clear'] = $content;
-               $this->response = $json;
-               
-               $str = json_encode($json);
-               $this ->body($str);
-               exit;
+               $manager ->sendJson($json);
            }
-           print_r($content);
-           exit;
     }
+    
+    
+    
+    
 }
 
 

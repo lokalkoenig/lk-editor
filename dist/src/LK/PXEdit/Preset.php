@@ -22,14 +22,14 @@ abstract class Preset {
     var $manager;
     
     
-    function __construct(\LK\PDF\DyanmicLayout $manager) {
+    function __construct(\LK\PXEdit\DyanmicLayout $manager) {
       $this ->setManager($manager);
     }
     
     /**
      * Gets the Manager
      * 
-     * @return \LK\PDF\DyanmicLayout
+     * @return \LK\PXEdit\DyanmicLayout
      */
     function getManager(){
       return $this -> manager;
@@ -39,9 +39,9 @@ abstract class Preset {
     /**
      * Sets the Manager
      * 
-     * @param \LK\PDF\DyanmicLayout $manager
+     * @param \LK\PXEdit\DyanmicLayout $manager
      */
-    function setManager(\LK\PDF\DyanmicLayout $manager){
+    function setManager(\LK\PXEdit\DyanmicLayout $manager){
       $this -> manager = $manager;
     }
     

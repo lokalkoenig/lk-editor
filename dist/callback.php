@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-include 'autoload.php';
+include 'src/autoload.php';
 
 
 // REQUEST load present
@@ -18,41 +18,18 @@ $callback['version'] = 1;
 $callback['PDXEditor'] = __DIR__;
 $callback['args'] = $_GET;
 
-$docs = new LK\PDF\DyanmicLayout();
+$docs = new LK\PXEdit\DyanmicLayout();
 
 if(isset($_GET['preset']) 
     && is_string($_GET['preset'])){
-    
-    $preset = "\\LK\\PDF\\PXEditPresets\\" . $_GET['preset'];
-    $callback['preset_class'] = $preset;
- 
-    if(class_exists($preset)){
-        $obj = new $preset($docs);
-        
-        $callback['values'] = $obj -> getDefaultValues();
-        $callback['options'] = $obj -> getOptions();
-        
-        $html = array();
-        $layouts = $obj -> getAvailableLayouts();
-        
-        $callback['test'] = $docs;
-        
-        foreach ($layouts as $layout){
-            $type = $docs ->getDefintion($layout);
-            $callback['type'] = $layout;
-            
-            $html[] = (string)$type;
-        }
-        
-        $callback['layouts'] = implode('', $html);
-    }
+    $docs ->loadNewPreset($_GET['preset']);
 }
 
 if(isset($_GET['type']) 
     && is_string($_GET['type']) 
     && $_GET['type'] == "image"){
     
-    $upload_handler = new LK_UploadHandler();
+    $upload_handler = new LK\PXEdit\Upload\ImageUploader();
     exit;
 }
 

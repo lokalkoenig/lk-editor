@@ -122,10 +122,10 @@ class UploadHandler
             'identify_bin' => 'identify',
             'image_versions' => array(
                 // The empty image version key defines options for the original image:
-                '' => array(
+                //'' => array(
                     // Automatically rotate images based on EXIF meta data:
-                    'auto_orient' => true
-                ),
+                //    'auto_orient' => true
+                //),
                 // Uncomment the following to create medium sized images:
                 /*
                 'medium' => array(
@@ -133,7 +133,7 @@ class UploadHandler
                     'max_height' => 600
                 ),
                 */
-                'thumbnail' => array(
+                //'thumbnail' => array(
                     // Uncomment the following to use a defined directory for the thumbnails
                     // instead of a subdirectory based on the version identifier.
                     // Make sure that this directory doesn't allow execution of files if you
@@ -144,9 +144,9 @@ class UploadHandler
                     // Uncomment the following to force the max
                     // dimensions and e.g. create square thumbnails:
                     //'crop' => true,
-                    'max_width' => 80,
-                    'max_height' => 80
-                )
+                 //   'max_width' => 80,
+                 //   'max_height' => 80
+                //)
             ),
             'print_response' => true
         );

@@ -76,8 +76,10 @@
         @method input2value() 
         **/
         input2value: function() { 
-            $('#PXEdit').PXEditor('changed');
-            return this.$input.val();
+           PDFForm.setChanged();
+           
+           
+           return this.$input.val();
         }, 
         overflow: function(){
            
@@ -102,7 +104,7 @@
                     'btnGrp-lists',
                     ['horizontalRule']
                 ],
-              autogrow: false,
+              autogrow: true,
               removeformatPasted: true
             });
         }

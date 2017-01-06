@@ -16,7 +16,7 @@
                     delete data.rows[i][col];
                 }
                 
-                $('#PXEdit').PXEditor('changed');
+                PDFForm.setChanged();
                 $(this).createTableWdiget(data);
            return ;     
            }
@@ -30,7 +30,7 @@
                     data.rows[i][length] = 'Neu';
                 }
                 
-                $('#PXEdit').PXEditor('changed');
+                PDFForm.setChanged();
                 $(this).createTableWdiget(data);
            
            return ;   
@@ -62,7 +62,7 @@
                  
                  data.rows = new_data;
                   
-                 $('#PXEdit').PXEditor('changed'); 
+                 PDFForm.setChanged();
                  $(this).createTableWdiget(data);
            
            return true;
@@ -81,7 +81,7 @@
                
                data.rows[data.rows.length] = new_set;
               
-               $('#PXEdit').PXEditor('changed');
+               PDFForm.setChanged();
                $(this).createTableWdiget(data);
            
            return true;    
@@ -138,10 +138,13 @@
                        ];
        }
        
+       var tableFixed = $(this).hasClass('widget-table-fixed');
+       
        var markup = '<div><div class="text">'+ options.title +'</div><span class="glyphicon glyphicon-cog table-options"></span>';
        
        // We limit the maximum length to 
        var length = Object.keys(options.rows[0]).length;
+       
        
        if(length < 4){
             markup += '<div class="option2"><span data-action="add-col" title="Spalte hinzufügen" class="PXEdit-table-add-col glyphicon glyphicon-plus"></span></div>';

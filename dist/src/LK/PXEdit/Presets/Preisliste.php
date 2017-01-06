@@ -11,8 +11,6 @@ class Preisliste extends Preset {
     
     function getDefaultValues(){
       
-        $manager = $this->getManager();
-        
         $sample_table = [
                 0 => [
                     'Position',
@@ -28,15 +26,8 @@ class Preisliste extends Preset {
                 ]
         ];
         
-        
-        $layout = new \LK\PDF\Doctypes\Layout_preistable_three();
-        
-        $manager ->addLayout($layout);
-        $manager ->addLayout(new \LK\PDF\Doctypes\Layout_preistable_two());
-        $manager ->addLayout(new \LK\PDF\Doctypes\Layout_preistable_one());
-        
         $value = new \stdClass();
-        $value -> layout = $layout ->getId();
+        $value -> layout = 'layout-preistable_three';
         $value -> title = 'Preisliste';
         $value -> active = 0;
         
@@ -45,13 +36,6 @@ class Preisliste extends Preset {
             'id' => 1,
             'widget' => 'editor',
             'value' => '<h1>Preisliste</h1><p>Erklärung zur Preisliste</p>',
-        ];
-        
-        $value -> content[] = [
-            'id' => 1,
-            'widget' => 'table',
-            'title' => '',
-            'rows' => $sample_table,
         ];
         
         $value -> content[] = [
@@ -68,7 +52,18 @@ class Preisliste extends Preset {
             'rows' => $sample_table,
         ];
         
-        $value -> sample = [];
+        $value -> content[] = [
+            'id' => 4,
+            'widget' => 'table',
+            'title' => '',
+            'rows' => $sample_table,
+        ];
+        
+        $value -> sample = [
+            'layout-preistable_three' => $value -> content,
+            'layout-preistable_two' => $value -> content,
+            'layout-preistable_one' => $value -> content,
+        ];
         
     return $value;    
     }

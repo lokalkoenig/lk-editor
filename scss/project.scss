@@ -38,11 +38,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
 
 @import 'modules/small_layouts';
 
-.pdf-editor {
-     background: #34495e; 
-}
-
-
 #PXEdit .layout-menu {
   position: fixed;
   right: -300px;
@@ -399,10 +394,17 @@ $doc_p_size: (16px * $doc_pdf_zoom);
         position: relative;
     }
     
+    
+    
     .editor-widget-editor {
-        .editable-container.editable-inline {
-            position: absolute;
-        }
+      .editable-empty {
+        min-height: 20px;
+      }
+      
+      
+     .editable-container.editable-inline {
+        position: absolute;
+     }
     }
     
     .editor-widget-image {
@@ -423,7 +425,31 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     
     div[data-height="50"]{
         height: ($doc_content_height / 2) - $doc_content_spacing;
+        
+        
     }
+    
+    div.widget-flexibile {
+      height: auto;
+      
+      .editor-widget {
+        position: relative;
+        //height: auto !important;
+        margin-bottom: $doc_content_spacing;
+       
+        .editable-container.editable-inline {
+          position: relative;
+        }
+        
+        .trumbowyg-editor, 
+        .trumbowyg-textarea,
+        .trumbowyg-box {
+          min-height: 0;
+        }
+        
+      }
+    }
+    
     
     div[data-height="100"]{
         height: ($doc_content_height) - $doc_content_spacing;
@@ -609,6 +635,16 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     .widget[data-widget="table"] {
         position: relative;    
         
+        &.widget-table-fixed {
+          .option2 {
+            display: none !important;
+          }
+          
+          .text {
+            display: none !important;
+          }
+        }
+        
         .editable-container {
             min-height: 0 !important;
         }
@@ -786,7 +822,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
                 font-size: ($doc_p_size - 1px);
                 line-height: 1.2;
                 min-height: 20px;
-                height: 100px;
+                height: 50px;
                 box-shadow: none;
                 resize: none;
                 position: absolute;
@@ -820,7 +856,7 @@ table.table {
     
     tr td {
      font-size: ($doc_p_size - 1px);
-     padding: 5px 2.5px;
+     padding: 5px 4px;
      word-break: break-word;
      vertical-align: top;
      line-height: 1.3;

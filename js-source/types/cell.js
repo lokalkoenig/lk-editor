@@ -45,8 +45,7 @@ $(function(){
         
         
         input2value: function() { 
-            $('#PXEdit').PXEditor('changed');
-            
+            PDFForm.setChanged();
             return this.$input.val();
         } 
     });

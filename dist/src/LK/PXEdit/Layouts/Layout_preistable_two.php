@@ -18,10 +18,10 @@ class Layout_preistable_two extends Doctype {
       return '<div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
         
               <div class="float-2 float-col" data-height="50">
-                   <div class="float-100 widget" data-height="50" data-width="50" data-index="2" data-widget="table"></div>   
+                   <div class="float-100 widget widget-table-fixed" data-height="50" data-width="50" data-index="2" data-widget="table"></div>   
                </div>
                 <div class="float-2 float-col" data-height="50">
-                   <div class="float-100 widget" data-height="50" data-width="50" data-index="3" data-widget="table"></div>   
+                   <div class="float-100 widget widget-table-fixed" data-height="50" data-width="50" data-index="3" data-widget="table"></div>   
                </div>';  
     }
 }

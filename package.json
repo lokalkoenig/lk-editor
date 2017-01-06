@@ -13,8 +13,13 @@
     "blueimp-file-upload": "9.14.1"
   },
   "devDependencies": {
+    "gulp-clean-css": "^2.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "0.0.14",
     "gulp-ruby-sass": "^2.1.1",
     "gulp-sass": "^2.3.2",
+    "gulp-strip-comments": "^2.4.3",
+    "gulp-strip-css-comments": "^1.2.0",
     "gulp-watch": "^4.3.11"
   }
 }
