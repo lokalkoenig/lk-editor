@@ -578,6 +578,8 @@
     $.fn.editable.defaults.onblur = "submit";
     $.fn.editable.defaults.emptytext = "";
     
+    $.trumbowyg.svgPath = 'css/icons.svg';
+    
     // selfregister events & listeners
     jQuery(document).ready(function(){
       PDFForm.addListener();

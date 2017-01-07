@@ -210,7 +210,6 @@ jQuery('document').ready(function(){
    });
   
    $("#PXEdit").on('click', '.option-table li', function(){
-        console.log($(this).attr('data-preset'));
         $(this).closest('.widget').createTableWdiget('setpreset', $(this).attr('data-preset'));
    });
   

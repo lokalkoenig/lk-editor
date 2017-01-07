@@ -1,4 +1,1340 @@
-.fileinput-button{position:relative;overflow:hidden;display:inline-block}.fileinput-button input{position:absolute;top:0;right:0;margin:0;opacity:0;-ms-filter:'alpha(opacity=0)';font-size:200px!important;direction:ltr;cursor:pointer}@media screen\9{.fileinput-button input{filter:alpha(opacity=0);font-size:100%;height:100%}}/*! X-editable - v1.5.1 
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block; }
+
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer; }
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%; } }
+/*! X-editable - v1.5.1 
 * In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
 * http://github.com/vitalets/x-editable
-* Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */.editableform{margin-bottom:0}.editableform .form-control{width:auto}.editable-buttons{vertical-align:top;margin-left:7px;zoom:1}.editable-buttons.editable-buttons-bottom{display:block;margin-top:7px;margin-left:0}.editable-input{vertical-align:top;white-space:normal;zoom:1}.editable-buttons .editable-cancel{margin-left:7px}.editable-buttons button.ui-button-icon-only{height:24px;width:30px}.editableform-loading{height:25px;width:auto;min-width:25px}.editable-inline .editableform-loading{background-position:left 5px}.editable-error-block{max-width:300px;margin:5px 0 0;width:auto;white-space:normal}.editable-error-block.ui-state-error{padding:3px}.editable-error{color:red}.editableform .editable-date{padding:0;margin:0;float:left}.editable-inline .add-on .icon-th{margin-top:3px;margin-left:1px}.editable-checklist label input[type=checkbox],.editable-checklist label span{vertical-align:middle;margin:0}.editable-checklist label{white-space:nowrap}.editable-clear{clear:both;font-size:.9em;text-decoration:none;text-align:right}.editable-clear-x{display:block;width:13px;height:13px;position:absolute;opacity:.6;z-index:100;top:50%;right:6px;margin-top:-6px}#PXEdit .layout-menu:hover,.editable-clear-x:hover{opacity:1}.editable-pre-wrapped{white-space:pre-wrap}.editable-container.editable-popup{max-width:none!important}.editable-container.popover{width:auto}.editable-container.editable-inline{vertical-align:middle;zoom:1}.editable-container.ui-widget{font-size:inherit;z-index:9990}.editable-click.editable-disabled,a.editable-click.editable-disabled,a.editable-click.editable-disabled:hover{color:#585858;cursor:default;border-bottom:none}.editable-empty{color:#D14;text-decoration:none}.editable-empty:hover{border-bottom:1px #CCC dashed}.editable-bg-transition{-webkit-transition:background-color 1.4s ease-out;-moz-transition:background-color 1.4s ease-out;-o-transition:background-color 1.4s ease-out;-ms-transition:background-color 1.4s ease-out;transition:background-color 1.4s ease-out}.form-horizontal .editable{padding-top:5px;display:inline-block}.small-format-presentation .layout-template{width:120px;height:100px;float:left;margin-right:10px;border:1px solid Silver;cursor:pointer;margin-bottom:10px}.small-format-presentation .layout-template .widget{margin:5px 0 5px 5px;background:#EEE;height:90px;float:left;transition:.2s background ease;width:110px}.pdf .footer-logos img,.small-format-presentation .layout-template.layout-50-50-double .float-2:not(.widget),.small-format-presentation .layout-template.layout-50-50-left .float-2:not(.widget),.small-format-presentation .layout-template.layout-preistable_three .float-2,.small-format-presentation .layout-template.layout-preistable_two .float-2{margin-right:5px}.small-format-presentation .layout-template .widget.selected{background:#428bca}.small-format-presentation .layout-template .widget.changed{background:#ffa07a}.small-format-presentation .layout-template.layout-50-50 .widget{width:52px}.small-format-presentation .layout-template .float-2{width:52px;float:left}.small-format-presentation .layout-template .float-2 .float-100[data-height="50"]{height:42px;width:52px;margin-bottom:0}.small-format-presentation .layout-template.layout-preistable_one .widget,.small-format-presentation .layout-template.layout-preistable_three .widget-flexibile,.small-format-presentation .layout-template.layout-preistable_two .widget-flexibile{height:42px;margin-bottom:0}.small-format-presentation .layout-template.layout-preistable_three .float-3,.small-format-presentation .layout-template.layout-preistable_two .float-3{margin-right:5px;width:33.5px;float:left}.small-format-presentation .layout-template.layout-preistable_three .float-3 .widget,.small-format-presentation .layout-template.layout-preistable_two .float-3 .widget{width:32.5px;float:none;height:42px;margin-bottom:0}.small-format-presentation .layout-template.layout-preistable_three .float-2 .widget,.small-format-presentation .layout-template.layout-preistable_two .float-2 .widget{width:52px}.small-format-presentation .layout-template.layout-tripple{position:relative}.small-format-presentation .layout-template.layout-tripple .float-3{width:37.5px;float:left}.small-format-presentation .layout-template.layout-tripple .widget{width:32.5px;float:none;height:42px;margin-bottom:0}#PXEdit .layout-menu{position:fixed;right:-300px;width:300px;background:#fff;margin-top:10px;opacity:1;border-top-right-radius:0;border-bottom-right-radius:0;transition:right .5s ease-in-out,opacity .2s ease;z-index:300}#PXEdit .layout-menu.open{right:0}#PXEdit .layout-menu.open+.layout-menu-backdrop{display:block}#PXEdit .layout-menu .layout-template.active .widget,#PXEdit .layout-menu .layout-template:hover .widget{background:#add8e6}#PXEdit .layout-menu-backdrop{z-index:299;position:fixed;display:none;top:0;bottom:0;left:0;right:0;background:rgba(0,0,0,.5)}.editableform .control-group{margin-bottom:0;white-space:nowrap;position:relative;width:100%;display:block}.editable-buttons{display:none}.editable-container.editable-inline,.editable-input{display:block;width:100%}#PXEdit,#PXEdit #document-save-settings{display:none}.editable-unsaved{font-weight:inherit}.editable-click,a.editable-click,a.editable-click:hover{text-decoration:none;border:none}.editableform .control-group,body{line-height:1.2}.trumbowyg-button-pane{background:#fff;border:1px solid Silver}#PXEdit{position:absolute;top:40px;left:0;right:0}#PXEdit.pdf-editor-changed #document-save-settings{display:inline-block}#PXEdit.loading #pdf-visibile-editor{background:url(/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif) center center no-repeat}#PXEdit.loading .settings-panel{pointer-events:none}#PXEdit .backdrop{position:fixed;top:0;background:rgba(0,0,0,.5);bottom:0;left:0;right:0;z-index:99}.pdf{position:relative;z-index:100;width:897.6px;height:635.2px;max-width:none;margin-top:0;background:#fff;padding:0}.pdf .alert{border-top-left-radius:0;border-top-right-radius:0;z-index:10000;position:absolute;left:20%;right:20%;top:0;transition:.4s top ease-in-out}.pdf .alert.slideUp{top:-150px}.pdf .editor-widget{position:relative}.pdf .editor-widget.editor-widget-image{cursor:pointer}.pdf .editor-widget.editor-widget-image .progress{position:absolute;top:0;height:5px;border-radius:0;width:100%;display:none}.pdf .editor-widget.editor-widget-image.in-progress .progress{display:block}.pdf .editor-widget.editor-widget-image.in-progress img{opacity:.2}.pdf .editor-widget.editor-widget-image .btn{position:absolute;bottom:-40px;border-radius:0;left:0;opacity:0;transition:bottom .4s ease}.pdf .editor-widget.editor-widget-image:hover .btn{opacity:1;bottom:0}.pdf .editor-widget.editor-widget-image:hover img{box-shadow:1px 1px 1px 1px #ccc}.pdf .settings-panel{position:absolute;top:4px;width:35px;z-index:100;margin-left:-38px}.pdf .settings-panel button{margin-bottom:2px;max-width:32px;overflow:hidden;min-width:32px;transition:.2s min-width ease-in-out}.pdf .settings-panel button .label-in{display:none;margin-left:5px}.pdf .settings-panel button:hover{min-width:130px}.pdf .settings-panel button:hover .label-in{display:inline}.pdf header{height:100px;margin-bottom:24px;border-bottom:1px Silver solid}.pdf header .logo{margin-left:64px;padding-top:20px}.pdf header .label-editor{position:absolute;top:42px;border-radius:0;transform:rotate(270deg);margin-left:-43px;width:100px;text-align:center}.pdf .float-2{width:50%;float:left}.pdf .float-3{float:left;width:33.33333333%}.pdf .float-xs-8{float:left;width:80%}.pdf .float-xs-4{float:left;width:20%}.pdf .footer-logos{margin-left:64px;padding-top:15px}.pdf .footer-logos img{height:auto;width:90px}.pdf footer{position:absolute;bottom:0;border-top:1px Silver solid;left:0;right:0;height:60.8px;background:#eee}.trumbowyg-box{border:none;padding:0;margin:0}.trumbowyg-box .trumbowyg-editor{padding:0}.trumbowyg-box .trumbowyg-button-pane{position:relative;margin-top:-36px;top:-10px}.trumbowyg-box .trumbowyg-button-pane button{width:25px}#pdf-visibile-editor{height:448px;background:#fff;margin:0 64px;position:relative}#pdf-visibile-editor .widget-placeholder{background:rgba(240,240,240,.1);border:1px dashed #EEE;position:relative}#pdf-visibile-editor .widget-placeholder:before{content:'Platzhalter';text-transform:uppercase;font-size:9px;position:absolute;top:10px;left:10px}#pdf-visibile-editor .editor-widget{position:relative}#pdf-visibile-editor .editor-widget-editor .editable-empty{min-height:20px}#pdf-visibile-editor .editor-widget-editor .editable-container.editable-inline{position:absolute}#pdf-visibile-editor .editor-widget-image{overflow:hidden}#pdf-visibile-editor .editor-widget-image[data-fid="0"]{background:url(placeholder.jpg) center no-repeat;background-size:contain}#pdf-visibile-editor .editor-widget-image img{height:100%;width:100%}#pdf-visibile-editor div[data-height="50"]{height:200px}#pdf-visibile-editor div.widget-flexibile{height:auto}#pdf-visibile-editor div.widget-flexibile .editor-widget{position:relative;margin-bottom:24px}#pdf-visibile-editor div.widget-flexibile .editor-widget .editable-container.editable-inline{position:relative}#pdf-visibile-editor div.widget-flexibile .editor-widget .trumbowyg-box,#pdf-visibile-editor div.widget-flexibile .editor-widget .trumbowyg-editor,#pdf-visibile-editor div.widget-flexibile .editor-widget .trumbowyg-textarea{min-height:0}#pdf-visibile-editor div[data-height="100"]{height:424px}#pdf-visibile-editor div[data-height="100"] div[data-height="50"]{height:200px}#pdf-visibile-editor div[data-height="100"] div[data-height="50"] .editable-container,#pdf-visibile-editor div[data-height="100"] div[data-height="50"] .trumbowyg-editor{min-height:200px}#pdf-visibile-editor div[data-height="100"] .trumbowyg-editor{min-height:424px;overflow:hidden}#pdf-visibile-editor .float-2 .widget,#pdf-visibile-editor .float-2 .widget-placeholder,#pdf-visibile-editor .float-3 .widget,#pdf-visibile-editor .float-3 .widget-placeholder{margin-bottom:24px}#pdf-visibile-editor .float-2:not(:last-child)>div,#pdf-visibile-editor .float-3:not(:last-child)>div{margin-right:24px;position:relative}.pdf h1,.pdf h2{margin:0 0 9.6px}.pdf h1{font-size:22.4px;font-weight:700}.pdf h1 span,.pdf h1 strong{font-weight:700!important}.pdf h2{font-size:17.6px}.pdf h2 span,.pdf h2 strong{font-weight:400!important}.pdf .footnote-table,.pdf ol,.pdf p,.pdf ul{margin:0 0 8px;font-size:12.8px}.pdf .footnote-table{display:table;height:60px;margin-right:64px}.pdf .footnote-table .footnote-cell{display:table-cell;vertical-align:middle}#pdfdoc-alter-layout .layout-template.active .widget,#pdfdoc-alter-layout .layout-template:hover .widget{background:#add8e6}#pdf-current-layout .layout-template .widget{position:relative}#pdf-current-layout .layout-template .widget .label{position:absolute;display:block;top:0;bottom:0;left:0;right:0;background:#fff;border:1px solid Silver;text-align:center;transition:background .2s ease;line-height:35px;color:#000;border-radius:0;padding:0;font-size:9px;font-weight:400}#pdf-current-layout .layout-template .widget.changed .label{color:#000;font-weight:700;background:#ebebeb}#pdf-current-layout .layout-template .widget.selected .label,#pdf-current-layout .layout-template .widget:hover .label{background:#428bca;color:#fff}.message-overlay{top:0;left:0;right:0;z-index:5000;bottom:0;position:fixed;background:rgba(0,0,0,.5)}.message-overlay>div{display:table;width:80%;height:100%;margin:0 auto;-webkit-transform:translate(0,-20%);-webkit-transition:-webkit-transform .2s ease-in-out}.message-overlay>div.in{-webkit-transform:translate(0,0)}.message-overlay>div>div{display:table-cell;vertical-align:top}.message-overlay .well{border:0;border-radius:0;background:#fff}.pdf .widget[data-widget=table]{position:relative}.pdf .widget[data-widget=table].widget-table-fixed .option2,.pdf .widget[data-widget=table].widget-table-fixed .text{display:none!important}.pdf .widget[data-widget=table] .editable-container{min-height:0!important}.pdf .widget[data-widget=table] .glyphicon{display:none;position:absolute;right:0;font-size:10px;border:1px solid #CCC;color:#CCC;padding:5px;cursor:pointer;transition:all .2s ease-in;top:2px}.pdf .widget[data-widget=table] .glyphicon:hover{color:#333;border-color:#333}.pdf .widget[data-widget=table] .option,.pdf .widget[data-widget=table] .option2{display:none;position:absolute}.pdf .widget[data-widget=table] .option-table{width:1px;transition:width .2s ease-in;overflow:hidden;display:block;z-index:200;position:absolute;right:22px;height:22px;top:0;margin:0}.pdf .widget[data-widget=table] .option-table li{display:inline-block;border:1px solid Silver;padding:2px 4px;font-size:9px;color:Silver;background:#fff;transition:color .2s ease-in;cursor:pointer;line-height:16px;border-right:0}.pdf .widget[data-widget=table] .option-table li.active,.pdf .widget[data-widget=table] .option-table li:hover{color:#333}.pdf .widget[data-widget=table] .glyphicon-cog{right:0;display:inline-block;left:auto;top:0;color:#EEE;border-color:#fff;z-index:2}.pdf .widget[data-widget=table].widget-options .glyphicon{display:inline-block}.pdf .widget[data-widget=table].widget-options .option-table{visibility:visible;width:170px;right:20px;z-index:1;text-align:right}.pdf .widget[data-widget=table].widget-options .option2{display:block;z-index:200;right:0}.pdf .widget[data-widget=table].widget-options .option2 .glyphicon{top:0}.pdf .widget[data-widget=table].widget-options .option{display:block;position:absolute;top:0;left:0;right:0;text-align:center}.pdf .widget[data-widget=table].widget-options .option .glyphicon-minus{display:inline-block;position:static}.pdf .widget[data-widget=table].widget-options .glyphicon-cog{color:Silver;border-color:Silver}.pdf .widget[data-widget=table].widget-options table{border-bottom:1px #EEE solid}.pdf .widget[data-widget=table].widget-options table+.glyphicon-plus{top:auto}.pdf .widget[data-widget=table].widget-options .PXEdit-table-col.glyphicon-minus{right:auto;left:0;top:-20px;background:#fff}.pdf .widget[data-widget=table]:not(.widget-options) div.text.editable-empty{display:none!important}.pdf .widget[data-widget=table] div.text{min-height:20px}.pdf .widget[data-widget=table] div.text.editable-open{display:block!important;visibility:hidden}.pdf .widget[data-widget=table] .table-edit{display:block;min-height:15px;cursor:text}.pdf .widget[data-widget=table] .table-edit.editable-open{display:block!important;visibility:hidden}.pdf .widget[data-widget=table] .editable-buttons{display:none}.pdf .widget[data-widget=table] .editableform .control-group{position:absolute;z-index:2;top:0}.pdf .widget[data-widget=table] .editable-inline textarea{padding:2.5px!important;font-size:11.8px;line-height:1.2;min-height:20px;height:50px;box-shadow:none;resize:none;position:absolute;border:1px dotted Silver;width:100%;background:rgba(255,255,255,.5)}.pdf .widget[data-widget=table] .editable-inline input{border:0;padding:0;box-shadow:none;font-size:17.6px;margin-bottom:9.6px;margin-top:-5px;width:100%}.pdf table.table{margin:0}.pdf table.table.table-options .glyphicon{display:inline-block}.pdf table.table tr td{font-size:11.8px;padding:5px 4px;word-break:break-word;vertical-align:top;line-height:1.3;border:0;position:relative;white-space:pre}#footnote,#footnote input{font-size:10.8px;text-align:right;position:relative;color:#888}.pdf table.table.table-2 td{width:50%}.pdf table.table.table-3 td{width:33.3333334%}.pdf table.table.table-4 td{width:25%}.pdf table.table[data-preset=table-normal] tr:first-child td,.pdf table.table[data-preset=table-advanced] tr:first-child td{font-weight:700;vertical-align:bottom}.pdf table.table[data-preset=table-advanced] tr td:first-child{font-weight:700}.pdf table.table tr:nth-child(even) td{background:#eee}#footnote{top:-18px;margin:0 64px;z-index:100}#footnote input{background:0 0;display:block;border:0;width:100%;padding:0;top:-9px;box-shadow:none;padding-right:0!important}#footnote>div{height:17px;display:block}#footnote>div.editable-empty:after{content:'Fusszeile (optional)';color:#888;cursor:pointer}
+* Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
+.editableform {
+  margin-bottom: 0;
+  /* overwrites bootstrap margin */ }
+
+.editableform .control-group {
+  margin-bottom: 0;
+  /* overwrites bootstrap margin */
+  white-space: nowrap;
+  /* prevent wrapping buttons on new line */ }
+
+/* 
+  BS3 width:1005 for inputs breaks editable form in popup 
+  See: https://github.com/vitalets/x-editable/issues/393
+*/
+.editableform .form-control {
+  width: auto; }
+
+.editable-buttons {
+  display: inline-block;
+  /* should be inline to take effect of parent's white-space: nowrap */
+  vertical-align: top;
+  margin-left: 7px;
+  /* inline-block emulation for IE7*/
+  zoom: 1;
+  *display: inline; }
+
+.editable-buttons.editable-buttons-bottom {
+  display: block;
+  margin-top: 7px;
+  margin-left: 0; }
+
+.editable-input {
+  vertical-align: top;
+  display: inline-block;
+  /* should be inline to take effect of parent's white-space: nowrap */
+  width: auto;
+  /* bootstrap-responsive has width: 100% that breakes layout */
+  white-space: normal;
+  /* reset white-space decalred in parent*/
+  /* display-inline emulation for IE7*/
+  zoom: 1;
+  *display: inline; }
+
+.editable-buttons .editable-cancel {
+  margin-left: 7px; }
+
+/*for jquery-ui buttons need set height to look more pretty*/
+.editable-buttons button.ui-button-icon-only {
+  height: 24px;
+  width: 30px; }
+
+.editableform-loading {
+  /** background: url('../img/loading.gif') center center no-repeat; */
+  height: 25px;
+  width: auto;
+  min-width: 25px; }
+
+.editable-inline .editableform-loading {
+  background-position: left 5px; }
+
+.editable-error-block {
+  max-width: 300px;
+  margin: 5px 0 0 0;
+  width: auto;
+  white-space: normal; }
+
+/*add padding for jquery ui*/
+.editable-error-block.ui-state-error {
+  padding: 3px; }
+
+.editable-error {
+  color: red; }
+
+/* ---- For specific types ---- */
+.editableform .editable-date {
+  padding: 0;
+  margin: 0;
+  float: left; }
+
+/* move datepicker icon to center of add-on button. See https://github.com/vitalets/x-editable/issues/183 */
+.editable-inline .add-on .icon-th {
+  margin-top: 3px;
+  margin-left: 1px; }
+
+/* checklist vertical alignment */
+.editable-checklist label input[type="checkbox"],
+.editable-checklist label span {
+  vertical-align: middle;
+  margin: 0; }
+
+.editable-checklist label {
+  white-space: nowrap; }
+
+/* clear button shown as link in date inputs */
+.editable-clear {
+  clear: both;
+  font-size: 0.9em;
+  text-decoration: none;
+  text-align: right; }
+
+/* IOS-style clear button for text inputs */
+.editable-clear-x {
+  display: block;
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  opacity: 0.6;
+  z-index: 100;
+  top: 50%;
+  right: 6px;
+  margin-top: -6px; }
+
+.editable-clear-x:hover {
+  opacity: 1; }
+
+.editable-pre-wrapped {
+  white-space: pre-wrap; }
+
+.editable-container.editable-popup {
+  max-width: none !important;
+  /* without this rule poshytip/tooltip does not stretch */ }
+
+.editable-container.popover {
+  width: auto;
+  /* without this rule popover does not stretch */ }
+
+.editable-container.editable-inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  /* inline-block emulation for IE7*/
+  zoom: 1;
+  *display: inline; }
+
+.editable-container.ui-widget {
+  font-size: inherit;
+  /* jqueryui widget font 1.1em too big, overwrite it */
+  z-index: 9990;
+  /* should be less than select2 dropdown z-index to close dropdown first when click */ }
+
+.editable-click,
+a.editable-click,
+a.editable-click:hover {
+  text-decoration: none;
+  border-bottom: dashed 1px #0088cc; }
+
+.editable-click.editable-disabled,
+a.editable-click.editable-disabled,
+a.editable-click.editable-disabled:hover {
+  color: #585858;
+  cursor: default;
+  border-bottom: none; }
+
+.editable-empty {
+  color: #DD1144;
+  text-decoration: none; }
+  .editable-empty:hover {
+    border-bottom: 1px #CCC dashed; }
+
+.editable-unsaved {
+  font-weight: bold; }
+
+.editable-unsaved:after {
+  /*    content: '*'*/ }
+
+.editable-bg-transition {
+  -webkit-transition: background-color 1400ms ease-out;
+  -moz-transition: background-color 1400ms ease-out;
+  -o-transition: background-color 1400ms ease-out;
+  -ms-transition: background-color 1400ms ease-out;
+  transition: background-color 1400ms ease-out; }
+
+/*see https://github.com/vitalets/x-editable/issues/139 */
+.form-horizontal .editable {
+  padding-top: 5px;
+  display: inline-block; }
+
+/**
+ * Trumbowyg v2.3.0 - A lightweight WYSIWYG editor
+ * Default stylesheet for Trumbowyg editor
+ * ------------------------
+ * @link http://alex-d.github.io/Trumbowyg
+ * @license MIT
+ * @author Alexandre Demode (Alex-D)
+ *         Twitter : @AlexandreDemode
+ *         Website : alex-d.fr
+ */
+#trumbowyg-icons {
+  overflow: hidden;
+  visibility: hidden;
+  height: 0;
+  width: 0; }
+
+#trumbowyg-icons svg {
+  height: 0;
+  width: 0; }
+
+.trumbowyg-box *,
+.trumbowyg-box *::before,
+.trumbowyg-box *::after {
+  box-sizing: border-box; }
+
+.trumbowyg-box svg {
+  width: 17px;
+  height: 100%;
+  fill: #222; }
+
+.trumbowyg-box,
+.trumbowyg-editor {
+  display: block;
+  position: relative;
+  border: 1px solid #DDD;
+  width: 100%;
+  min-height: 300px;
+  margin: 17px auto; }
+
+.trumbowyg-box .trumbowyg-editor {
+  margin: 0 auto; }
+
+.trumbowyg-box.trumbowyg-fullscreen {
+  background: #FEFEFE;
+  border: none !important; }
+
+.trumbowyg-editor,
+.trumbowyg-textarea {
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+  min-height: 300px;
+  width: 100%;
+  border-style: none;
+  resize: none;
+  outline: none;
+  overflow: auto; }
+
+.trumbowyg-box-blur .trumbowyg-editor img,
+.trumbowyg-box-blur .trumbowyg-editor hr {
+  opacity: 0.2; }
+
+.trumbowyg-textarea {
+  position: relative;
+  display: block;
+  overflow: auto;
+  border: none;
+  white-space: normal;
+  font-size: 14px;
+  font-family: "Inconsolata", "Consolas", "Courier", "Courier New", sans-serif;
+  line-height: 18px; }
+
+.trumbowyg-box.trumbowyg-editor-visible .trumbowyg-textarea {
+  height: 1px !important;
+  width: 25%;
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: none;
+  opacity: 0 !important; }
+
+.trumbowyg-box.trumbowyg-editor-hidden .trumbowyg-textarea {
+  display: block; }
+
+.trumbowyg-box.trumbowyg-editor-hidden .trumbowyg-editor {
+  display: none; }
+
+.trumbowyg-box.trumbowyg-disabled .trumbowyg-textarea {
+  opacity: 0.8;
+  background: none; }
+
+.trumbowyg-editor[contenteditable=true]:empty:not(:focus)::before {
+  content: attr(placeholder);
+  color: #999;
+  pointer-events: none; }
+
+.trumbowyg-button-pane {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  width: 100%;
+  min-height: 36px;
+  background: #ecf0f1;
+  border-bottom: 1px solid #d7e0e2;
+  margin: 0;
+  padding: 0 5px;
+  list-style-type: none;
+  line-height: 10px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.trumbowyg-button-pane::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  background: #d7e0e2; }
+
+.trumbowyg-button-pane .trumbowyg-button-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap; }
+
+.trumbowyg-button-pane .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
+  color: transparent; }
+
+.trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group::before {
+  content: " ";
+  display: block;
+  width: 1px;
+  background: #d7e0e2;
+  margin: 0 5px;
+  height: 35px; }
+
+.trumbowyg-button-pane button {
+  display: block;
+  position: relative;
+  width: 35px;
+  height: 35px;
+  padding: 1px 6px !important;
+  margin-bottom: 1px;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  background: none;
+  -webkit-transition: background-color 150ms, opacity 150ms;
+  transition: background-color 150ms, opacity 150ms; }
+
+.trumbowyg-button-pane button.trumbowyg-textual-button {
+  width: auto;
+  line-height: 35px; }
+
+.trumbowyg-button-pane.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
+.trumbowyg-disabled .trumbowyg-button-pane button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
+  opacity: 0.2;
+  cursor: default; }
+
+.trumbowyg-button-pane.trumbowyg-disable .trumbowyg-button-group::before,
+.trumbowyg-disabled .trumbowyg-button-pane .trumbowyg-button-group::before {
+  background: #e3e9eb; }
+
+.trumbowyg-button-pane button:not(.trumbowyg-disable):hover,
+.trumbowyg-button-pane button:not(.trumbowyg-disable):focus,
+.trumbowyg-button-pane button.trumbowyg-active {
+  background-color: #FFF;
+  outline: none; }
+
+.trumbowyg-button-pane .trumbowyg-open-dropdown::after {
+  display: block;
+  content: " ";
+  position: absolute;
+  top: 25px;
+  right: 3px;
+  height: 0;
+  width: 0;
+  border: 3px solid transparent;
+  border-top-color: #555; }
+
+.trumbowyg-button-pane .trumbowyg-open-dropdown.trumbowyg-textual-button {
+  padding-left: 10px !important;
+  padding-right: 18px !important; }
+
+.trumbowyg-button-pane .trumbowyg-open-dropdown.trumbowyg-textual-button::after {
+  top: 17px;
+  right: 7px; }
+
+.trumbowyg-button-pane .trumbowyg-right {
+  margin-left: auto; }
+
+.trumbowyg-button-pane .trumbowyg-right::before {
+  display: none !important; }
+
+.trumbowyg-dropdown {
+  width: 200px;
+  border: 1px solid #ecf0f1;
+  padding: 5px 0;
+  border-top: none;
+  background: #FFF;
+  margin-left: -1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 3px; }
+
+.trumbowyg-dropdown button {
+  display: block;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-decoration: none;
+  background: #FFF;
+  padding: 0 10px;
+  color: #333 !important;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 15px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms; }
+
+.trumbowyg-dropdown button:hover, .trumbowyg-dropdown button:focus {
+  background: #ecf0f1; }
+
+.trumbowyg-dropdown button svg {
+  float: left;
+  margin-right: 14px; }
+
+/* Modal box */
+.trumbowyg-modal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  max-width: 520px;
+  width: 100%;
+  height: 350px;
+  z-index: 11;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.trumbowyg-modal-box {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  max-width: 500px;
+  width: calc(100% - 20px);
+  padding-bottom: 45px;
+  z-index: 1;
+  background-color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.trumbowyg-modal-box .trumbowyg-modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  padding: 15px 0 13px;
+  display: block;
+  border-bottom: 1px solid #EEE;
+  color: #333;
+  background: #fbfcfc; }
+
+.trumbowyg-modal-box .trumbowyg-progress {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  top: 58px; }
+
+.trumbowyg-modal-box .trumbowyg-progress .trumbowyg-progress-bar {
+  background: #2BC06A;
+  height: 100%;
+  -webkit-transition: width 150ms linear;
+  transition: width 150ms linear; }
+
+.trumbowyg-modal-box label {
+  display: block;
+  position: relative;
+  margin: 15px 12px;
+  height: 29px;
+  line-height: 29px;
+  overflow: hidden; }
+
+.trumbowyg-modal-box label .trumbowyg-input-infos {
+  display: block;
+  text-align: left;
+  height: 25px;
+  line-height: 25px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms; }
+
+.trumbowyg-modal-box label .trumbowyg-input-infos span {
+  display: block;
+  color: #69878f;
+  background-color: #fbfcfc;
+  border: 1px solid #DEDEDE;
+  padding: 0 7px;
+  width: 150px; }
+
+.trumbowyg-modal-box label .trumbowyg-input-infos span.trumbowyg-msg-error {
+  color: #e74c3c; }
+
+.trumbowyg-modal-box label.trumbowyg-input-error input,
+.trumbowyg-modal-box label.trumbowyg-input-error textarea {
+  border: 1px solid #e74c3c; }
+
+.trumbowyg-modal-box label.trumbowyg-input-error .trumbowyg-input-infos {
+  margin-top: -27px; }
+
+.trumbowyg-modal-box label input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 27px;
+  line-height: 27px;
+  border: 1px solid #DEDEDE;
+  background: #fff;
+  font-size: 14px;
+  max-width: 330px;
+  width: 70%;
+  padding: 0 7px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms; }
+
+.trumbowyg-modal-box label input:hover, .trumbowyg-modal-box label input:focus {
+  outline: none;
+  border: 1px solid #95a5a6; }
+
+.trumbowyg-modal-box label input:focus {
+  background: #fbfcfc; }
+
+.trumbowyg-modal-box .error {
+  margin-top: 25px;
+  display: block;
+  color: red; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  text-decoration: none;
+  color: #FFF;
+  display: block;
+  width: 100px;
+  height: 35px;
+  line-height: 33px;
+  margin: 0 10px;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
+  font-size: 16px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit {
+  right: 110px;
+  background: #2bc06a; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:hover, .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:focus {
+  background: #40d47e;
+  outline: none; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:active {
+  background: #25a25a; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset {
+  color: #555;
+  background: #e6e6e6; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset:hover, .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset:focus {
+  background: #fbfbfb;
+  outline: none; }
+
+.trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset:active {
+  background: #d5d5d5; }
+
+.trumbowyg-overlay {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  left: 0;
+  display: none;
+  z-index: 10; }
+
+/**
+ * Fullscreen
+ */
+body.trumbowyg-body-fullscreen {
+  overflow: hidden; }
+
+.trumbowyg-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 99999; }
+
+.trumbowyg-fullscreen.trumbowyg-box,
+.trumbowyg-fullscreen .trumbowyg-editor {
+  border: none; }
+
+.trumbowyg-fullscreen .trumbowyg-editor,
+.trumbowyg-fullscreen .trumbowyg-textarea {
+  height: calc(100% - 37px) !important;
+  overflow: auto; }
+
+.trumbowyg-fullscreen .trumbowyg-overlay {
+  height: 100% !important; }
+
+.trumbowyg-fullscreen .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
+  color: #222;
+  fill: transparent; }
+
+.trumbowyg-editor {
+  /*
+     * lset for resetCss option
+     */ }
+
+.trumbowyg-editor object,
+.trumbowyg-editor embed,
+.trumbowyg-editor video,
+.trumbowyg-editor img {
+  max-width: 100%; }
+
+.trumbowyg-editor video,
+.trumbowyg-editor img {
+  height: auto; }
+
+.trumbowyg-editor img {
+  cursor: move; }
+
+.trumbowyg-editor.trumbowyg-reset-css {
+  background: #FEFEFE !important;
+  font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.45em !important;
+  white-space: normal !important;
+  color: #333; }
+
+.trumbowyg-editor.trumbowyg-reset-css a {
+  color: #15c !important;
+  text-decoration: underline !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css div,
+.trumbowyg-editor.trumbowyg-reset-css p,
+.trumbowyg-editor.trumbowyg-reset-css ul,
+.trumbowyg-editor.trumbowyg-reset-css ol,
+.trumbowyg-editor.trumbowyg-reset-css blockquote {
+  box-shadow: none !important;
+  background: none !important;
+  margin: 0 !important;
+  margin-bottom: 15px !important;
+  line-height: 1.4em !important;
+  font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  border: none; }
+
+.trumbowyg-editor.trumbowyg-reset-css iframe,
+.trumbowyg-editor.trumbowyg-reset-css object,
+.trumbowyg-editor.trumbowyg-reset-css hr {
+  margin-bottom: 15px !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css blockquote {
+  margin-left: 32px !important;
+  font-style: italic !important;
+  color: #555; }
+
+.trumbowyg-editor.trumbowyg-reset-css ul,
+.trumbowyg-editor.trumbowyg-reset-css ol {
+  padding-left: 20px !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css ul ul,
+.trumbowyg-editor.trumbowyg-reset-css ol ol,
+.trumbowyg-editor.trumbowyg-reset-css ul ol,
+.trumbowyg-editor.trumbowyg-reset-css ol ul {
+  border: none;
+  margin: 2px !important;
+  padding: 0 !important;
+  padding-left: 24px !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css hr {
+  display: block;
+  height: 1px;
+  border: none;
+  border-top: 1px solid #CCC; }
+
+.trumbowyg-editor.trumbowyg-reset-css h1,
+.trumbowyg-editor.trumbowyg-reset-css h2,
+.trumbowyg-editor.trumbowyg-reset-css h3,
+.trumbowyg-editor.trumbowyg-reset-css h4 {
+  color: #111;
+  background: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-weight: bold; }
+
+.trumbowyg-editor.trumbowyg-reset-css h1 {
+  font-size: 32px !important;
+  line-height: 38px !important;
+  margin-bottom: 20px !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css h2 {
+  font-size: 26px !important;
+  line-height: 34px !important;
+  margin-bottom: 15px !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css h3 {
+  font-size: 22px !important;
+  line-height: 28px !important;
+  margin-bottom: 7px !important; }
+
+.trumbowyg-editor.trumbowyg-reset-css h4 {
+  font-size: 16px !important;
+  line-height: 22px !important;
+  margin-bottom: 7px !important; }
+
+.trumbowyg-box-blur .trumbowyg-editor *, .trumbowyg-box-blur .trumbowyg-editor::before {
+  color: transparent !important;
+  text-shadow: 0 0 7px #333; }
+
+@media screen and (min-width: 0 \0 ) {
+  .trumbowyg-box-blur .trumbowyg-editor *, .trumbowyg-box-blur .trumbowyg-editor::before {
+    color: rgba(200, 200, 200, 0.6) !important; } }
+@supports (-ms-accelerator: true) {
+  .trumbowyg-box-blur .trumbowyg-editor *, .trumbowyg-box-blur .trumbowyg-editor::before {
+    color: rgba(200, 200, 200, 0.6) !important; } }
+.small-format-presentation .layout-template {
+  width: 120px;
+  height: 100px;
+  float: left;
+  margin-right: 10px;
+  border: 1px Silver solid;
+  cursor: pointer;
+  margin-bottom: 10px; }
+  .small-format-presentation .layout-template .widget {
+    margin: 5px;
+    margin-right: 0;
+    background: #EEE;
+    height: 90px;
+    float: left;
+    transition: 0.2s background ease;
+    width: 110px; }
+    .small-format-presentation .layout-template .widget.selected {
+      background: #428bca; }
+    .small-format-presentation .layout-template .widget.changed {
+      background: lightsalmon; }
+  .small-format-presentation .layout-template.layout-50-50 .widget {
+    width: 52px; }
+  .small-format-presentation .layout-template .float-2 {
+    width: 52px;
+    float: left; }
+    .small-format-presentation .layout-template .float-2 .float-100[data-height="50"] {
+      height: 42px;
+      width: 52px;
+      margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-50-50-double .float-2:not(.widget), .small-format-presentation .layout-template.layout-50-50-left .float-2:not(.widget) {
+    margin-right: 5px; }
+  .small-format-presentation .layout-template.layout-preistable_one .widget {
+    height: 42px;
+    margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-preistable_two .widget-flexibile, .small-format-presentation .layout-template.layout-preistable_three .widget-flexibile {
+    height: 42px;
+    margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-preistable_two .float-3, .small-format-presentation .layout-template.layout-preistable_three .float-3 {
+    margin-right: 5px;
+    width: 33.5px;
+    float: left; }
+    .small-format-presentation .layout-template.layout-preistable_two .float-3 .widget, .small-format-presentation .layout-template.layout-preistable_three .float-3 .widget {
+      width: 32.5px;
+      float: none;
+      height: 42px;
+      margin-bottom: 0; }
+  .small-format-presentation .layout-template.layout-preistable_two .float-2, .small-format-presentation .layout-template.layout-preistable_three .float-2 {
+    margin-right: 5px; }
+    .small-format-presentation .layout-template.layout-preistable_two .float-2 .widget, .small-format-presentation .layout-template.layout-preistable_three .float-2 .widget {
+      width: 52px; }
+  .small-format-presentation .layout-template.layout-tripple {
+    position: relative; }
+    .small-format-presentation .layout-template.layout-tripple .float-3 {
+      width: 37.5px;
+      float: left; }
+    .small-format-presentation .layout-template.layout-tripple .widget {
+      width: 32.5px;
+      float: none;
+      height: 42px;
+      margin-bottom: 0; }
+
+#PXEdit .layout-menu {
+  position: fixed;
+  right: -300px;
+  width: 300px;
+  background: White;
+  z-index: 200;
+  margin-top: 10px;
+  opacity: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: right 0.5s ease-in-out, opacity 0.2s ease;
+  z-index: 300; }
+  #PXEdit .layout-menu:hover {
+    opacity: 1; }
+  #PXEdit .layout-menu.open {
+    right: 0; }
+    #PXEdit .layout-menu.open + .layout-menu-backdrop {
+      display: block; }
+  #PXEdit .layout-menu .layout-template.active .widget, #PXEdit .layout-menu .layout-template:hover .widget {
+    background: lightblue; }
+
+#PXEdit .layout-menu-backdrop {
+  z-index: 299;
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5); }
+
+.editableform .control-group {
+  margin-bottom: 0;
+  white-space: nowrap;
+  line-height: 20px;
+  position: relative;
+  width: 100%;
+  display: block; }
+
+.editable-buttons {
+  display: none; }
+
+.editable-container.editable-inline, .editable-input {
+  display: block;
+  width: 100%; }
+
+.editable-unsaved {
+  font-weight: inherit; }
+
+.editable-click, a.editable-click, a.editable-click:hover {
+  border: none; }
+
+.editableform .control-group, body {
+  line-height: 1.2; }
+
+.trumbowyg-button-pane {
+  background: White;
+  border: 1px Silver solid; }
+
+#PXEdit {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0px;
+  display: none; }
+  #PXEdit #document-save-settings {
+    display: none; }
+  #PXEdit.pdf-editor-changed #document-save-settings {
+    display: inline-block; }
+  #PXEdit.loading #pdf-visibile-editor {
+    background: url(/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif);
+    background-position: center center;
+    background-repeat: no-repeat; }
+  #PXEdit.loading .settings-panel {
+    pointer-events: none; }
+  #PXEdit .backdrop {
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99; }
+
+.pdf {
+  position: relative;
+  z-index: 100;
+  width: 897.6px;
+  height: 635.2px;
+  max-width: none;
+  margin-top: 0px;
+  background: White;
+  padding: 0; }
+  .pdf .alert {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    z-index: 10000;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 0;
+    transition: 0.4s top ease-in-out; }
+    .pdf .alert.slideUp {
+      top: -150px; }
+  .pdf .editor-widget {
+    position: relative; }
+    .pdf .editor-widget.editor-widget-image {
+      cursor: pointer; }
+      .pdf .editor-widget.editor-widget-image .progress {
+        position: absolute;
+        top: 0;
+        height: 5px;
+        border-radius: 0;
+        width: 100%;
+        display: none; }
+      .pdf .editor-widget.editor-widget-image.in-progress .progress {
+        display: block; }
+      .pdf .editor-widget.editor-widget-image.in-progress img {
+        opacity: 0.2; }
+      .pdf .editor-widget.editor-widget-image .btn {
+        position: absolute;
+        bottom: -40px;
+        border-radius: 0;
+        left: 0;
+        opacity: 0;
+        transition: bottom .4s ease; }
+      .pdf .editor-widget.editor-widget-image:hover .btn {
+        opacity: 1;
+        bottom: 0; }
+      .pdf .editor-widget.editor-widget-image:hover img {
+        box-shadow: 1px 1px 1px 1px #ccc; }
+  .pdf .settings-panel {
+    position: absolute;
+    top: 4px;
+    /* left: -5px; */
+    width: 35px;
+    z-index: 100;
+    margin-left: -38px; }
+    .pdf .settings-panel button {
+      margin-bottom: 2px;
+      max-width: 32px;
+      overflow: hidden;
+      min-width: 32px;
+      transition: 0.2s min-width ease-in-out; }
+      .pdf .settings-panel button .label-in {
+        display: none;
+        margin-left: 5px; }
+      .pdf .settings-panel button:hover {
+        min-width: 130px; }
+        .pdf .settings-panel button:hover .label-in {
+          display: inline; }
+  .pdf header {
+    height: 100px;
+    margin-bottom: 24px;
+    border-bottom: 1px Silver solid; }
+    .pdf header .logo {
+      margin-left: 64px;
+      padding-top: 20px; }
+    .pdf header .label-editor {
+      position: absolute;
+      top: 42px;
+      border-radius: 0;
+      transform: rotate(270deg);
+      margin-left: -43px;
+      width: 100px;
+      text-align: center; }
+  .pdf .float-2 {
+    width: 50%;
+    float: left; }
+  .pdf .float-3 {
+    float: left;
+    width: 33.33333333%; }
+  .pdf .float-xs-8 {
+    float: left;
+    width: 80%; }
+  .pdf .float-xs-4 {
+    float: left;
+    width: 20%; }
+  .pdf .footer-logos {
+    margin-left: 64px;
+    padding-top: 15px; }
+    .pdf .footer-logos img {
+      height: auto;
+      margin-right: 5px;
+      width: 90px; }
+  .pdf footer {
+    position: absolute;
+    bottom: 0;
+    border-top: 1px Silver solid;
+    left: 0;
+    right: 0;
+    height: 60.8px;
+    background: #eee; }
+
+.trumbowyg-box {
+  border: none;
+  padding: 0;
+  margin: 0; }
+  .trumbowyg-box .trumbowyg-editor {
+    padding: 0px; }
+  .trumbowyg-box .trumbowyg-button-pane {
+    position: relative;
+    margin-top: -36px;
+    top: -10px; }
+    .trumbowyg-box .trumbowyg-button-pane button {
+      width: 25px; }
+
+#pdf-visibile-editor {
+  height: 448px;
+  background: White;
+  margin: 0 64px;
+  position: relative; }
+  #pdf-visibile-editor .widget-placeholder {
+    background: rgba(240, 240, 240, 0.1);
+    border: 1px #EEE dashed;
+    position: relative; }
+    #pdf-visibile-editor .widget-placeholder:before {
+      content: 'Platzhalter';
+      text-transform: uppercase;
+      font-size: 9px;
+      position: absolute;
+      top: 10px;
+      left: 10px; }
+  #pdf-visibile-editor .editor-widget {
+    position: relative; }
+  #pdf-visibile-editor .editor-widget-editor .editable-empty {
+    min-height: 20px; }
+  #pdf-visibile-editor .editor-widget-editor .editable-container.editable-inline {
+    position: absolute; }
+  #pdf-visibile-editor .editor-widget-image {
+    overflow: hidden; }
+    #pdf-visibile-editor .editor-widget-image[data-fid="0"] {
+      background: url("placeholder.jpg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center; }
+    #pdf-visibile-editor .editor-widget-image img {
+      height: 100%;
+      width: 100%; }
+  #pdf-visibile-editor div[data-height="50"] {
+    height: 200px; }
+  #pdf-visibile-editor div.widget-flexibile {
+    height: auto; }
+    #pdf-visibile-editor div.widget-flexibile .editor-widget {
+      position: relative;
+      margin-bottom: 24px; }
+      #pdf-visibile-editor div.widget-flexibile .editor-widget .editable-container.editable-inline {
+        position: relative; }
+      #pdf-visibile-editor div.widget-flexibile .editor-widget .trumbowyg-editor,
+      #pdf-visibile-editor div.widget-flexibile .editor-widget .trumbowyg-textarea,
+      #pdf-visibile-editor div.widget-flexibile .editor-widget .trumbowyg-box {
+        min-height: 0; }
+  #pdf-visibile-editor div[data-height="100"] {
+    height: 424px; }
+    #pdf-visibile-editor div[data-height="100"] div[data-height="50"] {
+      height: 200px; }
+      #pdf-visibile-editor div[data-height="100"] div[data-height="50"] .trumbowyg-editor, #pdf-visibile-editor div[data-height="100"] div[data-height="50"] .editable-container {
+        min-height: 200px; }
+    #pdf-visibile-editor div[data-height="100"] .trumbowyg-editor {
+      min-height: 424px;
+      overflow: hidden; }
+  #pdf-visibile-editor .float-2 .widget, #pdf-visibile-editor .float-2 .widget-placeholder, #pdf-visibile-editor .float-3 .widget, #pdf-visibile-editor .float-3 .widget-placeholder {
+    margin-bottom: 24px; }
+  #pdf-visibile-editor .float-2:not(:last-child) > div, #pdf-visibile-editor .float-3:not(:last-child) > div {
+    margin-right: 24px;
+    position: relative; }
+
+.pdf h1 {
+  margin: 0;
+  font-size: 22.4px;
+  margin-bottom: 9.6px;
+  font-weight: bold; }
+  .pdf h1 strong, .pdf h1 span {
+    font-weight: bold !important; }
+.pdf h2 {
+  margin: 0;
+  font-size: 17.6px;
+  margin-bottom: 9.6px; }
+  .pdf h2 strong, .pdf h2 span {
+    font-weight: normal !important; }
+.pdf p, .pdf ul, .pdf ol, .pdf .footnote-table {
+  margin: 0;
+  font-size: 12.8px;
+  margin-bottom: 8px; }
+.pdf .footnote-table {
+  display: table;
+  height: 60px;
+  margin-right: 64px; }
+  .pdf .footnote-table .footnote-cell {
+    display: table-cell;
+    vertical-align: middle; }
+
+#pdfdoc-alter-layout .layout-template:hover .widget, #pdfdoc-alter-layout .layout-template.active .widget {
+  background: lightblue; }
+
+#pdf-current-layout .layout-template .widget {
+  position: relative; }
+  #pdf-current-layout .layout-template .widget .label {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: White;
+    border: 1px Silver solid;
+    text-align: center;
+    transition: background 0.2s ease;
+    line-height: 35px;
+    color: Black;
+    border-radius: 0;
+    padding: 0;
+    font-size: 9px;
+    font-weight: normal; }
+  #pdf-current-layout .layout-template .widget.changed .label {
+    color: Black;
+    font-weight: bold;
+    background: #ebebeb; }
+  #pdf-current-layout .layout-template .widget:hover .label, #pdf-current-layout .layout-template .widget.selected .label {
+    background: #428bca;
+    color: white; }
+
+.message-overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5000;
+  bottom: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5); }
+  .message-overlay > div {
+    display: table;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    -webkit-transform: translate(0, -20%);
+    -webkit-transition: -webkit-transform 0.2s ease-in-out; }
+    .message-overlay > div.in {
+      -webkit-transform: translate(0, 0%); }
+    .message-overlay > div > div {
+      display: table-cell;
+      vertical-align: top; }
+  .message-overlay .well {
+    border: 0;
+    border-radius: 0;
+    background: White; }
+
+.pdf .widget[data-widget="table"] {
+  position: relative; }
+  .pdf .widget[data-widget="table"].widget-table-fixed .option2 {
+    display: none !important; }
+  .pdf .widget[data-widget="table"].widget-table-fixed .text {
+    display: none !important; }
+  .pdf .widget[data-widget="table"] .editable-container {
+    min-height: 0 !important; }
+  .pdf .widget[data-widget="table"] .glyphicon {
+    display: none;
+    position: absolute;
+    right: 0px;
+    font-size: 10px;
+    border: 1px #CCC solid;
+    color: #CCC;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    top: 2px; }
+    .pdf .widget[data-widget="table"] .glyphicon:hover {
+      color: #333;
+      border-color: #333; }
+  .pdf .widget[data-widget="table"] .option, .pdf .widget[data-widget="table"] .option2 {
+    display: none;
+    position: absolute; }
+  .pdf .widget[data-widget="table"] .option-table {
+    width: 1px;
+    transition: width 0.2s ease-in;
+    overflow: hidden;
+    display: block;
+    z-index: 200;
+    position: absolute;
+    right: 22px;
+    height: 22px;
+    top: 0;
+    margin: 0; }
+    .pdf .widget[data-widget="table"] .option-table li {
+      display: inline-block;
+      border: 1px Silver solid;
+      padding: 2px 4px;
+      font-size: 9px;
+      color: Silver;
+      background: White;
+      transition: color 0.2s ease-in;
+      cursor: pointer;
+      line-height: 16px;
+      border-right: 0; }
+      .pdf .widget[data-widget="table"] .option-table li:hover, .pdf .widget[data-widget="table"] .option-table li.active {
+        color: #333; }
+  .pdf .widget[data-widget="table"] .glyphicon-cog {
+    right: 0px;
+    display: inline-block;
+    left: auto;
+    top: 0px;
+    color: #EEE;
+    border-color: White;
+    z-index: 2; }
+  .pdf .widget[data-widget="table"].widget-options .glyphicon {
+    display: inline-block; }
+  .pdf .widget[data-widget="table"].widget-options .option-table {
+    visibility: visible;
+    width: 170px;
+    right: 20px;
+    z-index: 1;
+    text-align: right; }
+  .pdf .widget[data-widget="table"].widget-options .option2 {
+    display: block;
+    z-index: 200;
+    right: 0; }
+    .pdf .widget[data-widget="table"].widget-options .option2 .glyphicon {
+      top: 0px; }
+  .pdf .widget[data-widget="table"].widget-options .option {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    text-align: center; }
+    .pdf .widget[data-widget="table"].widget-options .option .glyphicon-minus {
+      display: inline-block;
+      position: static; }
+  .pdf .widget[data-widget="table"].widget-options .glyphicon-cog {
+    color: Silver;
+    border-color: Silver; }
+  .pdf .widget[data-widget="table"].widget-options table {
+    border-bottom: 1px #EEE solid; }
+  .pdf .widget[data-widget="table"].widget-options table + .glyphicon-plus {
+    top: auto; }
+  .pdf .widget[data-widget="table"].widget-options .PXEdit-table-col.glyphicon-minus {
+    right: auto;
+    left: 0px;
+    top: -20px;
+    background: white; }
+  .pdf .widget[data-widget="table"]:not(.widget-options) div.text.editable-empty {
+    display: none !important; }
+  .pdf .widget[data-widget="table"] div.text {
+    min-height: 20px; }
+    .pdf .widget[data-widget="table"] div.text.editable-open {
+      display: block !important;
+      visibility: hidden; }
+  .pdf .widget[data-widget="table"] .table-edit {
+    display: block;
+    min-height: 15px;
+    cursor: text; }
+    .pdf .widget[data-widget="table"] .table-edit.editable-open {
+      display: block !important;
+      visibility: hidden; }
+  .pdf .widget[data-widget="table"] .editable-buttons {
+    display: none; }
+  .pdf .widget[data-widget="table"] .editableform .control-group {
+    position: absolute;
+    z-index: 2;
+    top: 0; }
+  .pdf .widget[data-widget="table"] .editable-inline textarea {
+    border: 0;
+    padding: 2.5px !important;
+    font-size: 11.8px;
+    line-height: 1.2;
+    min-height: 20px;
+    height: 50px;
+    box-shadow: none;
+    resize: none;
+    position: absolute;
+    border: 1px Silver dotted;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5); }
+  .pdf .widget[data-widget="table"] .editable-inline input {
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    font-size: 17.6px;
+    margin-bottom: 9.6px;
+    margin-top: -5px;
+    width: 100%; }
+.pdf table.table {
+  margin: 0; }
+  .pdf table.table.table-options .glyphicon {
+    display: inline-block; }
+  .pdf table.table tr td {
+    font-size: 11.8px;
+    padding: 5px 4px;
+    word-break: break-word;
+    vertical-align: top;
+    line-height: 1.3;
+    border: 0;
+    position: relative;
+    white-space: pre; }
+  .pdf table.table.table-2 td {
+    width: 50%; }
+  .pdf table.table.table-3 td {
+    width: 33.3333334%; }
+  .pdf table.table.table-4 td {
+    width: 25%; }
+  .pdf table.table[data-preset='table-normal'] tr:first-child td, .pdf table.table[data-preset='table-advanced'] tr:first-child td {
+    font-weight: bold;
+    vertical-align: bottom; }
+  .pdf table.table[data-preset='table-advanced'] tr td:first-child {
+    font-weight: bold; }
+  .pdf table.table tr:nth-child(even) td {
+    background: #eee; }
+
+#footnote {
+  top: -18px;
+  position: relative;
+  font-size: 10.8px;
+  color: #888;
+  margin: 0 64px;
+  text-align: right;
+  z-index: 100; }
+  #footnote input {
+    background: transparent;
+    display: block;
+    border: 0;
+    font-size: 10.8px;
+    color: #888;
+    width: 100%;
+    text-align: right;
+    padding: 0;
+    top: -9px;
+    position: relative;
+    box-shadow: none;
+    padding-right: 0 !important; }
+  #footnote > div {
+    height: 17px;
+    display: block; }
+    #footnote > div.editable-empty:after {
+      content: 'Fusszeile (optional)';
+      color: #888;
+      cursor: pointer; }
