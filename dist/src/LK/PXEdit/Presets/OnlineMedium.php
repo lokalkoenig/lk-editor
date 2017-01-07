@@ -23,13 +23,10 @@ class OnlineMedium extends Preset {
     function getDefaultValues(){
         
         $value = new \stdClass();
-        $value -> layout = "layout_triple_one";
+        $value -> layout = "layout-triple-one";
         $value -> title = $this -> title;
         $value -> active = 0;
         $value -> content = array();
-        
-        $module = new \LK\PXEdit\Layouts\Layout_triple_one();
-        $value -> mockup = $module ->getMockup();
         
         $value -> content[] = [
             'id' => 1,
@@ -44,6 +41,13 @@ class OnlineMedium extends Preset {
         ];
         
     return $value;    
+    }
+    
+    function getAvailableLayouts() {
+    
+      return [
+          'layout-triple-one',
+      ];
     }
     
     function getWidgetOptions(){

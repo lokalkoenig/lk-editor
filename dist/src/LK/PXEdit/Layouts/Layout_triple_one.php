@@ -11,7 +11,7 @@ use LK\PXEdit\Doctype;
 class Layout_triple_one extends Doctype {
     //put your code here
     
-    var $id = 'layout-tripple-one';
+    var $id = 'layout-triple-one';
     var $field_instances = 2;
     
     function getMockup(){

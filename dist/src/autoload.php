@@ -14,7 +14,8 @@ function PXEdit_Autoload($className) {
     endif;
     
     if(in_array($explode[1], array('PXEdit'))){
-        require __DIR__ . '/' .$className . '.php';
+      $include_file = str_replace('\\', '/', $className);
+      require __DIR__ . '/' .$include_file . '.php';
     }  
 }
 

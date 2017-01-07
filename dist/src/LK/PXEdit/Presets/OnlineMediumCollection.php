@@ -149,7 +149,7 @@ class OnlineMediumCollection extends Preset {
     $content[] = [
       'id' => 3,
       'widget' => 'editor',
-      'value' => '<h2>Medium ' . time() . '</h2><p>More</p>',
+      'value' => '<h1>Medium ' . time() . '</h1><h2>Format XYZ</h2><p>Dieser Inhalt wird vom Server geladen und kann dann bearbeitet werden.</p>',
     ];
    
 
