@@ -11,7 +11,7 @@ use LK\PXEdit\Doctype;
 class Layout_triple_online extends Doctype {
     //put your code here
     
-    var $id = 'layout-tripple-online';
+    var $id = 'layout-triple-online';
     var $field_instances = 9;
     
     function getMockup(){

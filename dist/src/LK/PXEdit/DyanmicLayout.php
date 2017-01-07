@@ -38,13 +38,14 @@ class DyanmicLayout {
         $this -> types[$key] = $doctype;
     }
     
-    
     /**
-     * Loads a new preset as a create item
+     * Loads a Preset
      * 
      * @param string $preset_id
+     * @return \LK\PXEdit\Preset
      */
-    function loadNewPreset($preset_id){
+    function loadPreset($preset_id){
+        
         $preset_class_name = "\\LK\PXEdit\\Presets\\" . $preset_id;
         
         // Force an Autoload
@@ -54,11 +55,25 @@ class DyanmicLayout {
             $this ->sendError('Preset ' . $preset_class_name . " is not existing.");
         }
         
+        $preset = new $preset_class_name($this);   
+    
+    return $preset;    
+    }
+    
+    
+    /**
+     * Loads a new preset as a create item
+     * 
+     * @param string $preset_id
+     */
+    function createNewPreset($preset_id){
+        
         $callback = [];
-        $obj = new $preset_class_name($this);
+        $obj = $this ->loadPreset($preset_id);
         $callback['values'] = $obj -> getDefaultValues();
         $callback['options'] = $obj -> getOptions();
         $callback['options']['image_presets'] = $this->getImagePresets();  
+        $callback['values'] -> preset = $preset_id;  
         
         $html = array();
         $layouts = $obj -> getAvailableLayouts();

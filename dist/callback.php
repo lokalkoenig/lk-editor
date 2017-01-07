@@ -22,8 +22,18 @@ $docs = new LK\PXEdit\DyanmicLayout();
 
 if(isset($_GET['preset']) 
     && is_string($_GET['preset'])){
-    $docs ->loadNewPreset($_GET['preset']);
+    $docs ->createNewPreset($_GET['preset']);
 }
+
+if(isset($_POST['action']) 
+    && is_string($_POST['action']) 
+    && $_POST['action'] === 'preset-action'
+  ){
+  
+    $preset = $docs ->loadPreset($_POST['values']['preset']);
+    $preset -> performCallback($_POST);    
+}
+
 
 if(isset($_GET['type']) 
     && is_string($_GET['type']) 

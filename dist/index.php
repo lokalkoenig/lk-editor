@@ -28,32 +28,21 @@
         <script src="js/jquery.fileupload-min.js"></script>
         
         <!-- Inplace Editor -->
-        <script type="text/javascript" src="js/PXEdit-packed-min.js?<?php print time(); ?>"></script>
-        <link rel="stylesheet" type="text/css" href="css/project.css?<?php print time(); ?>"></link>
+        <script type="text/javascript" src="js/PXEdit-packed-min.js?v<?php print filemtime('js/PXEdit-packed-min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="css/project.css?<?php print filemtime('js/PXEdit-packed-min.js'); ?>"></link>
  </head>
 <body class="pdf-editor">
-	
-    
-    
     
       <div id="PXEdit" data-callback="callback.php">
             <div class="backdrop"></div>   
-            
-            <div class="layout-menu well well-white">
-              <p><strong>Wählen Sie ein Layout für das Dokument aus</strong></p>
-              <p>Das Layout können Sie später jederzeit über <button class="btn btn-default btn-sm" style="pointer-events: none;"><span class="glyphicon glyphicon-cog"></span></button> Einstellungen verändern.</p>
-              <hr />
               
-              <div class="layouts small-format-presentation"></div>
-              <button type="button" class="btn btn-default close-layout-menu"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>
-            </div>
+            <div class="layout-menu well well-white"></div>
             <div class="layout-menu-backdrop"></div>
-           
+            
             <div class="container pdf">
-                
                 <div class="settings-panel">
                     <button class="btn btn-default btn-sm" title="Schliessen" id="document-reset">
-                            <span class="glyphicon glyphicon-remove"></span><span class="label-in">Editor schliessen<span
+                            <span class="glyphicon glyphicon-remove"></span><span class="label-in">Editor schließen<span
                     </button>
                     <button id="PXEdit-change-input" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-cog"></span><span class="label-in">Einstellungen<span
@@ -253,7 +242,7 @@
         
         <script>
           jQuery(document).ready(function(){
-              jQuery('.PXEdit-create.btn-2click').click();
+              //jQuery('.PXEdit-create.btn-2click').click();
           });
         </script>  
 </body>

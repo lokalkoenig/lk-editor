@@ -20,14 +20,15 @@
       // choose a medium
       if(typeof options === 'string' && options === 'choose-medium'){
         
-        
         var data = {};
         data.values = PDFForm.generateSave();
         data.item = item_changed;
+        data.action = 'preset-action';
         
-        PDFForm.loading();
+        PDFForm.performAjax(data, function(data){
+          PDFForm.createWidgets(data);  
+        });
         
-        //console.log(data);
         return ;  
       }
       

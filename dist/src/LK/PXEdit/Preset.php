@@ -56,8 +56,7 @@ abstract class Preset {
             'change_layout' => 1,
             'change_input' => 1,
             'change_category' => 0,
-            'table_text' => false,
-            'table_columns' => 'flexibile'
+            'message_on_setup' => '',
         ];
         
         $options = $this ->getWidgetOptions();
@@ -73,6 +72,18 @@ abstract class Preset {
     
     function getCategory(){
         return $this -> category;
+    }
+    
+    /**
+     * Performs an preset callback
+     * and send back JSON
+     * 
+     * @param array $array
+     */
+    function performCallback($array){
+      
+      $manager = $this->getManager();
+      $manager ->sendJson($array);
     }
     
     public function getAvailableLayouts(){

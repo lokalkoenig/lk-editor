@@ -69,6 +69,35 @@
             }
         },
         
+        /**
+         * Performs an AJAX request
+         * 
+         * @param {Object} send_data
+         * @param {function} callback
+         */
+        performAjax: function(send_data, callback){
+            
+          this.loading();  
+          var reference = this;
+          
+           $.ajax({
+                dataType: "json",
+                method: "POST",
+                url: this.callback_url,
+                data: send_data,
+                success: function(data){
+                    if(data.error){
+                      reference.createMessage(data.message);
+                      return ;
+                    }
+                  
+                    callback(data);
+                },
+                error: function(xhr, message){
+                   reference.createMessage("<strong>Fehler:</strong> " + message);
+                }
+          });
+        },
         
         /**
          * Resets the Editor-Interface 
@@ -83,16 +112,66 @@
           this.setPreset('');
           
           // Change layout
-          if(this.options.change_layout == 1 || this.options.change_layout_via_menu == 1){
+          if(this.options.change_layout === 1 || this.options.change_layout_via_menu === 1){
             $('#PXEdit #PXEdit-change-input').show();
           }
           
           // Show input-changer 
-         if(this.options.change_input == 1){
+         if(this.options.change_input === 1){
             $('#PXEdit #current-layout').show();
           }
         },
         
+        /**
+         * Returns the active layout
+         * 
+         * @returns {string}
+         */
+        getActiveLayout: function(){
+          return this.current_layout;
+        },
+        
+        /**
+         * Sets the current layout
+         * 
+         * @returns {undefined}
+         */
+        setActiveLayout: function(layout){
+          this.current_layout = layout;
+        },
+        
+        
+        /**
+         * Gets the current selected Mockup
+         * 
+         * @returns {string} Mockup
+         */
+        getMockup: function(){
+          var layout = this.getActiveLayout();
+          return $('.layout-template.' + layout).html();
+        },
+        
+        /**
+         * Shows the Callout to change the layout 
+         */
+        showLayoutCallout : function(){
+          
+          var msg = '<p><strong>Wählen Sie ein Layout für das Dokument aus</strong></p>\n\
+                    <p>Das Layout können Sie später jederzeit über <button class="btn btn-default btn-sm" style="pointer-events: none;"><span class="glyphicon glyphicon-cog"></span></button> Einstellungen verändern.</p>\n\
+                    <hr /><div class="layouts small-format-presentation">'+ jQuery('#available-layouts').html() +'</div>\n\
+                    <hr /><button type="button" class="btn btn-default btn-close"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>';
+          
+          this.createMessage(msg);
+          
+          // get active layout
+          var current = this.getActiveLayout();
+          $('.layout-menu .layouts .layout-template[data-id="'+ current +'"]').addClass('active');
+        },
+        
+        /**
+         * Adds the necessary listeners
+         * to the editor
+         */
         addListener: function() {
           var reference = this;
           
@@ -104,18 +183,13 @@
                 }
                 
                 if(reference.options.change_layout_via_menu){
-                  jQuery('.layout-menu').addClass('open');
+                  reference.showLayoutCallout();
                 }
             });
 
-            // close the layout-menu
-            $('#PXEdit .close-layout-menu').click(function(){
-              $('#PXEdit .layout-menu').removeClass('open');
-            });
-          
             // close
             $('#PXEdit #document-reset').click(function(){
-              if(reference.changed == false){
+              if(reference.changed === false){
                   $('#PXEdit').fadeOut();
               }
               else {
@@ -158,14 +232,26 @@
                 }
             }
             
+            this.setPreset(data.preset);
+            
             $('#PXEdit').fadeIn();
             $('#PXEdit').removeClass('loading');
             
             if(this.options.message_on_setup){
-              this.createMessage(this.options.message_on_setup, 2500);
+              this.createMessage(this.options.message_on_setup);
             }
             
-            this.init(data);
+            $('#PXEdit #footnote .widget').editable({
+               type: 'text',
+            });
+            
+            this.setActiveLayout(data.layout);
+            this.createWidgets(data.content);
+            
+            if(typeof data.sample === 'object'){
+                this.setOptions({'sample_data' : data.sample});
+                this.showLayoutCallout();
+            }
         },
         
         saveAndClose: function(){
@@ -212,13 +298,7 @@
                 }
                 
                 if(type == 'image'){
-                    data[x] = {
-                      'widget': 'image',
-                      'url': $(this).find('img').attr('src'),
-                      'fid': $(this).children('.editor-widget-image').attr('data-fid'),
-                      'preset': $(this).children('.editor-widget-image').attr('data-image-present'),
-                      'versions': JSON.parse($(this).children('.editor-widget-image').attr('data-versions'))
-                    };
+                    data[x] = $(this).createImageWidget('serialize');
                 }
                 
                 if(type == 'table'){
@@ -234,7 +314,8 @@
               'active': $('#dokument-freigabe').prop('checked'),
               'layout': $('.row-editor').attr('data-layout'),
               'footnote': $('#footnote').text(),
-              'content': data
+              'content': data,
+              'preset': this.preset
             };
             
             
@@ -251,42 +332,23 @@
             
            this.saveAndClose();
         },
-        init: function(saved_content){
-            this.current_layout = saved_content.layout;
-            this.data = saved_content.content;
+        
+        /**
+         * Creates the necessary widgets
+         * 
+         * @param {object} data
+         * @returns {undefined}
+         */
+        createWidgets: function(data){
+            // reset widgets
+            jQuery('#PXEdit .row-editor').remove();
+            jQuery('#PXEdit #pdf-visibile-editor').html("<div class='row-editor'><div>");
+            jQuery('#PXEdit .row-editor').attr("data-layout", this.getActiveLayout());
+            jQuery('#PXEdit .row-editor').html(this.getMockup());
             
-            // footnote
-            
-            $('#footnote .widget').editable({
-               type: 'text',
-            });
-            
-            jQuery('.row-editor').remove();
-            jQuery('#pdf-visibile-editor').html("<div class='row-editor'><div>");
-            
-            if(typeof saved_content.mockup === 'string'){
-               jQuery('.row-editor').attr("data-layout", saved_content.layout).html(saved_content.mockup);
-            }
-            else {
-               if(saved_content.layout === ''){
-                   this.openSettings();
-                   return ;
-                } 
-                
-               jQuery('.row-editor').attr("data-layout", saved_content.layout).html(jQuery('#available-layouts .layout-template.' + saved_content.layout).html());
-            }
-            
-            if(typeof saved_content.sample == 'object'){
-                this.options['sample_data'] = saved_content.sample;   
-            
-                jQuery('.layout-menu').addClass('open');
-                jQuery('.layout-menu .layouts').html(jQuery('#available-layouts').html());
-                jQuery('.layout-menu .layouts .layout-template[data-id="'+ saved_content.layout +'"]').addClass('active');
-                jQuery('.row-editor').addClass('editor-' +  saved_content.layout);
-            }
-            
-            var data = saved_content.content;
             var reference = this;
+            this.data = data;
+           
             var x = 0;
             jQuery('.row-editor .widget').each(function(){
                if(typeof data[x] === "undefined"){
@@ -297,7 +359,11 @@
                } 
                x++;
             });
+            
+            // if Editor has still loading state
+            this.loading(-1);
         },
+     
         // saves the layout and rerender
         saveLayoutChanges: function (element){
             var save = this.generateSave();
@@ -345,17 +411,24 @@
             });
             
             this.loading(500);
-            this.init({'layout': layout, 'content': new_data });
+            this.setActiveLayout(layout);
+            this.createWidgets(new_data);
         },
         
         loading: function(timeout){
-           $('#PXEdit').addClass('loading');   
-          
-           if(typeof timeout === 'number'){
+           
+          if(typeof timeout === 'number'){
+            if(timeout < 0){
+              $('#PXEdit').removeClass('loading');   
+              return ;
+            }
+            
             setTimeout(function(){
                $('#PXEdit').removeClass('loading');   
             }, timeout);
            } 
+          
+          $('#PXEdit').addClass('loading');   
         },
         
         /**
@@ -558,16 +631,6 @@
     
     
     $(document).ready(function(){
-        $('body').on("click", ".message-overlay", function(){
-            $(this).fadeOut(200, function(){
-                $(this).remove();
-            });
-        });
-        
-        $('.alert .close').click(function(){
-            $(this).parent().addClass('slideUp');
-        });
-        
         
         // react on Document-Create
         $('.PXEdit-create').click(function(){
@@ -579,6 +642,7 @@
                 url: PDFForm.callback_url,
                 data: {'preset': preset},
                 success: function(data){
+                    
                     if(data.error){
                       PDFForm.createMessage(data.message);
                       return ;
@@ -618,7 +682,11 @@
                 console.clear();
                 console.log(JSON.stringify(PDFForm, null, 4));
             }
-      }
+      };
+      
+      $('.layout-menu').on('click', '.close, .btn-close', function(){
+          $(this).closest('.layout-menu').removeClass('open'); 
+      });
     });  
     
     
@@ -629,22 +697,21 @@
      * @param {number} autoclose
      */
     $.fn.createMessage = function(message, autoclose){
-        $("<div class='message-overlay'><div><div><div class='well well-white'><span class='close'>&times;</span>" +  message + "</div></div></div></div>").insertAfter(this);
+        $('.layout-menu').html('<span class="close">&times;</span>' + message);
+      
         setTimeout(function(){
-            $(".message-overlay>div").addClass('in');
+            $('.layout-menu').addClass('open');
         }, 200);
         
         if(typeof autoclose === 'number'){
             setTimeout(function(){
-              $(".message-overlay>div").removeClass('in');
-              
-              setTimeout(function(){
-                $(".message-overlay").remove();
-              }, 500);
-              
+              $('.layout-menu').removeClass('open');
             }, autoclose);
         }
     };
+    
+    
+    
     
 }( jQuery ));    
 
