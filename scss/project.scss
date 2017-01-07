@@ -146,15 +146,25 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     
     
     &.loading {
-        #pdf-visibile-editor {
-           background: url(/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif);
-           background-position: center center;
-           background-repeat: no-repeat;
+      #pdf-visibile-editor {
+        &:before {
+          content: '';
+          position: absolute;
+          z-index: 101;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-color: rgba(255,255,255,0.5);
         }
-        
-        .settings-panel {
-            pointer-events: none;
-        }
+      }
+      
+      .settings-panel {
+        pointer-events: none;
+      }
     }
     
     .backdrop {
@@ -197,6 +207,31 @@ $doc_p_size: (16px * $doc_pdf_zoom);
            }
         }
         
+        .online-medium-chooser {
+            height: auto;
+            position: absolute !important;
+            width: ($doc_pdf_width / 3) - ($doc_content_spacing * 3) + 11;
+            top: 1px;
+            z-index: 1;
+            margin-left: 1px;
+            
+            select {
+              width: 100%;
+              padding: 5px 10px;
+              border-color: transparent;
+              cursor: pointer;
+              text-align: center;
+              
+              option {
+                text-align: center;
+              }
+              
+              &:focus, 
+              &:hover {
+                background: rgba(240, 240, 240, 0.2);
+              }
+            }
+        }  
         
         .editor-widget {
             position: relative;
@@ -374,6 +409,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     background: White;
     margin: 0 ($doc_80);     
     position: relative;
+    margin-right: $doc_80 - $doc_content_spacing;
     
     .widget-placeholder {
         background: rgba(240,240,240, 0.1);
@@ -475,7 +511,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
         }
     }
     
-   .float-2:not(:last-child), .float-3:not(:last-child) {
+   .float-2, .float-3 {
         &>div {
           margin-right: $doc_content_spacing;  
           position: relative;
@@ -509,24 +545,11 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     }
     
     
-    p, ul, ol, .footnote-table {
+    p, ul, ol {
         margin: 0;
         font-size: $doc_p_size;
         margin-bottom: $doc_p_margin;
     } 
-    
-    .footnote-table {
-        display: table;
-      
-        height: 60px;
-        margin-right: $doc_80;
-        
-        .footnote-cell {
-            display: table-cell;
-            vertical-align: middle;
-        }
-    }
-    
 }
 
 
@@ -582,14 +605,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
 
         
       }
-    }
-}
-
-.message-overlay-in {
-    .message-overlay {
-        &>div {
-           
-        }    
     }
 }
 

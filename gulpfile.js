@@ -32,6 +32,7 @@ gulp.task('scripts-editor-pack', function() {
                    "js-source/types/image.js",
                    "js-source/types/cell.js",
                    "js-source/types/table.js",
+                   "js-source/types/online_medium_chooser.js",
                    "js-source/PXEdit.js"
                  ])
     .pipe(concat('PXEdit-packed.js'))
@@ -69,7 +70,10 @@ gulp.task('scripts-trumbowyg-pack', function() {
 
 gulp.task('default', function() {
  	gulp.watch('scss/*.scss', ['sass', 'css-minfy']);
-        gulp.watch('js-source/*.js', ['scripts-editor-pack']);       
+        gulp.watch('scss/*/*.scss', ['sass', 'css-minfy']);
+        
+        gulp.watch('js-source/*.js', ['scripts-editor-pack']);   
+        gulp.watch('js-source/*/*.js', ['scripts-editor-pack']);   
 });
 
 

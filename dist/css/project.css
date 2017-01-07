@@ -871,10 +871,18 @@ body.trumbowyg-body-fullscreen {
     display: none; }
   #PXEdit.pdf-editor-changed #document-save-settings {
     display: inline-block; }
-  #PXEdit.loading #pdf-visibile-editor {
-    background: url(/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif);
+  #PXEdit.loading #pdf-visibile-editor:before {
+    content: '';
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif");
     background-position: center center;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.5); }
   #PXEdit.loading .settings-panel {
     pointer-events: none; }
   #PXEdit .backdrop {
@@ -906,6 +914,23 @@ body.trumbowyg-body-fullscreen {
     transition: 0.4s top ease-in-out; }
     .pdf .alert.slideUp {
       top: -150px; }
+  .pdf .online-medium-chooser {
+    height: auto;
+    position: absolute !important;
+    width: 238.2px;
+    top: 1px;
+    z-index: 1;
+    margin-left: 1px; }
+    .pdf .online-medium-chooser select {
+      width: 100%;
+      padding: 5px 10px;
+      border-color: transparent;
+      cursor: pointer;
+      text-align: center; }
+      .pdf .online-medium-chooser select option {
+        text-align: center; }
+      .pdf .online-medium-chooser select:focus, .pdf .online-medium-chooser select:hover {
+        background: rgba(240, 240, 240, 0.2); }
   .pdf .editor-widget {
     position: relative; }
     .pdf .editor-widget.editor-widget-image {
@@ -1013,7 +1038,8 @@ body.trumbowyg-body-fullscreen {
   height: 448px;
   background: White;
   margin: 0 64px;
-  position: relative; }
+  position: relative;
+  margin-right: 40px; }
   #pdf-visibile-editor .widget-placeholder {
     background: rgba(240, 240, 240, 0.1);
     border: 1px #EEE dashed;
@@ -1065,7 +1091,7 @@ body.trumbowyg-body-fullscreen {
       overflow: hidden; }
   #pdf-visibile-editor .float-2 .widget, #pdf-visibile-editor .float-2 .widget-placeholder, #pdf-visibile-editor .float-3 .widget, #pdf-visibile-editor .float-3 .widget-placeholder {
     margin-bottom: 24px; }
-  #pdf-visibile-editor .float-2:not(:last-child) > div, #pdf-visibile-editor .float-3:not(:last-child) > div {
+  #pdf-visibile-editor .float-2 > div, #pdf-visibile-editor .float-3 > div {
     margin-right: 24px;
     position: relative; }
 
@@ -1082,17 +1108,10 @@ body.trumbowyg-body-fullscreen {
   margin-bottom: 9.6px; }
   .pdf h2 strong, .pdf h2 span {
     font-weight: normal !important; }
-.pdf p, .pdf ul, .pdf ol, .pdf .footnote-table {
+.pdf p, .pdf ul, .pdf ol {
   margin: 0;
   font-size: 12.8px;
   margin-bottom: 8px; }
-.pdf .footnote-table {
-  display: table;
-  height: 60px;
-  margin-right: 64px; }
-  .pdf .footnote-table .footnote-cell {
-    display: table-cell;
-    vertical-align: middle; }
 
 #pdfdoc-alter-layout .layout-template:hover .widget, #pdfdoc-alter-layout .layout-template.active .widget {
   background: lightblue; }

@@ -203,19 +203,32 @@
         <ul class="small">
             <li>Das Speichern ist nur vorbereitet.</li>
             <li>Bild und Bildgroessen sind vorbereitet, jedoch werden die Bilder nicht zurechtgeschnitten. Die Bildgroessenhinweise sind aber produktionsreif, aber nicht Pflicht.</li>
-            <li>Nur beim Punkt Eigenes Dokument kann man das Layout veraendern. Dieses kann man auch frei einordnen.</li>
             <li>Das Online-Medium ist speziell, 2/3 sind Platzhalter, da dieses Format ein Komponentenformat ist. Spaeter kann der MA individuell bis zu 3 Online-Formate in einem Dokument zusammenfassen.</li>
         </ul>
+        
+        <hr />
+        
+        <h4 class="text-center">Verlagsmodus</h4>
+      
         <p>  
-            
-            <button class="btn btn-default PXEdit-create" data-preset="OnlineMedium">Online-Medium (Part)</button>
-            
-            <button class="btn btn-default PXEdit-create" data-preset="OnlineArgumentation">Online Argumentation</button>
-            <button class="btn btn-default PXEdit-create" data-preset="RegionalArgumentation">Regional Argumentation</button>
+            <button class="btn btn-default PXEdit-create" data-preset="OnlineArgumentation">Online Argument.</button>
+            <button class="btn btn-default PXEdit-create" data-preset="RegionalArgumentation">Regional Argument.</button>
         </p>      
+        
+        <p>
+            <button class="btn btn-default PXEdit-create" data-preset="OnlineMedium">Online-Medium (Part)</button>
+        </p>
+        
         <p>      
-            <button class="btn btn-default PXEdit-create btn-2click" data-preset="Preisliste">Preisliste</button>
+            <button class="btn btn-default PXEdit-create" data-preset="Preisliste">Preisliste</button>
             <button class="btn btn-default PXEdit-create" data-preset="OpenDokument">Eigenes Dokument</button>
+        </p>  
+        
+        <hr />
+        <h4 class="text-center">Mitarbeitermodus</h4>
+        
+        <p>      
+            <button class="btn btn-default PXEdit-create btn-2click" data-preset="OnlineMediumCollection">Online-Medium (Collection)</button>
         </p>  
     </div>  
     <!--  
@@ -237,6 +250,12 @@
               background: #34495e; 
           }
         </style>  
+        
+        <script>
+          jQuery(document).ready(function(){
+              jQuery('.PXEdit-create.btn-2click').click();
+          });
+        </script>  
 </body>
 </html>
 

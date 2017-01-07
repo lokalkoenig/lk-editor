@@ -10,6 +10,7 @@
             return true;    
         }
         
+        
         var image_id = 'widget_image_' + options.id;
         
         // sizes are multiplied by 3
@@ -20,6 +21,11 @@
         
         var sizetitle = sizes[key];
         
+        if(typeof options.editable === 'undefined'){
+          options.editable = true;
+        }
+        
+        
         if(typeof options.fid === 'undefined' || options.fid === "0" || options.fid === 0){
             options.url = '';
             options.fid = 0;
@@ -28,6 +34,13 @@
         else {
           options.url = options.versions[key];
         }
+        
+        if(!options.editable){
+          $(this).html('<div id="'+ image_id +'" data-versions="' + JSON.stringify(options.versions) +'" data-image-present="' + key  +'" data-fid="'+ options.fid +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"></div>');
+          
+          return ;  
+        }
+        
         
         // init element
         $(this).html('<div id="'+ image_id +'" data-versions="' + JSON.stringify(options.versions) +'" data-image-present="' + key  +'" data-fid="'+ options.fid +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswaehlen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');

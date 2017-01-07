@@ -13,6 +13,12 @@
         // Current layout  
         current_layout: null,
        
+       // Version
+       version: 1.01,
+       
+       // Version Date
+       version_date: '2017-01-07',
+       
         // Data
         data: null,
         
@@ -28,6 +34,7 @@
         options: {
           'verlagsmodus': 1,
           'change_catgegory': 0,
+          'message_on_setup': '',
           'change_layout': 1,
           'change_input': 1,
           'change_layout_via_menu': 0,
@@ -154,6 +161,10 @@
             $('#PXEdit').fadeIn();
             $('#PXEdit').removeClass('loading');
             
+            if(this.options.message_on_setup){
+              this.createMessage(this.options.message_on_setup, 2500);
+            }
+            
             this.init(data);
         },
         
@@ -188,6 +199,10 @@
             
             $('.row-editor .widget').each(function(){
                 var type = $(this).attr('data-widget');
+                
+                if(type == 'online_medium_chooser'){
+                  data[x] = $(this).createOnlineMediumChooserWidget('serialize');
+                }
                 
                 if(type == 'editor'){
                     data[x] = {
@@ -374,6 +389,10 @@
         
           if(options.widget === 'table'){
             $(element).createTableWdiget(options);
+          }
+          
+          if(options.widget === 'online_medium_chooser'){
+            $(element).createOnlineMediumChooserWidget(options);
           }
           
           if(!$(element).hasClass("widget-flexibile")){
@@ -584,6 +603,7 @@
     jQuery(document).ready(function(){
       PDFForm.addListener();
       PDFForm.callback_url = $("#PXEdit").attr('data-callback');
+      console.log('+__ Welcome to PXEdit v' + PDFForm.version  + ' ('+ PDFForm.version_date + ') __+');
       
       // debug
       document.onkeyup = function(e) {
@@ -616,10 +636,10 @@
         
         if(typeof autoclose === 'number'){
             setTimeout(function(){
-              $(".message-overlay").addClass('slideUp');
+              $(".message-overlay>div").removeClass('in');
               
               setTimeout(function(){
-                $(".message-overlay").addClass('slideUp');
+                $(".message-overlay").remove();
               }, 500);
               
             }, autoclose);
