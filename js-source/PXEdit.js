@@ -683,6 +683,9 @@ $ = jQuery;
                     reference.setPreset(data.preset);
                     reference.setOptions(data.options);
                     reference.setup(data.values, data.layouts);
+                },
+                error: function(){
+                  reference.createMessage("Leider gab einen einen Fehler beim laden des Dokuments.");
                 }
             });
         }
@@ -734,7 +737,12 @@ $ = jQuery;
      */
     $.fn.createMessage = function(message, autoclose){
         $('.layout-menu').html('<span class="close">&times;</span>' + message);
-      
+        
+        // when error-message is shown and Editor is closed
+        if($('#PXEdit').hasClass('loading') && !$('#PXEdit').hasClass('open')){
+          $('#PXEdit').removeClass('loading');
+        }
+        
         setTimeout(function(){
             $('.layout-menu').addClass('open');
         }, 200);
