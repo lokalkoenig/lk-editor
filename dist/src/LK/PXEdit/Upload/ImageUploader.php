@@ -17,8 +17,8 @@ require_once __DIR__ .'/server.class.php';
 
 class ImageUploader extends \UploadHandler {
     
-    function construct(){
-        parent::__construct();
+    function construct($options = []){
+        parent::__construct($options);
     }
     
     function generate_response($content, $print_response = true){

@@ -4,14 +4,18 @@
  */
 
  var PDFForm = null;
+$ = jQuery;
 
 (function ($) {
     "use strict";
         
         
       PDFForm = {
-        // Current layout  
-        current_layout: null,
+       // Current layout  
+       current_layout: null,
+       
+       // callback
+       cb: null,
        
        // Version
        version: 1.01,
@@ -43,6 +47,8 @@
         },
         
         callback_url: '',
+        
+        callback_id: '',
         
         // Preset
         preset: '',
@@ -79,6 +85,8 @@
             
           this.loading();  
           var reference = this;
+          
+          send_data.hash = this.callback_id;
           
            $.ajax({
                 dataType: "json",
@@ -165,7 +173,7 @@
           
           // get active layout
           var current = this.getActiveLayout();
-          $('.layout-menu .layouts .layout-template[data-id="'+ current +'"]').addClass('active');
+          $('#PXEdit-message .layouts .layout-template[data-id="'+ current +'"]').addClass('active');
         },
         
         /**
@@ -190,16 +198,21 @@
             // close
             $('#PXEdit #document-reset').click(function(){
               if(reference.changed === false){
-                  $('#PXEdit').fadeOut();
+                  reference.close();
               }
               else {
-                 $("#PXEdit").createMessage('Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?<br /></br ><button class="btn btn-danger" onclick=" $(\'#PXEdit\').fadeOut();">Änderungen verwerfen</button>');  
+                 $("#PXEdit").createMessage('Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?<br /></br ><button class="btn btn-danger" id="PXEdit-cancel">Änderungen verwerfen</button>');  
               }
             });
+            
+            $('body').on('click', "#PXEdit-cancel", function(){
+              reference.close();
+            });
+            
 
             // change layout
-            $('#PXEdit .layout-menu').on("click", ".layout-template:not(.active)", function(){
-               $('#PXEdit .layout-menu .layout-template.active').removeClass('active');
+            $('#PXEdit-message').on("click", ".layout-template:not(.active)", function(){
+               $('#PXEdit-message .layout-template.active').removeClass('active');
                $(this).addClass('active');
 
               // call layout-changes to set the new Layout
@@ -234,7 +247,7 @@
             
             this.setPreset(data.preset);
             
-            $('#PXEdit').fadeIn();
+            $('#PXEdit').addClass('open').fadeIn();
             $('#PXEdit').removeClass('loading');
             
             if(this.options.message_on_setup){
@@ -625,38 +638,57 @@
                 $('#layoutModal').modal('hide');
                 $("#document-save-settings").show();
             });
-        }
-    };
-    
-    
-    
-    $(document).ready(function(){
+        },
         
-        // react on Document-Create
-        $('.PXEdit-create').click(function(){
-            PDFForm.loading();
-            var preset = $(this).attr('data-preset');
-            
-            $.ajax({
+        
+        close: function(){
+          this.destroy();
+           $('#PXEdit').removeClass('open').fadeOut();
+           $('.layout-menu').removeClass('open');
+        },
+        
+        destroy: function(){
+          var reference = this;
+          
+          setTimeout(function(){
+            reference.cb();
+          }, 500);
+        },
+        
+        /**
+         * Loads a Document from a ressource
+         * This is the starting-point for the integration
+         * 
+         * @param {Object} data
+         * @returns {undefined}
+         */
+        loadDocument: function(data, cb){
+          this.loading();
+          this.cb = cb;
+          var reference = this;
+          
+          data.hash = this.callback_id;
+          
+          $.ajax({
                 dataType: "json",
-                url: PDFForm.callback_url,
-                data: {'preset': preset},
+                url: reference.callback_url,
+                data: data,
                 success: function(data){
                     
                     if(data.error){
-                      PDFForm.createMessage(data.message);
+                      reference.createMessage(data.message);
                       return ;
                     }
                   
-                    PDFForm.setPreset(preset);
-                    PDFForm.setOptions(data.options);
-                    PDFForm.setup(data.values, data.layouts);
+                    reference.setPreset(data.preset);
+                    reference.setOptions(data.options);
+                    reference.setup(data.values, data.layouts);
                 }
             });
-        });
-    });
+        }
+    };
     
-     // Editable Defaults
+    // Editable Defaults
     $.fn.editable.defaults.mode = "inline";
     $.fn.editable.defaults.onblur = "submit";
     $.fn.editable.defaults.emptytext = "";
@@ -665,22 +697,26 @@
     
     // selfregister events & listeners
     jQuery(document).ready(function(){
-      PDFForm.addListener();
-      PDFForm.callback_url = $("#PXEdit").attr('data-callback');
-      console.log('+__ Welcome to PXEdit v' + PDFForm.version  + ' ('+ PDFForm.version_date + ') __+');
+      var editor = PXEdit();
+      
+      editor.addListener();
+      editor.callback_url = $("#PXEdit").data('callback');
+      editor.callback_id = $("#PXEdit").data('callback-id');
+      
+      console.log('PXEdit v' + editor.version  + ' ('+ editor.version_date + ')');
       
       // debug
       document.onkeyup = function(e) {
             // CTR + I
             if(e.ctrlKey && e.keyCode == 73) {
-                var data = PDFForm.generateSave();
+                var data = editor.generateSave();
                 console.clear();
                 console.log(JSON.stringify(data, null, 4));
             }
             // CTR + Q
             if(e.ctrlKey && e.keyCode == 81) {
                 console.clear();
-                console.log(JSON.stringify(PDFForm, null, 4));
+                console.log(JSON.stringify(editor, null, 4));
             }
       };
       
@@ -710,8 +746,15 @@
         }
     };
     
-    
-    
-    
 }( jQuery ));    
 
+
+/**
+ * Returns the PXEditor
+ * 
+ * @returns {PDFForm}
+ */
+function PXEdit(){
+  
+  return PDFForm;  
+}

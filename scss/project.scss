@@ -32,6 +32,8 @@ $doc_hx_margin: (12px * $doc_pdf_zoom);
 $doc_p_margin: (10px * $doc_pdf_zoom);
 $doc_p_size: (16px * $doc_pdf_zoom);
 
+$editor_top: 73px;
+
 
 @import 'modules/fileupload';
 @import 'modules/inplace';
@@ -39,13 +41,13 @@ $doc_p_size: (16px * $doc_pdf_zoom);
 
 @import 'modules/small_layouts';
 
-#PXEdit .layout-menu {
+#PXEdit-message {
   position: fixed;
   right: -300px;
   width: 300px;
   background: White;
-  z-index: 200;
-  margin-top: 10px;
+  z-index: 300;
+  top: $editor_top;
   opacity: 1;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;  
@@ -59,7 +61,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
   &.open {
     right: 0;
  
-    +.layout-menu-backdrop {
+    +#PXEdit-message-bkdrp {
       display: block;
     }   
   }
@@ -74,7 +76,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
   } 
 }
 
-#PXEdit .layout-menu-backdrop { 
+#PXEdit-message-bkdrp { 
     z-index: 299;
     position: fixed;
     display: none;
@@ -82,7 +84,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,.2);
   }  
 
 
@@ -128,11 +130,12 @@ $doc_p_size: (16px * $doc_pdf_zoom);
 
 
 #PXEdit {
-    position: absolute;
-    top: 40px;
+    position: fixed;
+    top: $editor_top;
     left: 0;
     right: 0px;
     display: none;
+    z-index: 100;
     
     #document-save-settings {
         display: none;
@@ -144,8 +147,25 @@ $doc_p_size: (16px * $doc_pdf_zoom);
         }
     }
     
+    &.loading, &.open  {
+      +#PXEdit-backdrop {
+        display: block;
+      }
+    }  
+    
+    &.open {
+      +#PXEdit-backdrop {
+        background: rgba(0,0,0,0.5);
+      }
+    }
     
     &.loading {
+      +#PXEdit-backdrop {
+        background-image: url('/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif');
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+      
       #pdf-visibile-editor {
         &:before {
           content: '';
@@ -155,7 +175,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
           left: 0;
           right: 0;
           bottom: 0;
-          background: url('/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif');
+          background-image: url('/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif');
           background-position: center center;
           background-repeat: no-repeat;
           background-color: rgba(255,255,255,0.5);
@@ -167,46 +187,32 @@ $doc_p_size: (16px * $doc_pdf_zoom);
       }
     }
     
-    .backdrop {
-            position: fixed;
-            top: 0;
-            background: rgba(0,0,0,0.5);
-            bottom: 0;
-            left: 0;    
-            right: 0;
-            z-index: 99;
-    }
-    
 }
 
+#PXEdit-backdrop {
+  position: fixed;
+  top: 0;
+  display: none;
+  background: rgba(255,255,255,0.5);
+  bottom: 0;
+  left: 0;    
+  right: 0;
+  z-index: 99;
+  transition: background .5s ease;
+}
+    
 
-.pdf {
-	position:relative;
-        z-index: 100;
-        width: $doc_pdf_width;
-	height: $doc_pdf_height;
-	max-width: none;
-        margin-top: 0px;
-        background: White;
-        padding: 0;
+#PXEdit .pdf {
+	position:relative !important;
+        z-index: 100 !important;
+        width: $doc_pdf_width !important;
+	height: $doc_pdf_height !important;
+	max-width: none !important;
+        margin-top: 0px !important;
+        background: White !important;
+        padding: 0 !important;
         
        
-        
-        .alert {
-           border-top-left-radius: 0;
-           border-top-right-radius: 0;
-           z-index: 10000;
-           position: absolute;
-           left: 20%;
-           right: 20%;
-           top: 0;
-           transition: 0.4s top ease-in-out;
-           
-           &.slideUp {
-              top: -150px; 
-           }
-        }
-        
         .online-medium-chooser {
             height: auto;
             position: absolute !important;
@@ -403,7 +409,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     }    
 }
 
-
 #pdf-visibile-editor {
     height: $doc_content_height;
     background: White;
@@ -519,7 +524,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
    }    
 }
 
-
 // PDF Typo
 .pdf {
     
@@ -551,7 +555,6 @@ $doc_p_size: (16px * $doc_pdf_zoom);
         margin-bottom: $doc_p_margin;
     } 
 }
-
 
 #pdfdoc-alter-layout {
     .layout-template {
@@ -608,45 +611,7 @@ $doc_p_size: (16px * $doc_pdf_zoom);
     }
 }
 
-// PDF 
-.message-overlay {
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 5000;
-    bottom: 0;
-    position: fixed;
-    background: rgba(0,0,0,0.5);
-    
-    &>div {
-        display: table;
-        width: 80%;
-        height: 100%;
-        margin: 0 auto;
-        -webkit-transform: translate(0, -20%);
-        -webkit-transition: -webkit-transform 0.2s ease-in-out;
-        
-        &.in {
-             -webkit-transform: translate(0, 0%);
-        }
-        
-        
-        &>div {
-            display: table-cell;
-            vertical-align: top;
-        }
-    }
-    
-    
-    .well {
-        border: 0;
-        border-radius: 0;
-        background: White;
-    }    
-}
-
-
-.pdf {
+#PXEdit .pdf {
     
     .widget[data-widget="table"] {
         position: relative;    

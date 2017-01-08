@@ -802,28 +802,28 @@ body.trumbowyg-body-fullscreen {
       height: 42px;
       margin-bottom: 0; }
 
-#PXEdit .layout-menu {
+#PXEdit-message {
   position: fixed;
   right: -300px;
   width: 300px;
   background: White;
-  z-index: 200;
-  margin-top: 10px;
+  z-index: 300;
+  top: 73px;
   opacity: 1;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   transition: right 0.5s ease-in-out, opacity 0.2s ease;
   z-index: 300; }
-  #PXEdit .layout-menu:hover {
+  #PXEdit-message:hover {
     opacity: 1; }
-  #PXEdit .layout-menu.open {
+  #PXEdit-message.open {
     right: 0; }
-    #PXEdit .layout-menu.open + .layout-menu-backdrop {
+    #PXEdit-message.open + #PXEdit-message-bkdrp {
       display: block; }
-  #PXEdit .layout-menu .layout-template.active .widget, #PXEdit .layout-menu .layout-template:hover .widget {
+  #PXEdit-message .layout-template.active .widget, #PXEdit-message .layout-template:hover .widget {
     background: lightblue; }
 
-#PXEdit .layout-menu-backdrop {
+#PXEdit-message-bkdrp {
   z-index: 299;
   position: fixed;
   display: none;
@@ -831,7 +831,7 @@ body.trumbowyg-body-fullscreen {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.5); }
+  background: rgba(0, 0, 0, 0.2); }
 
 .editableform .control-group {
   margin-bottom: 0;
@@ -862,15 +862,24 @@ body.trumbowyg-body-fullscreen {
   border: 1px Silver solid; }
 
 #PXEdit {
-  position: absolute;
-  top: 40px;
+  position: fixed;
+  top: 73px;
   left: 0;
   right: 0px;
-  display: none; }
+  display: none;
+  z-index: 100; }
   #PXEdit #document-save-settings {
     display: none; }
   #PXEdit.pdf-editor-changed #document-save-settings {
     display: inline-block; }
+  #PXEdit.loading + #PXEdit-backdrop, #PXEdit.open + #PXEdit-backdrop {
+    display: block; }
+  #PXEdit.open + #PXEdit-backdrop {
+    background: rgba(0, 0, 0, 0.5); }
+  #PXEdit.loading + #PXEdit-backdrop {
+    background-image: url("/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif");
+    background-position: center center;
+    background-repeat: no-repeat; }
   #PXEdit.loading #pdf-visibile-editor:before {
     content: '';
     position: absolute;
@@ -879,113 +888,105 @@ body.trumbowyg-body-fullscreen {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif");
+    background-image: url("/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif");
     background-position: center center;
     background-repeat: no-repeat;
     background-color: rgba(255, 255, 255, 0.5); }
   #PXEdit.loading .settings-panel {
     pointer-events: none; }
-  #PXEdit .backdrop {
-    position: fixed;
-    top: 0;
-    background: rgba(0, 0, 0, 0.5);
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 99; }
 
-.pdf {
-  position: relative;
-  z-index: 100;
-  width: 897.6px;
-  height: 635.2px;
-  max-width: none;
-  margin-top: 0px;
-  background: White;
-  padding: 0; }
-  .pdf .alert {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    z-index: 10000;
-    position: absolute;
-    left: 20%;
-    right: 20%;
-    top: 0;
-    transition: 0.4s top ease-in-out; }
-    .pdf .alert.slideUp {
-      top: -150px; }
-  .pdf .online-medium-chooser {
+#PXEdit-backdrop {
+  position: fixed;
+  top: 0;
+  display: none;
+  background: rgba(255, 255, 255, 0.5);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  transition: background .5s ease; }
+
+#PXEdit .pdf {
+  position: relative !important;
+  z-index: 100 !important;
+  width: 897.6px !important;
+  height: 635.2px !important;
+  max-width: none !important;
+  margin-top: 0px !important;
+  background: White !important;
+  padding: 0 !important; }
+  #PXEdit .pdf .online-medium-chooser {
     height: auto;
     position: absolute !important;
     width: 238.2px;
     top: 1px;
     z-index: 1;
     margin-left: 1px; }
-    .pdf .online-medium-chooser select {
+    #PXEdit .pdf .online-medium-chooser select {
       width: 100%;
       padding: 5px 10px;
       border-color: transparent;
       cursor: pointer;
       text-align: center; }
-      .pdf .online-medium-chooser select option {
+      #PXEdit .pdf .online-medium-chooser select option {
         text-align: center; }
-      .pdf .online-medium-chooser select:focus, .pdf .online-medium-chooser select:hover {
+      #PXEdit .pdf .online-medium-chooser select:focus, #PXEdit .pdf .online-medium-chooser select:hover {
         background: rgba(240, 240, 240, 0.2); }
-  .pdf .editor-widget {
+  #PXEdit .pdf .editor-widget {
     position: relative; }
-    .pdf .editor-widget.editor-widget-image {
+    #PXEdit .pdf .editor-widget.editor-widget-image {
       cursor: pointer; }
-      .pdf .editor-widget.editor-widget-image .progress {
+      #PXEdit .pdf .editor-widget.editor-widget-image .progress {
         position: absolute;
         top: 0;
         height: 5px;
         border-radius: 0;
         width: 100%;
         display: none; }
-      .pdf .editor-widget.editor-widget-image.in-progress .progress {
+      #PXEdit .pdf .editor-widget.editor-widget-image.in-progress .progress {
         display: block; }
-      .pdf .editor-widget.editor-widget-image.in-progress img {
+      #PXEdit .pdf .editor-widget.editor-widget-image.in-progress img {
         opacity: 0.2; }
-      .pdf .editor-widget.editor-widget-image .btn {
+      #PXEdit .pdf .editor-widget.editor-widget-image .btn {
         position: absolute;
         bottom: -40px;
         border-radius: 0;
         left: 0;
         opacity: 0;
         transition: bottom .4s ease; }
-      .pdf .editor-widget.editor-widget-image:hover .btn {
+      #PXEdit .pdf .editor-widget.editor-widget-image:hover .btn {
         opacity: 1;
         bottom: 0; }
-      .pdf .editor-widget.editor-widget-image:hover img {
+      #PXEdit .pdf .editor-widget.editor-widget-image:hover img {
         box-shadow: 1px 1px 1px 1px #ccc; }
-  .pdf .settings-panel {
+  #PXEdit .pdf .settings-panel {
     position: absolute;
     top: 4px;
     /* left: -5px; */
     width: 35px;
     z-index: 100;
     margin-left: -38px; }
-    .pdf .settings-panel button {
+    #PXEdit .pdf .settings-panel button {
       margin-bottom: 2px;
       max-width: 32px;
       overflow: hidden;
       min-width: 32px;
       transition: 0.2s min-width ease-in-out; }
-      .pdf .settings-panel button .label-in {
+      #PXEdit .pdf .settings-panel button .label-in {
         display: none;
         margin-left: 5px; }
-      .pdf .settings-panel button:hover {
+      #PXEdit .pdf .settings-panel button:hover {
         min-width: 130px; }
-        .pdf .settings-panel button:hover .label-in {
+        #PXEdit .pdf .settings-panel button:hover .label-in {
           display: inline; }
-  .pdf header {
+  #PXEdit .pdf header {
     height: 100px;
     margin-bottom: 24px;
     border-bottom: 1px Silver solid; }
-    .pdf header .logo {
+    #PXEdit .pdf header .logo {
       margin-left: 64px;
       padding-top: 20px; }
-    .pdf header .label-editor {
+    #PXEdit .pdf header .label-editor {
       position: absolute;
       top: 42px;
       border-radius: 0;
@@ -993,26 +994,26 @@ body.trumbowyg-body-fullscreen {
       margin-left: -43px;
       width: 100px;
       text-align: center; }
-  .pdf .float-2 {
+  #PXEdit .pdf .float-2 {
     width: 50%;
     float: left; }
-  .pdf .float-3 {
+  #PXEdit .pdf .float-3 {
     float: left;
     width: 33.33333333%; }
-  .pdf .float-xs-8 {
+  #PXEdit .pdf .float-xs-8 {
     float: left;
     width: 80%; }
-  .pdf .float-xs-4 {
+  #PXEdit .pdf .float-xs-4 {
     float: left;
     width: 20%; }
-  .pdf .footer-logos {
+  #PXEdit .pdf .footer-logos {
     margin-left: 64px;
     padding-top: 15px; }
-    .pdf .footer-logos img {
+    #PXEdit .pdf .footer-logos img {
       height: auto;
       margin-right: 5px;
       width: 90px; }
-  .pdf footer {
+  #PXEdit .pdf footer {
     position: absolute;
     bottom: 0;
     border-top: 1px Silver solid;
@@ -1143,40 +1144,15 @@ body.trumbowyg-body-fullscreen {
     background: #428bca;
     color: white; }
 
-.message-overlay {
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 5000;
-  bottom: 0;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5); }
-  .message-overlay > div {
-    display: table;
-    width: 80%;
-    height: 100%;
-    margin: 0 auto;
-    -webkit-transform: translate(0, -20%);
-    -webkit-transition: -webkit-transform 0.2s ease-in-out; }
-    .message-overlay > div.in {
-      -webkit-transform: translate(0, 0%); }
-    .message-overlay > div > div {
-      display: table-cell;
-      vertical-align: top; }
-  .message-overlay .well {
-    border: 0;
-    border-radius: 0;
-    background: White; }
-
-.pdf .widget[data-widget="table"] {
+#PXEdit .pdf .widget[data-widget="table"] {
   position: relative; }
-  .pdf .widget[data-widget="table"].widget-table-fixed .option2 {
+  #PXEdit .pdf .widget[data-widget="table"].widget-table-fixed .option2 {
     display: none !important; }
-  .pdf .widget[data-widget="table"].widget-table-fixed .text {
+  #PXEdit .pdf .widget[data-widget="table"].widget-table-fixed .text {
     display: none !important; }
-  .pdf .widget[data-widget="table"] .editable-container {
+  #PXEdit .pdf .widget[data-widget="table"] .editable-container {
     min-height: 0 !important; }
-  .pdf .widget[data-widget="table"] .glyphicon {
+  #PXEdit .pdf .widget[data-widget="table"] .glyphicon {
     display: none;
     position: absolute;
     right: 0px;
@@ -1187,13 +1163,13 @@ body.trumbowyg-body-fullscreen {
     cursor: pointer;
     transition: all 0.2s ease-in;
     top: 2px; }
-    .pdf .widget[data-widget="table"] .glyphicon:hover {
+    #PXEdit .pdf .widget[data-widget="table"] .glyphicon:hover {
       color: #333;
       border-color: #333; }
-  .pdf .widget[data-widget="table"] .option, .pdf .widget[data-widget="table"] .option2 {
+  #PXEdit .pdf .widget[data-widget="table"] .option, #PXEdit .pdf .widget[data-widget="table"] .option2 {
     display: none;
     position: absolute; }
-  .pdf .widget[data-widget="table"] .option-table {
+  #PXEdit .pdf .widget[data-widget="table"] .option-table {
     width: 1px;
     transition: width 0.2s ease-in;
     overflow: hidden;
@@ -1204,7 +1180,7 @@ body.trumbowyg-body-fullscreen {
     height: 22px;
     top: 0;
     margin: 0; }
-    .pdf .widget[data-widget="table"] .option-table li {
+    #PXEdit .pdf .widget[data-widget="table"] .option-table li {
       display: inline-block;
       border: 1px Silver solid;
       padding: 2px 4px;
@@ -1215,9 +1191,9 @@ body.trumbowyg-body-fullscreen {
       cursor: pointer;
       line-height: 16px;
       border-right: 0; }
-      .pdf .widget[data-widget="table"] .option-table li:hover, .pdf .widget[data-widget="table"] .option-table li.active {
+      #PXEdit .pdf .widget[data-widget="table"] .option-table li:hover, #PXEdit .pdf .widget[data-widget="table"] .option-table li.active {
         color: #333; }
-  .pdf .widget[data-widget="table"] .glyphicon-cog {
+  #PXEdit .pdf .widget[data-widget="table"] .glyphicon-cog {
     right: 0px;
     display: inline-block;
     left: auto;
@@ -1225,63 +1201,63 @@ body.trumbowyg-body-fullscreen {
     color: #EEE;
     border-color: White;
     z-index: 2; }
-  .pdf .widget[data-widget="table"].widget-options .glyphicon {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options .glyphicon {
     display: inline-block; }
-  .pdf .widget[data-widget="table"].widget-options .option-table {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options .option-table {
     visibility: visible;
     width: 170px;
     right: 20px;
     z-index: 1;
     text-align: right; }
-  .pdf .widget[data-widget="table"].widget-options .option2 {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options .option2 {
     display: block;
     z-index: 200;
     right: 0; }
-    .pdf .widget[data-widget="table"].widget-options .option2 .glyphicon {
+    #PXEdit .pdf .widget[data-widget="table"].widget-options .option2 .glyphicon {
       top: 0px; }
-  .pdf .widget[data-widget="table"].widget-options .option {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options .option {
     display: block;
     position: absolute;
     top: 0px;
     left: 0;
     right: 0;
     text-align: center; }
-    .pdf .widget[data-widget="table"].widget-options .option .glyphicon-minus {
+    #PXEdit .pdf .widget[data-widget="table"].widget-options .option .glyphicon-minus {
       display: inline-block;
       position: static; }
-  .pdf .widget[data-widget="table"].widget-options .glyphicon-cog {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options .glyphicon-cog {
     color: Silver;
     border-color: Silver; }
-  .pdf .widget[data-widget="table"].widget-options table {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options table {
     border-bottom: 1px #EEE solid; }
-  .pdf .widget[data-widget="table"].widget-options table + .glyphicon-plus {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options table + .glyphicon-plus {
     top: auto; }
-  .pdf .widget[data-widget="table"].widget-options .PXEdit-table-col.glyphicon-minus {
+  #PXEdit .pdf .widget[data-widget="table"].widget-options .PXEdit-table-col.glyphicon-minus {
     right: auto;
     left: 0px;
     top: -20px;
     background: white; }
-  .pdf .widget[data-widget="table"]:not(.widget-options) div.text.editable-empty {
+  #PXEdit .pdf .widget[data-widget="table"]:not(.widget-options) div.text.editable-empty {
     display: none !important; }
-  .pdf .widget[data-widget="table"] div.text {
+  #PXEdit .pdf .widget[data-widget="table"] div.text {
     min-height: 20px; }
-    .pdf .widget[data-widget="table"] div.text.editable-open {
+    #PXEdit .pdf .widget[data-widget="table"] div.text.editable-open {
       display: block !important;
       visibility: hidden; }
-  .pdf .widget[data-widget="table"] .table-edit {
+  #PXEdit .pdf .widget[data-widget="table"] .table-edit {
     display: block;
     min-height: 15px;
     cursor: text; }
-    .pdf .widget[data-widget="table"] .table-edit.editable-open {
+    #PXEdit .pdf .widget[data-widget="table"] .table-edit.editable-open {
       display: block !important;
       visibility: hidden; }
-  .pdf .widget[data-widget="table"] .editable-buttons {
+  #PXEdit .pdf .widget[data-widget="table"] .editable-buttons {
     display: none; }
-  .pdf .widget[data-widget="table"] .editableform .control-group {
+  #PXEdit .pdf .widget[data-widget="table"] .editableform .control-group {
     position: absolute;
     z-index: 2;
     top: 0; }
-  .pdf .widget[data-widget="table"] .editable-inline textarea {
+  #PXEdit .pdf .widget[data-widget="table"] .editable-inline textarea {
     border: 0;
     padding: 2.5px !important;
     font-size: 11.8px;
@@ -1294,7 +1270,7 @@ body.trumbowyg-body-fullscreen {
     border: 1px Silver dotted;
     width: 100%;
     background: rgba(255, 255, 255, 0.5); }
-  .pdf .widget[data-widget="table"] .editable-inline input {
+  #PXEdit .pdf .widget[data-widget="table"] .editable-inline input {
     border: 0;
     padding: 0;
     box-shadow: none;
@@ -1302,11 +1278,11 @@ body.trumbowyg-body-fullscreen {
     margin-bottom: 9.6px;
     margin-top: -5px;
     width: 100%; }
-.pdf table.table {
+#PXEdit .pdf table.table {
   margin: 0; }
-  .pdf table.table.table-options .glyphicon {
+  #PXEdit .pdf table.table.table-options .glyphicon {
     display: inline-block; }
-  .pdf table.table tr td {
+  #PXEdit .pdf table.table tr td {
     font-size: 11.8px;
     padding: 5px 4px;
     word-break: break-word;
@@ -1315,18 +1291,18 @@ body.trumbowyg-body-fullscreen {
     border: 0;
     position: relative;
     white-space: pre; }
-  .pdf table.table.table-2 td {
+  #PXEdit .pdf table.table.table-2 td {
     width: 50%; }
-  .pdf table.table.table-3 td {
+  #PXEdit .pdf table.table.table-3 td {
     width: 33.3333334%; }
-  .pdf table.table.table-4 td {
+  #PXEdit .pdf table.table.table-4 td {
     width: 25%; }
-  .pdf table.table[data-preset='table-normal'] tr:first-child td, .pdf table.table[data-preset='table-advanced'] tr:first-child td {
+  #PXEdit .pdf table.table[data-preset='table-normal'] tr:first-child td, #PXEdit .pdf table.table[data-preset='table-advanced'] tr:first-child td {
     font-weight: bold;
     vertical-align: bottom; }
-  .pdf table.table[data-preset='table-advanced'] tr td:first-child {
+  #PXEdit .pdf table.table[data-preset='table-advanced'] tr td:first-child {
     font-weight: bold; }
-  .pdf table.table tr:nth-child(even) td {
+  #PXEdit .pdf table.table tr:nth-child(even) td {
     background: #eee; }
 
 #footnote {

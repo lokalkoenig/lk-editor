@@ -2865,7 +2865,7 @@ Editableform based on Twitter Bootstrap 3
         containerName: 'popover',
         containerDataName: 'bs.popover',
         innerCss: '.popover-content',
-        defaults: $.fn.popover.Constructor.DEFAULTS,
+        //defaults: $.fn.popover.Constructor.DEFAULTS,
 
         initContainer: function(){
             $.extend(this.containerOptions, {

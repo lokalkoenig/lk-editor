@@ -19,10 +19,10 @@ class DyanmicLayout {
     var $verlag = 0;
     
     var $image_presets = [
-        'w100xh100' => '2310px (Breite) &times 1272px (Hoehe)',
-        'w50xh50' => '1080px (Breite) &times 600px (Hoehe)',
-        'w50xh100' => '1080px (Breite) &times 1272px (Hoehe)',
-        'w33xh50' => '762px (Breite) &times 600px (Breite)'
+        'w100xh100' => ['width' => 2310, 'height' => 1272, 'title' => '2310px (Breite) × 1272px (Höhe)'],
+        'w50xh50' => ['width' => 1080, 'height' => 600, 'title' => '1080px (Breite) × 600px (Höhe)'],
+        'w50xh100' => ['width' => 1080, 'height' => 1272, 'title' => '1080px (Breite) × 1272px (Höhe)'],
+        'w33xh50' => ['width' => 762, 'height' => 600, 'title' => '762px (Breite) × 600px (Höhe)'], 
     ];
     
     function __construct($verlagsmodus = 0){ 
@@ -31,6 +31,23 @@ class DyanmicLayout {
     
     function getImagePresets(){
         return $this -> image_presets;
+    }
+    
+    /**
+     * Gets the Image-styles for the Frontend
+     * 
+     * @return array
+     */
+    function getImagePresetsParsed(){
+      
+      $presets = $this->getImagePresets();
+      
+      $array = array();
+      while(list($key, $val) = each($presets)){
+        $array[$key] = $val['title'];
+      }
+      
+    return $array;  
     }
     
     function addLayout(\LK\PDF\Doctypes\Doctype $doctype){
@@ -83,7 +100,7 @@ class DyanmicLayout {
             $html[] = (string)$layout;
         }
 
-        $callback['image_presets'] = $this -> getImagePresets();
+        $callback['image_presets'] = $this -> getImagePresetsParsed();
         $callback['layouts'] = implode('', $html);
         $this ->sendJson($callback);
     }
@@ -135,4 +152,27 @@ class DyanmicLayout {
       $layout = new $layout_name();
       return $layout;
     } 
+    
+    /**
+     * Gets back the Editor-HTML
+     * 
+     * @param array $variables
+     * @return string HTML of the Editor
+     */
+    function getEditorTemplate($variables){
+      
+      if(!isset($variables["pxeditid"])){
+          $variables["pxeditid"] = 'demo';
+      }
+      
+      \ob_start();
+      while(list($key, $val) = each($variables)){
+        $$key = $val;
+      }
+      
+      include __DIR__ . "/../../../template/editor.tpl.php";
+      $html = \ob_get_clean();
+    
+    return $html;  
+    }
 }
