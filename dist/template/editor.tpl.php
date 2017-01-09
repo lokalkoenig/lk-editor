@@ -7,7 +7,7 @@
                     <button id="PXEdit-change-input" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-cog"></span><span class="label-in">Einstellungen<span
                     </button>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#saveModal" title="Speichern Sie hier ihr Dokument" id="document-save">
+                    <button class="btn btn-primary btn-sm" title="Speichern Sie hier ihr Dokument" id="PXEdit-document-save">
                             <span class="glyphicon glyphicon-ok"></span><span class="label-in">Speichern</span>
                     </button>
                 </div>    
@@ -34,49 +34,6 @@
                 </footer>
 	</div>
      
-    <div class="modal fade" tabindex="-1" id="saveModal" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Dokument speichern</h4>
-            </div>
-            <div class="modal-body">
-                <p>Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel?</p>
-                
-                <div class="form-group">
-                    <label for="title">Titel des Dokuments</label>
-                    <input type="text" class="form-control" id="dokument-title" value="" placeholder="Titel" required="required" />
-                    <p class="help-block">Wird in der Auswahl der Dokumente als Titel verwendet.</p>
-                </div>
-                
-                 <div class="form-group select-category">
-                    <label for="category">Kategorie</label>
-                    <select class="form-control" name="category" id="dokument-category">
-                        <option value="0"></option>
-                        <option value="print">Print</option>
-                        <option value="online">Online</option>
-                        <option value="sonstiges">Sonstiges</option>
-                    </select>
-                    <p class="help-block">Es stehen die Kategorien Print, Online und Sonstiges zur Auswahl.</p>
-                </div>
-                
-                <div class="form-group">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" id="dokument-freigabe"> Dokument fuer Mitarbeiter freischalten
-                        </label>
-                      </div>
-                  </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
-              <button type="button" class="btn btn-primary" id="PXEdit-save-document">Speichern</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-      
     <div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content small-format-presentation">

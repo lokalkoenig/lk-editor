@@ -26,6 +26,16 @@ abstract class Preset {
       $this ->setManager($manager);
     }
     
+    
+    /**
+     * Get the Preset-Default-Title
+     * 
+     * @return string
+     */
+    function getTitle(){
+      return $this->title;
+    }
+    
     /**
      * Gets the Manager
      * 
@@ -36,6 +46,35 @@ abstract class Preset {
     }
     
     
+    /**
+     * Get the managed inputs to be filled by
+     * the people
+     * 
+     * @return array
+     */
+    function getManagedInputs(){
+      
+      $inputs = [];
+      $inputs['title'] = [
+          'type' => 'text',
+          'label' => 'Titel des Dokuments',
+          'desc' => 'Wird in der Auswahl der Dokumente als Titel verwendet.',
+          'value' => $this ->getTitle(),
+          'required' => 1
+      ];
+      
+     $inputs['status'] = [
+          'type' => 'checkbox',
+          'label' => 'Dokument für Mitarbeiter freischalten',
+          'desc' => '',
+          'value' => 0,
+          'required' => 0
+     ];
+      
+    return $inputs;  
+    }
+
+
     /**
      * Sets the Manager
      * 
@@ -70,7 +109,7 @@ abstract class Preset {
     return $options;    
     }
     
-    function getCategory(){
+    public function getCategory(){
         return $this -> category;
     }
     

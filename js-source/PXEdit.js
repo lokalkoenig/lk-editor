@@ -18,10 +18,10 @@ $ = jQuery;
        cb: null,
        
        // Version
-       version: 1.01,
+       version: '0.1.2',
        
        // Version Date
-       version_date: '2017-01-07',
+       version_date: '2017-01-09',
        
         // Data
         data: null,
@@ -45,6 +45,8 @@ $ = jQuery;
           'sample_data': {},
           'image_presets': {},
         },
+        
+        inputs: {},
         
         callback_url: '',
         
@@ -85,15 +87,18 @@ $ = jQuery;
             
           this.loading();  
           var reference = this;
-          
+          var url = this.callback_url;
           send_data.hash = this.callback_id;
           
-           $.ajax({
+          console.log(url);
+          
+          $.ajax({
                 dataType: "json",
-                method: "POST",
-                url: this.callback_url,
+                url: url,
+                type: 'POST',
                 data: send_data,
                 success: function(data){
+                  
                     if(data.error){
                       reference.createMessage(data.message);
                       return ;
@@ -102,7 +107,7 @@ $ = jQuery;
                     callback(data);
                 },
                 error: function(xhr, message){
-                   reference.createMessage("<strong>Fehler:</strong> " + message);
+                   reference.createMessage("<p><strong>Fehler:</strong> Leider ist beim Speichern das Dokuments etwas schief gegangen.</p>");
                 }
           });
         },
@@ -182,9 +187,17 @@ $ = jQuery;
          */
         addListener: function() {
           var reference = this;
-          
+            
+          $('#PXEdit-document-save').click(function(){
+            reference.saveDialoge();
+          })
+            
+          $('body').on('click', ".btn-pxedit-save", function(){
+            reference.saveDialogeFeedback();
+          });
+            
             // cta change layout
-            $('#PXEdit #PXEdit-change-input').click(function(){
+          $('#PXEdit #PXEdit-change-input').click(function(){
                 if(reference.options.change_layout){
                   reference.openSettings();
                   return ;
@@ -218,11 +231,6 @@ $ = jQuery;
               // call layout-changes to set the new Layout
               reference.saveLayoutChanges(this);
           });
-
-          $('#PXEdit-save-document').click(function(){
-              reference.saveTitleForm();
-          });
-        
         },
         
         /**
@@ -268,28 +276,16 @@ $ = jQuery;
         },
         
         saveAndClose: function(){
+          var reference = this;
+          var data = this.generateSave();
+          this.loading()
             
-            if(this.options.verlagsmodus){
-                $('#saveModal').modal('hide');
-            }
-            
-            var reference = this;
-            var data = this.generateSave();
-            data.preset = this.preset;
-            
-            $.ajax({
-                type: "POST",
-                url: this.callback_url + "?save=1",
-                data: {'data': data},
-                success: function(){
-                    reference.createMessage("Das Dokument wurde gespeichert.", 2000); 
-                    
-                    setTimeout(function(){
-                       jQuery('#PXEdit').fadeOut();
-                    }, 500);
-                },
-                dataType: 'json'
-              });
+          data.action = 'save-document';
+          
+          this.performAjax(data, function(){
+            $('#PXEdit').removeClass('open').fadeOut();
+            reference.createMessage(data.message, 2000); 
+          });
         },
         generateSave: function(){
             
@@ -323,27 +319,72 @@ $ = jQuery;
             });
            
             var save_data = {
-              'title':  $('#dokument-title').val(),
-              'active': $('#dokument-freigabe').prop('checked'),
-              'layout': $('.row-editor').attr('data-layout'),
+              'title':  this.options['title'],
+              'status': this.options['status'],
+              'category': this.options['category'],
+              'layout': this.getActiveLayout(),
+              
               'footnote': $('#footnote').text(),
               'content': data,
               'preset': this.preset
             };
             
-            
         return save_data;    
         },
-        saveTitleForm: function(){
-           $('#dokument-title').parent().removeClass('has-error');
-           
-           if($('#dokument-title').val() === ""){
-                $('#dokument-title').parent().addClass('has-error');
-                $('#dokument-title').focus();
-                return ;
-           }
+        
+        saveDialoge: function(){
             
-           this.saveAndClose();
+          var markup = '<div class="pxedit-save-container"><p><strong>Dokument speichern</strong></p><hr />';
+          
+          for (var key in this.inputs) {
+            var obj = this.inputs[key];
+           
+            if(obj.type === 'text'){
+                markup += '<div class="form-group"><label for="title">'+ obj.label +'</label><input class="form-control save-ables" data-key="'+ key +'" type="text" class="form-control" value="' + this.options[key]  +'" />';
+                
+                if(obj.desc !== ''){
+                  markup += '<p class="help-block">Wird in der Auswahl der Dokumente als Titel verwendet.</p>';
+                }
+                
+                markup += '</div>';
+            }
+            
+            if(obj.type === 'checkbox'){
+              if(this.options[key] === 1){
+                markup += '<div class="checkbox"><label><input class="save-ables" checked="checked" type="checkbox" data-key="'+ key +'"> '+ obj.label +'</label></div>';
+              }
+              else {
+                markup += '<div class="checkbox"><label><input class="save-ables" type="checkbox" data-key="'+ key +'"> '+ obj.label +'</label></div>';
+              }
+            }
+          }
+          
+         markup += '<hr /><p><button class="btn btn-primary btn-pxedit-save">Speichern</button></p></div>';
+         this.createMessage(markup);
+        },
+        
+        saveDialogeFeedback: function(){
+          
+          var errors = 0;
+          
+          for (var key in this.inputs) {
+            var obj = this.inputs[key];
+            var value = $('.pxedit-save-container .save-ables[data-key="'+ key +'"]').val();
+            $('.pxedit-save-container .save-ables[data-key="'+ key +'"]').removeClass('has-error'); 
+             
+            if(obj.required === 1){
+              if(!value){
+                  $('.pxedit-save-container .save-ables[data-key="'+ key +'"]').addClass('has-error').focus();
+                  errors++;
+              }
+            }
+            
+            this.options[key] = value;
+          }
+          
+          if(errors === 0){
+            this.saveAndClose();
+          }
         },
         
         /**
@@ -679,7 +720,8 @@ $ = jQuery;
                       reference.createMessage(data.message);
                       return ;
                     }
-                  
+                    
+                    reference.inputs = data.inputs;
                     reference.setPreset(data.preset);
                     reference.setOptions(data.options);
                     reference.setup(data.values, data.layouts);
