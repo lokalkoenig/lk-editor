@@ -18,10 +18,10 @@ $ = jQuery;
        cb: null,
        
        // Version
-       version: '0.1.2',
+       version: '0.1.3',
        
        // Version Date
-       version_date: '2017-01-09',
+       version_date: '2017-01-10',
        
         // Data
         data: null,
@@ -36,6 +36,8 @@ $ = jQuery;
         change_input: true,
         
         options: {
+          'id': 0,
+          'action': '',
           'verlagsmodus': 1,
           'change_catgegory': 0,
           'message_on_setup': '',
@@ -269,7 +271,7 @@ $ = jQuery;
             this.setActiveLayout(data.layout);
             this.createWidgets(data.content);
             
-            if(typeof data.sample === 'object'){
+            if(typeof data.sample === 'object' && !this.options.id){
                 this.setOptions({'sample_data' : data.sample});
                 this.showLayoutCallout();
             }
@@ -279,12 +281,14 @@ $ = jQuery;
           var reference = this;
           var data = this.generateSave();
           this.loading()
-            
+          $('#PXEdit-message').removeClass('open');
+          
           data.action = 'save-document';
           
-          this.performAjax(data, function(){
+          this.performAjax(data, function(data){
             $('#PXEdit').removeClass('open').fadeOut();
-            reference.createMessage(data.message, 2000); 
+            reference.cb();
+            reference.createMessage(data.message, 2500); 
           });
         },
         generateSave: function(){
@@ -323,11 +327,14 @@ $ = jQuery;
               'status': this.options['status'],
               'category': this.options['category'],
               'layout': this.getActiveLayout(),
-              
               'footnote': $('#footnote').text(),
               'content': data,
               'preset': this.preset
             };
+            
+            if(this.options.id){
+              save_data.id = this.options.id;
+            }
             
         return save_data;    
         },
@@ -350,11 +357,11 @@ $ = jQuery;
             }
             
             if(obj.type === 'checkbox'){
-              if(this.options[key] === 1){
-                markup += '<div class="checkbox"><label><input class="save-ables" checked="checked" type="checkbox" data-key="'+ key +'"> '+ obj.label +'</label></div>';
+              if(this.options[key] === 1 || this.options[key] === "1"){
+                markup += '<div class="checkbox"><label><input value="1" class="save-ables" checked="checked" type="checkbox" data-key="'+ key +'"> '+ obj.label +'</label></div>';
               }
               else {
-                markup += '<div class="checkbox"><label><input class="save-ables" type="checkbox" data-key="'+ key +'"> '+ obj.label +'</label></div>';
+                markup += '<div class="checkbox"><label><input value="1" class="save-ables" type="checkbox" data-key="'+ key +'"> '+ obj.label +'</label></div>';
               }
             }
           }
@@ -379,7 +386,18 @@ $ = jQuery;
               }
             }
             
-            this.options[key] = value;
+            // different jQuery handling on Checkboxes
+            if(obj.type === 'checkbox'){
+              if($('.pxedit-save-container .save-ables[data-key="'+ key +'"]').is(":checked")){
+                this.options[key] = 1;
+              }
+              else {
+                this.options[key] = 0;
+              }
+            }
+            else {
+              this.options[key] = value;
+            }
           }
           
           if(errors === 0){
@@ -688,13 +706,7 @@ $ = jQuery;
            $('.layout-menu').removeClass('open');
         },
         
-        destroy: function(){
-          var reference = this;
-          
-          setTimeout(function(){
-            reference.cb();
-          }, 500);
-        },
+        destroy: function(){ },
         
         /**
          * Loads a Document from a ressource
@@ -753,6 +765,11 @@ $ = jQuery;
       // debug
       document.onkeyup = function(e) {
             // CTR + I
+            //console.log(e.keyCode);
+            if(e.ctrlKey && e.keyCode == 83) {
+              
+            }
+            
             if(e.ctrlKey && e.keyCode == 73) {
                 var data = editor.generateSave();
                 console.clear();

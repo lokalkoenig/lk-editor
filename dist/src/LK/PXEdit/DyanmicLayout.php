@@ -89,11 +89,15 @@ class DyanmicLayout {
         $obj = $this ->loadPreset($preset_id);
         $callback['values'] = $obj -> getDefaultValues();
         
+        
         $callback['options'] = $obj -> getOptions();
         $callback['options']['category'] = $obj ->getCategory();  
         $callback['options']['status'] = 0;  
         $callback['options']['image_presets'] = $this->getImagePresets();  
+        $callback['options']['action'] = 'load-preset';
         $callback['options']['title'] = $obj ->getTitle();
+        $callback['options']['id'] = 0;
+        
         $callback['inputs'] = $obj -> getManagedInputs();
         $callback['values'] -> preset = $preset_id;  
         

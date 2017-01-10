@@ -6,7 +6,7 @@ use LK\PXEdit\Presets\OnlineArgumentation;
 class OpenDokument extends OnlineArgumentation {
     //put your code here
     
-    var $category = '';
+    var $category = 'sonstiges';
     var $title = 'Freies Dokument';
     
     function getDefaultValues(){
