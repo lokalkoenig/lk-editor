@@ -96,6 +96,7 @@ abstract class Preset {
             'change_input' => 1,
             'change_category' => 0,
             'message_on_setup' => '',
+            'footnote' => 1,
         ];
         
         $options = $this ->getWidgetOptions();

@@ -53,7 +53,8 @@ class OnlineMedium extends Preset {
     function getWidgetOptions(){
         return array(
             'change_layout' => 0,
-            'change_input' => 0
+            'change_input' => 0,
+            'footnote' => 0,
         );
     }   
 }

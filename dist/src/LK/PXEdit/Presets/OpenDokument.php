@@ -21,6 +21,28 @@ class OpenDokument extends OnlineArgumentation {
          
     return $value;    
     }
+    
+    /**
+     * Gets the Managed inputs for the Documents
+     * @return array
+     */
+    function getManagedInputs(){
+      $inputs = parent::getManagedInputs();
+      $inputs['category'] = [
+          'type' => 'select',
+          'label' => 'Kategorie',
+          'desc' => 'Sie können das Dokument frei in die Kategorien einordnen.',
+          'options' => [
+            'print' => 'Print',
+            'online' => 'Ónline',
+            'sonstiges' => 'Sonstiges',  
+          ],
+          'value' => $this -> category,
+          'required' => 1,
+      ];
+    
+      return $inputs;
+    }
  
     function getWidgetOptions(){
         return array(

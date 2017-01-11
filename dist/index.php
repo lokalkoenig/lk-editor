@@ -69,14 +69,14 @@ $html = $doc->getEditorTemplate($variables);
         
         <p>      
             <button class="btn btn-default PXEdit-create" data-preset="Preisliste">Preisliste</button>
-            <button class="btn btn-default PXEdit-create" data-preset="OpenDokument">Eigenes Dokument</button>
+            <button class="btn btn-default PXEdit-create  btn-2click" data-preset="OpenDokument">Eigenes Dokument</button>
         </p>  
         
         <hr />
         <h4 class="text-center">Mitarbeitermodus</h4>
         
         <p>      
-            <button class="btn btn-default PXEdit-create btn-2click" data-preset="OnlineMediumCollection">Online-Medium (Collection)</button>
+            <button class="btn btn-default PXEdit-create" data-preset="OnlineMediumCollection">Online-Medium (Collection)</button>
         </p>  
     </div>  
     <!--  
@@ -100,9 +100,7 @@ $html = $doc->getEditorTemplate($variables);
         </style>  
         
         <script>
-          jQuery(document).ready(function(){
-              //jQuery('.PXEdit-create.btn-2click').click();
-          });
+          
           
          $(document).ready(function(){
             // react on Document-Create, for 
@@ -110,9 +108,16 @@ $html = $doc->getEditorTemplate($variables);
                   PDFForm.loading();
                   var preset = $(this).attr('data-preset');
 
-                  PDFForm.loadDocument({'preset': preset});
+                  PDFForm.loadDocument({'preset': preset}, function(){
+                    console.log("The CB sais Yes");
+                  });
                });
          });
+         
+         jQuery(document).ready(function(){
+            jQuery('.PXEdit-create.btn-2click').click();
+         });
+         
         </script>  
 </body>
 </html>

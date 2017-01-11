@@ -36,9 +36,8 @@ $editor_top: 73px;
 
 
 @import 'modules/fileupload';
-@import 'modules/inplace';
 @import 'modules/editor';
-
+@import 'modules/inplace';
 @import 'modules/small_layouts';
 
 #PXEdit-message {
@@ -123,10 +122,7 @@ $editor_top: 73px;
 
 
 
-.trumbowyg-button-pane {
-	background: White;
-	border: 1px Silver solid;
-}
+
 
 
 #PXEdit {
@@ -388,33 +384,17 @@ $editor_top: 73px;
         }	
 }
 
-
-.trumbowyg-box {
-    border: none;
-    padding: 0;
-    margin: 0;
-    
-    .trumbowyg-editor {
-        padding: 0px;
-    }
-    
-    .trumbowyg-button-pane {
-        position: relative;
-    	margin-top: -36px;
-    	top: -10px;
-        
-        button {
-            width: 25px;
-        }
-    }    
-}
-
 #pdf-visibile-editor {
     height: $doc_content_height;
     background: White;
     margin: 0 ($doc_80);     
     position: relative;
     margin-right: $doc_80 - $doc_content_spacing;
+    
+    // Layout full needs an extra spacing
+    .row-editor[data-layout="layout-full"] {
+      margin-right: $doc_content_spacing;  
+    }
     
     .widget-placeholder {
         background: rgba(240,240,240, 0.1);
@@ -436,27 +416,30 @@ $editor_top: 73px;
         position: relative;
     }
     
-    
-    
     .editor-widget-editor {
       .editable-empty {
         min-height: 20px;
       }
-      
       
      .editable-container.editable-inline {
         position: absolute;
      }
     }
     
-    .editor-widget-image {
+   .editor-widget-image {
         overflow: hidden;
+        box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
         
         &[data-fid="0"]{
           background: url('placeholder.jpg');
           background-repeat: no-repeat;
           background-size: contain;
           background-position: center;
+          
+          img {
+            display: none;
+          }
+          
         }
        
         img {
@@ -467,8 +450,6 @@ $editor_top: 73px;
     
     div[data-height="50"]{
         height: ($doc_content_height / 2) - $doc_content_spacing;
-        
-        
     }
     
     div.widget-flexibile {
@@ -488,7 +469,6 @@ $editor_top: 73px;
         .trumbowyg-box {
           min-height: 0;
         }
-        
       }
     }
     
@@ -515,6 +495,8 @@ $editor_top: 73px;
             margin-bottom: $doc_content_spacing;  
         }
     }
+    
+    
     
    .float-2, .float-3 {
         &>div {

@@ -44,11 +44,11 @@ if(isset($_GET['type'])
 }
 
 
-if(isset($_GET['save']) && is_string($_GET['save'])){
+if(isset($_POST['action']) && is_string($_POST['action']) && $_POST['action'] === 'save-document'){
     
     // save to whatever
     $time = time();
-    $data = $_POST['data'];
+    $data = $_POST;
     
     $save = $data;
     $content = json_encode($save);
@@ -56,6 +56,7 @@ if(isset($_GET['save']) && is_string($_GET['save'])){
     
     $callback['fn'] = $time . ".json";
     $callback['save'] = $save;   
+    $callback['message'] = "Ihr Dokument wurde gespeichert.";    
 }
 
 

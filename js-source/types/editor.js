@@ -91,6 +91,13 @@
                 //formatting: ['strong', 'em', 'underline', 'strikethrough'],
                 lists: ['orderedList', 'unorderedList'], // modified to check if override is working
                 semantic: ['strong', 'em'],
+                 btnsDef: {
+                 // Customizables dropdowns
+                 formattingLight: {
+                    dropdown: ['p', 'h1', 'h2'],
+                    ico: 'formatting' // Apply formatting icon
+                  }
+                },
                 headers: {
                        dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
                        ico: 'p'
@@ -98,13 +105,20 @@
             };
                 
             $(this.$input).trumbowyg({
+               btnsDef: {
+                  // Customizables dropdowns
+                  Format: {
+                      dropdown: ['p','h1','h2'],
+                      ico: 'formatting' // Apply formatting icon
+                  }
+              },
               btns: [
                     ['bold', 'italic'],
-                    ['h1', 'h2'],
-                    'btnGrp-lists',
-                    ['horizontalRule']
+                    ['Format'],
+                    'btnGrp-lists'
                 ],
               autogrow: true,
+              lang: 'de',
               removeformatPasted: true
             });
         }

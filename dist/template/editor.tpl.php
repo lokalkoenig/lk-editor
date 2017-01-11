@@ -33,8 +33,10 @@
                         </div>
                 </footer>
 	</div>
-     
-    <div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
+    <div id="available-layouts" class="hidden"></div>
+</div>  
+
+<div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content small-format-presentation">
             <div class="modal-header">
@@ -86,9 +88,7 @@
             </div>
           </div>
         </div>
-    </div>
-    <div id="available-layouts" class="hidden"></div>
-</div>  
+</div>
 
 <div id="PXEdit-backdrop"></div>   
 <div id="PXEdit-message" class="layout-menu well well-white"></div>

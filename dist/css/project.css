@@ -20,187 +20,6 @@
     filter: alpha(opacity=0);
     font-size: 100%;
     height: 100%; } }
-/*! X-editable - v1.5.1 
-* In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
-* http://github.com/vitalets/x-editable
-* Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
-.editableform {
-  margin-bottom: 0;
-  /* overwrites bootstrap margin */ }
-
-.editableform .control-group {
-  margin-bottom: 0;
-  /* overwrites bootstrap margin */
-  white-space: nowrap;
-  /* prevent wrapping buttons on new line */ }
-
-/* 
-  BS3 width:1005 for inputs breaks editable form in popup 
-  See: https://github.com/vitalets/x-editable/issues/393
-*/
-.editableform .form-control {
-  width: auto; }
-
-.editable-buttons {
-  display: inline-block;
-  /* should be inline to take effect of parent's white-space: nowrap */
-  vertical-align: top;
-  margin-left: 7px;
-  /* inline-block emulation for IE7*/
-  zoom: 1;
-  *display: inline; }
-
-.editable-buttons.editable-buttons-bottom {
-  display: block;
-  margin-top: 7px;
-  margin-left: 0; }
-
-.editable-input {
-  vertical-align: top;
-  display: inline-block;
-  /* should be inline to take effect of parent's white-space: nowrap */
-  width: auto;
-  /* bootstrap-responsive has width: 100% that breakes layout */
-  white-space: normal;
-  /* reset white-space decalred in parent*/
-  /* display-inline emulation for IE7*/
-  zoom: 1;
-  *display: inline; }
-
-.editable-buttons .editable-cancel {
-  margin-left: 7px; }
-
-/*for jquery-ui buttons need set height to look more pretty*/
-.editable-buttons button.ui-button-icon-only {
-  height: 24px;
-  width: 30px; }
-
-.editableform-loading {
-  /** background: url('../img/loading.gif') center center no-repeat; */
-  height: 25px;
-  width: auto;
-  min-width: 25px; }
-
-.editable-inline .editableform-loading {
-  background-position: left 5px; }
-
-.editable-error-block {
-  max-width: 300px;
-  margin: 5px 0 0 0;
-  width: auto;
-  white-space: normal; }
-
-/*add padding for jquery ui*/
-.editable-error-block.ui-state-error {
-  padding: 3px; }
-
-.editable-error {
-  color: red; }
-
-/* ---- For specific types ---- */
-.editableform .editable-date {
-  padding: 0;
-  margin: 0;
-  float: left; }
-
-/* move datepicker icon to center of add-on button. See https://github.com/vitalets/x-editable/issues/183 */
-.editable-inline .add-on .icon-th {
-  margin-top: 3px;
-  margin-left: 1px; }
-
-/* checklist vertical alignment */
-.editable-checklist label input[type="checkbox"],
-.editable-checklist label span {
-  vertical-align: middle;
-  margin: 0; }
-
-.editable-checklist label {
-  white-space: nowrap; }
-
-/* clear button shown as link in date inputs */
-.editable-clear {
-  clear: both;
-  font-size: 0.9em;
-  text-decoration: none;
-  text-align: right; }
-
-/* IOS-style clear button for text inputs */
-.editable-clear-x {
-  display: block;
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  opacity: 0.6;
-  z-index: 100;
-  top: 50%;
-  right: 6px;
-  margin-top: -6px; }
-
-.editable-clear-x:hover {
-  opacity: 1; }
-
-.editable-pre-wrapped {
-  white-space: pre-wrap; }
-
-.editable-container.editable-popup {
-  max-width: none !important;
-  /* without this rule poshytip/tooltip does not stretch */ }
-
-.editable-container.popover {
-  width: auto;
-  /* without this rule popover does not stretch */ }
-
-.editable-container.editable-inline {
-  display: inline-block;
-  vertical-align: middle;
-  width: auto;
-  /* inline-block emulation for IE7*/
-  zoom: 1;
-  *display: inline; }
-
-.editable-container.ui-widget {
-  font-size: inherit;
-  /* jqueryui widget font 1.1em too big, overwrite it */
-  z-index: 9990;
-  /* should be less than select2 dropdown z-index to close dropdown first when click */ }
-
-.editable-click,
-a.editable-click,
-a.editable-click:hover {
-  text-decoration: none;
-  border-bottom: dashed 1px #0088cc; }
-
-.editable-click.editable-disabled,
-a.editable-click.editable-disabled,
-a.editable-click.editable-disabled:hover {
-  color: #585858;
-  cursor: default;
-  border-bottom: none; }
-
-.editable-empty {
-  color: #DD1144;
-  text-decoration: none; }
-  .editable-empty:hover {
-    border-bottom: 1px #CCC dashed; }
-
-.editable-unsaved {
-  font-weight: bold; }
-
-.editable-unsaved:after {
-  /*    content: '*'*/ }
-
-.editable-bg-transition {
-  -webkit-transition: background-color 1400ms ease-out;
-  -moz-transition: background-color 1400ms ease-out;
-  -o-transition: background-color 1400ms ease-out;
-  -ms-transition: background-color 1400ms ease-out;
-  transition: background-color 1400ms ease-out; }
-
-/*see https://github.com/vitalets/x-editable/issues/139 */
-.form-horizontal .editable {
-  padding-top: 5px;
-  display: inline-block; }
-
 /**
  * Trumbowyg v2.3.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
@@ -379,7 +198,7 @@ a.editable-click.editable-disabled:hover {
   display: block;
   content: " ";
   position: absolute;
-  top: 25px;
+  top: 17px;
   right: 3px;
   height: 0;
   width: 0;
@@ -401,19 +220,20 @@ a.editable-click.editable-disabled:hover {
   display: none !important; }
 
 .trumbowyg-dropdown {
-  width: 200px;
+  width: 92px;
   border: 1px solid #ecf0f1;
-  padding: 5px 0;
+  padding: 0px 0;
   border-top: none;
   background: #FFF;
-  margin-left: -1px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 3px; }
+  margin-left: -6px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0 2px 3px; */
+  margin-top: -8px; }
 
 .trumbowyg-dropdown button {
   display: block;
   width: 100%;
-  height: 35px;
-  line-height: 35px;
+  height: 26px;
+  line-height: 20px;
   text-decoration: none;
   background: #FFF;
   padding: 0 10px;
@@ -421,9 +241,7 @@ a.editable-click.editable-disabled:hover {
   border: none;
   cursor: pointer;
   text-align: left;
-  font-size: 15px;
-  -webkit-transition: all 150ms;
-  transition: all 150ms; }
+  font-size: 12px; }
 
 .trumbowyg-dropdown button:hover, .trumbowyg-dropdown button:focus {
   background: #ecf0f1; }
@@ -741,6 +559,257 @@ body.trumbowyg-body-fullscreen {
 @supports (-ms-accelerator: true) {
   .trumbowyg-box-blur .trumbowyg-editor *, .trumbowyg-box-blur .trumbowyg-editor::before {
     color: rgba(200, 200, 200, 0.6) !important; } }
+/*! X-editable - v1.5.1 
+* In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
+* http://github.com/vitalets/x-editable
+* Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
+.editableform {
+  margin-bottom: 0;
+  /* overwrites bootstrap margin */ }
+
+.editableform .control-group {
+  margin-bottom: 0;
+  /* overwrites bootstrap margin */
+  white-space: nowrap;
+  /* prevent wrapping buttons on new line */ }
+
+/* 
+  BS3 width:1005 for inputs breaks editable form in popup 
+  See: https://github.com/vitalets/x-editable/issues/393
+*/
+.editableform .form-control {
+  width: auto; }
+
+.editable-buttons {
+  display: inline-block;
+  /* should be inline to take effect of parent's white-space: nowrap */
+  vertical-align: top;
+  margin-left: 7px;
+  /* inline-block emulation for IE7*/
+  zoom: 1;
+  *display: inline; }
+
+.editable-buttons.editable-buttons-bottom {
+  display: block;
+  margin-top: 7px;
+  margin-left: 0; }
+
+.editable-input {
+  vertical-align: top;
+  display: inline-block;
+  /* should be inline to take effect of parent's white-space: nowrap */
+  width: auto;
+  /* bootstrap-responsive has width: 100% that breakes layout */
+  white-space: normal;
+  /* reset white-space decalred in parent*/
+  /* display-inline emulation for IE7*/
+  zoom: 1;
+  *display: inline; }
+
+.editable-buttons .editable-cancel {
+  margin-left: 7px; }
+
+/*for jquery-ui buttons need set height to look more pretty*/
+.editable-buttons button.ui-button-icon-only {
+  height: 24px;
+  width: 30px; }
+
+.editableform-loading {
+  /** background: url('../img/loading.gif') center center no-repeat; */
+  height: 25px;
+  width: auto;
+  min-width: 25px; }
+
+.editable-inline .editableform-loading {
+  background-position: left 5px; }
+
+.editable-error-block {
+  max-width: 300px;
+  margin: 5px 0 0 0;
+  width: auto;
+  white-space: normal; }
+
+/*add padding for jquery ui*/
+.editable-error-block.ui-state-error {
+  padding: 3px; }
+
+.editable-error {
+  color: red; }
+
+/* ---- For specific types ---- */
+.editableform .editable-date {
+  padding: 0;
+  margin: 0;
+  float: left; }
+
+/* move datepicker icon to center of add-on button. See https://github.com/vitalets/x-editable/issues/183 */
+.editable-inline .add-on .icon-th {
+  margin-top: 3px;
+  margin-left: 1px; }
+
+/* checklist vertical alignment */
+.editable-checklist label input[type="checkbox"],
+.editable-checklist label span {
+  vertical-align: middle;
+  margin: 0; }
+
+.editable-checklist label {
+  white-space: nowrap; }
+
+/* clear button shown as link in date inputs */
+.editable-clear {
+  clear: both;
+  font-size: 0.9em;
+  text-decoration: none;
+  text-align: right; }
+
+/* IOS-style clear button for text inputs */
+.editable-clear-x {
+  display: block;
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  opacity: 0.6;
+  z-index: 100;
+  top: 50%;
+  right: 6px;
+  margin-top: -6px; }
+
+.editable-clear-x:hover {
+  opacity: 1; }
+
+.editable-pre-wrapped {
+  white-space: pre-wrap; }
+
+.editable-container.editable-popup {
+  max-width: none !important;
+  /* without this rule poshytip/tooltip does not stretch */ }
+
+.editable-container.popover {
+  width: auto;
+  /* without this rule popover does not stretch */ }
+
+.editable-container.editable-inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  /* inline-block emulation for IE7*/
+  zoom: 1;
+  *display: inline; }
+
+.editable-container.ui-widget {
+  font-size: inherit;
+  /* jqueryui widget font 1.1em too big, overwrite it */
+  z-index: 9990;
+  /* should be less than select2 dropdown z-index to close dropdown first when click */ }
+
+.editable-click,
+a.editable-click,
+a.editable-click:hover {
+  text-decoration: none;
+  border-bottom: dashed 1px #0088cc; }
+
+.editable-click.editable-disabled,
+a.editable-click.editable-disabled,
+a.editable-click.editable-disabled:hover {
+  color: #585858;
+  cursor: default;
+  border-bottom: none; }
+
+.editable-empty {
+  color: #DD1144;
+  text-decoration: none; }
+  .editable-empty:hover {
+    border-bottom: 1px #CCC dashed; }
+
+.editable-unsaved {
+  font-weight: bold; }
+
+.editable-unsaved:after {
+  /*    content: '*'*/ }
+
+.editable-bg-transition {
+  -webkit-transition: background-color 1400ms ease-out;
+  -moz-transition: background-color 1400ms ease-out;
+  -o-transition: background-color 1400ms ease-out;
+  -ms-transition: background-color 1400ms ease-out;
+  transition: background-color 1400ms ease-out; }
+
+/*see https://github.com/vitalets/x-editable/issues/139 */
+.form-horizontal .editable {
+  padding-top: 5px;
+  display: inline-block; }
+
+.trumbowyg-bold-button {
+  overflow: hidden; }
+  .trumbowyg-bold-button:before {
+    content: 'F';
+    width: 18px;
+    display: block;
+    height: 40px;
+    line-height: 36px;
+    font-weight: bold; }
+
+.trumbowyg-italic-button {
+  overflow: hidden; }
+  .trumbowyg-italic-button:before {
+    content: 'K';
+    width: 18px;
+    display: block;
+    height: 40px;
+    line-height: 36px;
+    font-style: italic; }
+
+.trumbowyg-Format-button {
+  width: 80px !important;
+  text-align: left !important; }
+
+.trumbowyg-unorderedList-button {
+  overflow: hidden; }
+  .trumbowyg-unorderedList-button:before {
+    content: '';
+    width: 16px;
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAk1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6eSN1AAAAMHRSTlMAAQIFBgcICQoiIyQmJygrLjk8PUBBQkVGSk1OT1FUVlyqq77AyszOz9PV2tzx8/2dc+tPAAAAuUlEQVQ4y+2Ttw7CQBBE3xkwOedokzM3//91FBi6s69AQiBes1OMtNLuDHwDQXy8LisevrUkaQgUF5GTFrEkSTaEhdxYTonqQJRiFLdETLKMq0Q0soyVxzwY6KX4zjCykg4lgJwbA4Tdad185odhZ+K1emQl7UsAeTfmeZ69gX7KeS4sE1V/2wu9Q+Eds2DzCm44mztpQhCfbj5V+Nf1Pb9+pqeWZSw/5i67rgMraVv0qGuhPa7yE9wBlq56vRz5h7sAAAAASUVORK5CYII=");
+    background-size: contain;
+    background-position: center 10px;
+    background-repeat: no-repeat; }
+
+.trumbowyg-orderedList-button {
+  overflow: hidden; }
+  .trumbowyg-orderedList-button:before {
+    content: '';
+    width: 16px;
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAA7VBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABuNtbbAAAATnRSTlMAAQIDBAUGBwkKCwwNDhESExQYHh8gISMqLC4vNDU4QUJDREVJTE1OUFZYX2JjaW10dXt/gIKFlJ6jsrm6vsXK0dPV3uDk5unt7/P19/uR/ZWbAAABEElEQVQ4y8XUy1bCQBAE0JqRRDAiYMT3MyqKGkV8o4IIKKjU/3+Oi8w2081Ga5XFzTlJ9fQAgIkiaFJ4IUOFC3tUQdOnDmJ91NZB2D0lxIGDlbv73JwCQOJgk57MAEtRSsZRQYT97KE5A9zyuGf8Z8xxd9zZVrgOSfJahEtjpskkqzzMjwGCNaBNloHEU88QAFD+5NAoZr37w+mKPGv7QL4vKw7FI3lpqnEROPG4L6ySF8ATG4CN8xPh3L3SkHpMtdC6Ru3fH56S20cLVL3rWnM/E0iF18ij/QlfxVkXWy1zw4955QUQa26KuSk5qkOxrrdv5Heg6uiM3BTRAoANckfcwl43ORyQixKsZx97Jblfvj6+ZcGgrJkAAAAASUVORK5CYII=");
+    background-size: contain;
+    background-position: center 10px;
+    background-repeat: no-repeat; }
+
+.trumbowyg-button-pane button:hover {
+  background: rgba(240, 240, 240, 0.5) !important; }
+
+.trumbowyg-button-pane {
+  background: White;
+  border: 1px Silver solid; }
+
+.trumbowyg-box {
+  border: none;
+  padding: 0;
+  margin: 0; }
+  .trumbowyg-box .trumbowyg-editor {
+    padding: 0px; }
+  .trumbowyg-box .trumbowyg-button-pane {
+    position: relative;
+    margin-top: -36px;
+    top: -10px; }
+    .trumbowyg-box .trumbowyg-button-pane button {
+      width: 30px; }
+
 .small-format-presentation .layout-template {
   width: 120px;
   height: 100px;
@@ -812,7 +881,7 @@ body.trumbowyg-body-fullscreen {
   opacity: 1;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  transition: right 0.5s ease-in-out, opacity 0.2s ease;
+  transition: right 600ms cubic-bezier(0.86, 0, 0.07, 1);
   z-index: 300; }
   #PXEdit-message:hover {
     opacity: 1; }
@@ -856,10 +925,6 @@ body.trumbowyg-body-fullscreen {
 
 .editableform .control-group, body {
   line-height: 1.2; }
-
-.trumbowyg-button-pane {
-  background: White;
-  border: 1px Silver solid; }
 
 #PXEdit {
   position: fixed;
@@ -1022,25 +1087,14 @@ body.trumbowyg-body-fullscreen {
     height: 60.8px;
     background: #eee; }
 
-.trumbowyg-box {
-  border: none;
-  padding: 0;
-  margin: 0; }
-  .trumbowyg-box .trumbowyg-editor {
-    padding: 0px; }
-  .trumbowyg-box .trumbowyg-button-pane {
-    position: relative;
-    margin-top: -36px;
-    top: -10px; }
-    .trumbowyg-box .trumbowyg-button-pane button {
-      width: 25px; }
-
 #pdf-visibile-editor {
   height: 448px;
   background: White;
   margin: 0 64px;
   position: relative;
   margin-right: 40px; }
+  #pdf-visibile-editor .row-editor[data-layout="layout-full"] {
+    margin-right: 24px; }
   #pdf-visibile-editor .widget-placeholder {
     background: rgba(240, 240, 240, 0.1);
     border: 1px #EEE dashed;
@@ -1059,12 +1113,15 @@ body.trumbowyg-body-fullscreen {
   #pdf-visibile-editor .editor-widget-editor .editable-container.editable-inline {
     position: absolute; }
   #pdf-visibile-editor .editor-widget-image {
-    overflow: hidden; }
+    overflow: hidden;
+    box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.75); }
     #pdf-visibile-editor .editor-widget-image[data-fid="0"] {
       background: url("placeholder.jpg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center; }
+      #pdf-visibile-editor .editor-widget-image[data-fid="0"] img {
+        display: none; }
     #pdf-visibile-editor .editor-widget-image img {
       height: 100%;
       width: 100%; }

@@ -18,10 +18,10 @@ $ = jQuery;
        cb: null,
        
        // Version
-       version: '0.1.3',
+       version: '0.1.4',
        
        // Version Date
-       version_date: '2017-01-10',
+       version_date: '2017-01-11',
        
         // Data
         data: null,
@@ -38,6 +38,7 @@ $ = jQuery;
         options: {
           'id': 0,
           'action': '',
+          'footnote': 1,
           'verlagsmodus': 1,
           'change_catgegory': 0,
           'message_on_setup': '',
@@ -92,8 +93,6 @@ $ = jQuery;
           var url = this.callback_url;
           send_data.hash = this.callback_id;
           
-          console.log(url);
-          
           $.ajax({
                 dataType: "json",
                 url: url,
@@ -120,20 +119,20 @@ $ = jQuery;
         resetEditor: function(){
           this.changed = false;
           
-          $('#PXEdit #PXEdit-change-input, #current-layout').hide();
-          $('#PXEdit #footnote').html('<div class="widget"></div>');  
+          $('#PXEdit-change-input, #layoutModal #current-layout').hide();
+          $('#PXEdit #footnote').html('<div class="widget"></div>').hide();  
           $('#PXEdit #pdf-visibile-editor').html('');
              
           this.setPreset('');
           
-          // Change layout
+          // Change layout - CTA
           if(this.options.change_layout === 1 || this.options.change_layout_via_menu === 1){
-            $('#PXEdit #PXEdit-change-input').show();
+            $('#PXEdit-change-input').show();
           }
           
           // Show input-changer 
          if(this.options.change_input === 1){
-            $('#PXEdit #current-layout').show();
+            $('#layoutModal #current-layout').show();
           }
         },
         
@@ -264,9 +263,12 @@ $ = jQuery;
               this.createMessage(this.options.message_on_setup);
             }
             
-            $('#PXEdit #footnote .widget').editable({
-               type: 'text',
-            });
+            if(this.options.footnote){
+              $('#PXEdit #footnote').show();  
+              $('#PXEdit #footnote .widget').editable({
+                type: 'text',
+              });
+            }
             
             this.setActiveLayout(data.layout);
             this.createWidgets(data.content);
@@ -347,10 +349,35 @@ $ = jQuery;
             var obj = this.inputs[key];
            
             if(obj.type === 'text'){
-                markup += '<div class="form-group"><label for="title">'+ obj.label +'</label><input class="form-control save-ables" data-key="'+ key +'" type="text" class="form-control" value="' + this.options[key]  +'" />';
+                markup += '<div class="form-group"><label for="title">'+ obj.label +'</label>\n\
+               <input class="form-control save-ables" data-key="'+ key +'" type="text" class="form-control" value="' + this.options[key]  +'" />';
                 
                 if(obj.desc !== ''){
                   markup += '<p class="help-block">Wird in der Auswahl der Dokumente als Titel verwendet.</p>';
+                }
+                
+                markup += '</div>';
+            }
+            
+             if(obj.type === 'select'){
+                markup += '<div class="form-group"><label for="title">'+ obj.label +'</label>\n\
+                <select class="form-control save-ables" data-key="'+ key +'" class="form-control" value="' + this.options[key]  +'">';
+                
+                for (var select_key in obj.options) {
+                  var label = obj.options[select_key];
+                   
+                  if(obj.value === select_key){
+                    markup += '<option value="'+ select_key + '" selected>'+ label +'</option>';
+                  }
+                  else {
+                    markup += '<option value="'+ select_key + '">'+ label +'</option>';
+                  } 
+                }
+                 
+                markup += '</select>';
+                
+                if(obj.desc !== ''){
+                  markup += '<p class="help-block">' + obj.desc + '</p>';
                 }
                 
                 markup += '</div>';
@@ -461,7 +488,7 @@ $ = jQuery;
                 widget_type = reference.options.sample_data[layout][x]['widget'];
               }
               
-              var new_data_item = {'widget': widget_type};
+              var new_data_item = {'widget': widget_type, 'id': (x + 1) };
               var result = reference.searchWidget(widget_type, data, x, true);
               
               if(result){
@@ -749,8 +776,7 @@ $ = jQuery;
     $.fn.editable.defaults.mode = "inline";
     $.fn.editable.defaults.onblur = "submit";
     $.fn.editable.defaults.emptytext = "";
-    
-    $.trumbowyg.svgPath = 'css/icons.svg';
+    $.trumbowyg.svgPath = false;
     
     // selfregister events & listeners
     jQuery(document).ready(function(){
