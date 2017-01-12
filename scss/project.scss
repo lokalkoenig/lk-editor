@@ -180,6 +180,7 @@ $editor_top: 73px;
       
       .settings-panel {
         pointer-events: none;
+        opacity: .8;
       }
     }
     
@@ -286,7 +287,7 @@ $editor_top: 73px;
         .settings-panel {
             position: absolute;
             top: 4px;
-            /* left: -5px; */
+            bottom: 0;
             width: 35px;
             z-index: 100;
             margin-left: -38px;
@@ -297,7 +298,13 @@ $editor_top: 73px;
                 overflow: hidden;
                 min-width: 32px;
                 transition: 0.2s min-width ease-in-out;
-                 
+                
+                &#PXEdit-document-remove {
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                }
+                
                 .label-in {
                     display:none;
                     margin-left: 5px;

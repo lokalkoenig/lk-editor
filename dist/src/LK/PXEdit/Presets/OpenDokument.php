@@ -34,7 +34,7 @@ class OpenDokument extends OnlineArgumentation {
           'desc' => 'Sie können das Dokument frei in die Kategorien einordnen.',
           'options' => [
             'print' => 'Print',
-            'online' => 'Ónline',
+            'online' => 'Online',
             'sonstiges' => 'Sonstiges',  
           ],
           'value' => $this -> category,

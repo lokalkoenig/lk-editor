@@ -15,7 +15,7 @@ $ = jQuery;
        current_layout: null,
        
        // callback
-       cb: null,
+       cb: function(){},
        
        // Version
        version: '0.1.4',
@@ -119,7 +119,7 @@ $ = jQuery;
         resetEditor: function(){
           this.changed = false;
           
-          $('#PXEdit-change-input, #layoutModal #current-layout').hide();
+          $('#PXEdit-change-input, #layoutModal #current-layout, #PXEdit-document-remove').hide();
           $('#PXEdit #footnote').html('<div class="widget"></div>').hide();  
           $('#PXEdit #pdf-visibile-editor').html('');
              
@@ -191,7 +191,11 @@ $ = jQuery;
             
           $('#PXEdit-document-save').click(function(){
             reference.saveDialoge();
-          })
+          });
+          
+          $('#PXEdit-document-remove').click(function(){
+            reference.removeDialoge();
+          });
             
           $('body').on('click', ".btn-pxedit-save", function(){
             reference.saveDialogeFeedback();
@@ -215,7 +219,7 @@ $ = jQuery;
                   reference.close();
               }
               else {
-                 $("#PXEdit").createMessage('Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?<br /></br ><button class="btn btn-danger" id="PXEdit-cancel">Änderungen verwerfen</button>');  
+                reference.createMessage('<p>Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?</p><hr /><p><button class="btn btn-danger" id="PXEdit-cancel">Änderungen verwerfen</button></p>');  
               }
             });
             
@@ -223,7 +227,10 @@ $ = jQuery;
               reference.close();
             });
             
-
+            $('body').on('click', ".btn-pxedit-remove", function(){
+              reference.removeDialogeSubmit();
+            });
+            
             // change layout
             $('#PXEdit-message').on("click", ".layout-template:not(.active)", function(){
                $('#PXEdit-message .layout-template.active').removeClass('active');
@@ -273,6 +280,10 @@ $ = jQuery;
             this.setActiveLayout(data.layout);
             this.createWidgets(data.content);
             
+            if(this.options.id){
+              $('#PXEdit-document-remove').show();
+            }
+            
             if(typeof data.sample === 'object' && !this.options.id){
                 this.setOptions({'sample_data' : data.sample});
                 this.showLayoutCallout();
@@ -282,7 +293,7 @@ $ = jQuery;
         saveAndClose: function(){
           var reference = this;
           var data = this.generateSave();
-          this.loading()
+          this.loading();
           $('#PXEdit-message').removeClass('open');
           
           data.action = 'save-document';
@@ -341,6 +352,28 @@ $ = jQuery;
         return save_data;    
         },
         
+        removeDialoge: function(){
+          if(this.options.id === 0){
+            return ;
+          }
+          
+          this.createMessage('<p><strong>Dokument löschen</strong></p><hr />Sind Sie sicher das sie das aktuelle Dokument verwerfen möchten?<p>\n\
+          <hr /><p><button class="btn btn-danger btn-pxedit-remove">Löschen bestätigen</button></p>');
+        },
+        
+        removeDialogeSubmit: function(){
+          this.createMessage('');
+          var reference = this;
+          
+          if(this.options.id){
+            this.performAjax({'action': 'remove-document', 'id': this.options.id}, function(data){
+              reference.destroy();
+              reference.cb();
+              reference.createMessage(data.message, 2500); 
+            });
+          }
+        },
+        
         saveDialoge: function(){
             
           var markup = '<div class="pxedit-save-container"><p><strong>Dokument speichern</strong></p><hr />';
@@ -366,7 +399,7 @@ $ = jQuery;
                 for (var select_key in obj.options) {
                   var label = obj.options[select_key];
                    
-                  if(obj.value === select_key){
+                  if(this.options[key] === select_key){
                     markup += '<option value="'+ select_key + '" selected>'+ label +'</option>';
                   }
                   else {
@@ -537,7 +570,7 @@ $ = jQuery;
          * @param {number} timeout
          */
         createMessage: function($message, timeout){
-           $("#PXEdit").createMessage($message, timeout);
+          $("#PXEdit").createMessage($message, timeout);
         },
         
         
@@ -729,11 +762,12 @@ $ = jQuery;
         
         close: function(){
           this.destroy();
-           $('#PXEdit').removeClass('open').fadeOut();
-           $('.layout-menu').removeClass('open');
+          $('.layout-menu').removeClass('open');
         },
         
-        destroy: function(){ },
+        destroy: function(){ 
+          $('#PXEdit').removeClass('open').fadeOut();
+        },
         
         /**
          * Loads a Document from a ressource
@@ -821,6 +855,12 @@ $ = jQuery;
      * @param {number} autoclose
      */
     $.fn.createMessage = function(message, autoclose){
+        
+        if(message === ''){
+          $('.layout-menu').removeClass('open');
+          return ;
+        }
+      
         $('.layout-menu').html('<span class="close">&times;</span>' + message);
         
         // when error-message is shown and Editor is closed

@@ -10,6 +10,9 @@
                     <button class="btn btn-primary btn-sm" title="Speichern Sie hier ihr Dokument" id="PXEdit-document-save">
                             <span class="glyphicon glyphicon-ok"></span><span class="label-in">Speichern</span>
                     </button>
+                    <button class="btn btn-danger btn-sm" title="Löschen Sie das Dokument" id="PXEdit-document-remove">
+                            <span class="glyphicon glyphicon-trash"></span><span class="label-in">Löschen</span>
+                    </button>
                 </div>    
             
 		<header>
@@ -35,6 +38,9 @@
 	</div>
     <div id="available-layouts" class="hidden"></div>
 </div>  
+<div id="PXEdit-backdrop"></div>   
+<div id="PXEdit-message" class="layout-menu well well-white"></div>
+<div id="PXEdit-message-bkdrp" class="layout-menu-backdrop"></div>
 
 <div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
         <div class="modal-dialog" role="document">
@@ -89,7 +95,3 @@
           </div>
         </div>
 </div>
-
-<div id="PXEdit-backdrop"></div>   
-<div id="PXEdit-message" class="layout-menu well well-white"></div>
-<div id="PXEdit-message-bkdrp" class="layout-menu-backdrop"></div>
