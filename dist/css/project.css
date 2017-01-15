@@ -1052,10 +1052,15 @@ a.editable-click.editable-disabled:hover {
   #PXEdit .pdf header {
     height: 100px;
     margin-bottom: 24px;
-    border-bottom: 1px Silver solid; }
+    border-bottom: 1px Silver solid;
+    overflow: hidden; }
     #PXEdit .pdf header .logo {
       margin-left: 64px;
-      padding-top: 20px; }
+      margin-top: 18px;
+      height: 65px; }
+      #PXEdit .pdf header .logo img {
+        height: 100%;
+        width: auto; }
     #PXEdit .pdf header .label-editor {
       position: absolute;
       top: 42px;
@@ -1392,6 +1397,6 @@ a.editable-click.editable-disabled:hover {
     height: 17px;
     display: block; }
     #footnote > div.editable-empty:after {
-      content: 'Fusszeile (optional)';
+      content: 'Fu\0000DFzeile (optional)';
       color: #888;
       cursor: pointer; }

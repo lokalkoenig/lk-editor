@@ -327,10 +327,17 @@ $editor_top: 73px;
 		height: $doc_header_height;
 		margin-bottom: $doc_30;
 		border-bottom: 1px Silver solid;
+                overflow: hidden;
                 
                 .logo {
                     margin-left: $doc_80;
-                    padding-top: 20px;
+                    margin-top: 18px;
+                    height: 65px;
+                    
+                    img {
+                      height: 100%;
+                      width: auto;
+                    }
                 }
                 
                 .label-editor {
@@ -910,7 +917,7 @@ table.table {
   
     &.editable-empty {
       &:after {
-        content: 'Fusszeile (optional)';
+        content: 'Fu\0000DFzeile (optional)';
         color: #888;
         cursor: pointer;
       }
