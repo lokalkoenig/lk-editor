@@ -379,9 +379,9 @@ $editor_top: 73px;
             padding-top: 15px;
             
             img {
-                height: auto;
-                margin-right: 5px;
-                width: 90px;
+              height: 30px;
+              margin-right: 5px;
+              width: auto;
             }
         }
         
@@ -394,7 +394,7 @@ $editor_top: 73px;
 		left: 0;
 		right: 0;
 		height: $doc_footer_height;
-		background: #eee;
+		background: #fff;
         }	
 }
 
@@ -550,6 +550,21 @@ $editor_top: 73px;
         font-size: $doc_p_size;
         margin-bottom: $doc_p_margin;
     } 
+    
+    ul, ol {
+      margin-left: 0px;
+      padding-left: 15px;
+    }
+    
+    ul li, 
+    ol li {
+      font-size: $doc_p_size;
+      margin-bottom: $doc_p_margin;
+      line-height: 1.4;
+      margin-left: 0px;
+      padding-left: 3px;
+    }
+    
 }
 
 #pdfdoc-alter-layout {
