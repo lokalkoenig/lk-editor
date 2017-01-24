@@ -47,13 +47,11 @@
           <div class="modal-content small-format-presentation">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Layout auswählen</h4>
+              <h4 class="modal-title">Layout und Inhalt auswählen</h4>
             </div>
             <div class="modal-body">
-                <p>Sie können andere Eingeformate für die Regionen das Layouts auswählen.</p>
-                
                 <div id="vkudoc-option-change-layout">
-                    <p><strong>Layout festlegen</strong></p>
+                    <p><strong>Layout auswählen</strong></p>
                     <div class="clearfix" id="change-layout">
                         <p>Bitte wählen Sie ein Layout für Ihr Dokument aus.</p>
                         <div id="pdfdoc-alter-layout"></div>
@@ -63,25 +61,25 @@
                 </div>
                
                 <div class="clearfix collapse in" id="current-layout">
+                    <p><strong>Inhalt auswählen</strong></p>
+                    <p>Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p> 
+                    
                     <div class="row">
-                        
                         <div class="col-xs-4">
-                             <p><label>Aktuelles Layout</label></p>
-                             
+                             <p><label>Bereiche</label></p>
                              <div id="pdf-current-layout"><!-- Current Layout --></div>
                         </div>
                         
                         <div class="col-xs-8 col-select">
                              <div class="form-group">
-                                <p><label for="choose-type">Eingabetyp ändern</label></p>
-                               
+                               <p><label for="choose-type">Inhaltsart auswählen</label></p>
                                <div class="btn-group" role="group">
-                                   <button data-widget="editor" class="btn btn-default">Editor</button>   
+                                   <button data-widget="editor" class="btn btn-default">Text</button>   
                                    <button data-widget="image" class="btn btn-default">Bild</button>   
                                    <button data-widget="table" class="btn btn-default">Tabelle</button>
                                 </div>
                                </div>
-                               <p class="small"><small>* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</small></p> 
+                               <p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p> 
                         </div>
                     </div>
                 </div>    

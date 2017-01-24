@@ -1,0 +1,243 @@
+
+
+.widget-table {
+  position: relative;    
+  
+  &:hover {
+    .glyphicon-cog {
+      color: #333;
+    }
+  }
+  
+  
+  &.widget-table-fixed {
+    .option2 {
+      display: none !important;
+    }
+          
+    .text {
+      display: none !important;
+    }
+  }
+        
+  .editable-container {
+    min-height: 0 !important;
+  }
+        
+  .glyphicon {
+      display: none;
+      position: absolute;
+      right: 1px;
+      width: 20px;
+      font-size: 10px;
+      border: 1px #CCC solid;
+      color: #CCC;
+      padding: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease-in;
+      top: 2px;
+
+      &:empty {
+       width: 20px;
+      }
+      
+      &:before {
+        position: relative;
+        left: -1px;
+      }
+      
+      &:hover {
+          color: #333;
+          border-color: #333; 
+      }
+   }
+        
+  .option, .option2 {
+    display: none;
+    position: absolute;
+  }
+        
+  .option-table {
+    width: 1px;
+    transition: width 0.2s ease-in;
+    overflow: hidden;
+    display: block;
+    z-index: 200;
+    position: absolute;
+    right: 22px;
+    height: 22px;
+    top: 0;
+    margin: 0;
+
+    li {
+      display: inline-block;
+      border: 1px Silver solid;
+      padding: 2px 4px !important;
+      font-size: 9px !important;
+      color: Silver;
+      background: White;
+      transition: color 0.2s ease-in;
+      cursor: pointer;
+      line-height: 16px !important;
+      border-right: 0;
+      
+      &:hover, 
+      &.active {
+        color: #333;
+      }
+    }
+  }
+       
+        
+        
+        .glyphicon-cog {
+            right: 0px;
+            display: inline-block;
+            left: auto;
+            top: 0px;
+            color: #EEE;
+            border-color: White;
+            z-index: 2;
+            
+            &:before {
+             position: relative;
+             top: .5px;
+             position: relative;
+           }
+        }
+        
+         &.widget-options {
+           .editor-empty {
+            display: block !important;
+            height: 25px !important;
+           }
+           
+           .glyphicon {
+            display: inline-block;
+           }
+            
+            .option-table {
+                visibility: visible;
+                width: 170px;
+                right: 20px;
+                z-index: 1;
+                text-align: right;
+            }
+            
+            .option2 {
+                display: block;
+                z-index: 200;
+                right: 0;
+                
+                .glyphicon {
+                    top: 0px;
+                }
+            }
+            
+            .option {
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                
+                .glyphicon-minus {
+                    display: inline-block;
+                    position: static;
+                }
+            }
+            
+            .glyphicon-cog {
+               color: Silver;
+               border-color: Silver; 
+            }
+            
+            table {
+                border-bottom: 1px #EEE solid;
+            }
+            
+            table + .glyphicon-plus {
+                top: auto;
+            }
+            
+            .PXEdit-table-col.glyphicon-minus {
+                right: auto;
+                left: 0px;
+                top: -20px;
+                background: white;
+            }
+         }
+        
+        
+        &:not(.widget-options){
+             div.text.editable-empty {
+              display: none !important;
+            } 
+        }
+        
+        div.text {
+          min-height: 20px;  
+            
+          &.editable-open {
+                display: block !important;
+                visibility: hidden;
+          }  
+        }
+        
+        
+        .table-edit {
+            display: block;
+            min-height: 15px;
+            cursor: text;
+        
+            &.editable-open {
+                display: block !important;
+                visibility: hidden;
+            }
+            
+            
+            
+        }
+        
+        .editable-buttons {
+            display: none;
+        }
+        
+        .editableform .control-group {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+        }
+        
+        .editable-inline {
+            textarea {
+                border: 0;
+                margin-top: 2.5px;
+                padding: 2.5px !important;
+                font-size: ($doc_p_size - 1px);
+                line-height: 1.2;
+                min-height: 20px;
+                height: 24px;
+                box-shadow: none;
+                resize: none;
+                position: absolute;
+                border: 1px Silver dotted;
+                width: 100%;
+                max-width: 96%;
+                background: rgba(255, 255, 255, 0.5);
+            }
+            
+            input {
+                border: 0;
+                padding: 0;
+                box-shadow: none;
+                font-size: $doc_h2_size;
+                margin-bottom: $doc_hx_margin;
+                margin-top: -5px;
+                width: 100%;           
+            }
+        }
+      
+  
+}

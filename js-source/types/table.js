@@ -92,7 +92,7 @@
                var data = {
                  'widget': 'table',
                  'tablepreset': $(this).find('table').attr('data-preset'),
-                 'title': $(this).find('div.text').html(),
+                 //'title': $(this).find('.editor-widget-editor .trumbowyg-editor').html(),
                  'rows': []
                };
                 
@@ -139,12 +139,12 @@
        }
        
        var tableFixed = $(this).hasClass('widget-table-fixed');
+       $(this).addClass('widget-table');
        
-       var markup = '<div><div class="text">'+ options.title +'</div><span class="glyphicon glyphicon-cog table-options"></span>';
+       var markup = '<div><span class="glyphicon glyphicon-cog table-options"></span>';
        
        // We limit the maximum length to 
        var length = Object.keys(options.rows[0]).length;
-       
        
        if(length < 4){
             markup += '<div class="option2"><span data-action="add-col" title="Spalte hinzufügen" class="PXEdit-table-add-col glyphicon glyphicon-plus"></span></div>';
@@ -183,11 +183,9 @@
        $(this).html(markup);   
        
        
-       $(this).find("div.text").each(function(){
-            $(this).editable({
-               type: 'editor',
-            });
-       });
+       //$(this).find("div.text").each(function(){
+          //$(this).createEditorWdiget({'id': options.id + "text", 'value': options.title, 'autogrow': true})  
+       //});
        
        // register 
        $(this).find(".table-edit").each(function(){

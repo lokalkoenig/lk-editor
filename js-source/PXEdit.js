@@ -38,6 +38,7 @@ $ = jQuery;
         options: {
           'id': 0,
           'action': '',
+          'page_title': '',
           'footnote': 1,
           'verlagsmodus': 1,
           'change_catgegory': 0,
@@ -60,7 +61,7 @@ $ = jQuery;
         
         // Formats
         formats: {
-            'editor': 'Editor', 
+            'editor': 'Text', 
             'image': 'Bild', 
             'table': 'Tabelle'
         },
@@ -173,7 +174,7 @@ $ = jQuery;
           var msg = '<p><strong>Wählen Sie ein Layout für das Dokument aus</strong></p>\n\
                     <p>Das Layout können Sie später jederzeit über <button class="btn btn-default btn-sm" style="pointer-events: none;"><span class="glyphicon glyphicon-cog"></span></button> Einstellungen verändern.</p>\n\
                     <hr /><div class="layouts small-format-presentation">'+ jQuery('#available-layouts').html() +'</div>\n\
-                    <hr /><button type="button" class="btn btn-default btn-close"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>';
+                    <hr /><button type="button" class="btn btn-success btn-close"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>';
           
           this.createMessage(msg);
           
@@ -319,7 +320,7 @@ $ = jQuery;
                 if(type == 'editor'){
                     data[x] = {
                       'widget': 'editor',
-                      'value': $(this).find('.editable').html()
+                      'value': $(this).find('.trumbowyg-editor').html()
                     };
                 }
                 
@@ -341,6 +342,7 @@ $ = jQuery;
               'category': this.options['category'],
               'layout': this.getActiveLayout(),
               'footnote': $('#footnote').text(),
+              'page_title': $('.row-editor h1.page-title').text(),
               'content': data,
               'preset': this.preset
             };
@@ -357,8 +359,8 @@ $ = jQuery;
             return ;
           }
           
-          this.createMessage('<p><strong>Dokument löschen</strong></p><hr />Sind Sie sicher das sie das aktuelle Dokument verwerfen möchten?<p>\n\
-          <hr /><p><button class="btn btn-danger btn-pxedit-remove">Löschen bestätigen</button></p>');
+          this.createMessage('<p><strong>Dokument löschen</strong></p><hr />Sind Sie sicher, dass Sie das aktuelle Dokument verwerfen möchten?<p>\n\
+          <hr /><p><button class="btn btn-danger btn-pxedit-remove">Löschen</button></p>');
         },
         
         removeDialogeSubmit: function(){
@@ -477,10 +479,12 @@ $ = jQuery;
             jQuery('#PXEdit #pdf-visibile-editor').html("<div class='row-editor'><div>");
             jQuery('#PXEdit .row-editor').attr("data-layout", this.getActiveLayout());
             jQuery('#PXEdit .row-editor').html(this.getMockup());
-            
+              
             var reference = this;
             this.data = data;
-           
+            
+            $('#PXEdit h1.page-title').createPageTitleWidget({'value': this.options.page_title});
+            
             var x = 0;
             jQuery('.row-editor .widget').each(function(){
                if(typeof data[x] === "undefined"){
@@ -888,6 +892,5 @@ $ = jQuery;
  * @returns {PDFForm}
  */
 function PXEdit(){
-  
   return PDFForm;  
 }

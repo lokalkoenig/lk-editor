@@ -56,7 +56,7 @@
         }
         
         // init element
-        $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswaehlen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
+        $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
         var image_reference = $('#widget_image_' + options.id);
         $(this).children('div').data('versions', options.versions);
         

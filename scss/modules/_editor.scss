@@ -155,9 +155,7 @@
   .trumbowyg-disabled .trumbowyg-button-pane button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
     opacity: 0.2;
     cursor: default; }
-  .trumbowyg-button-pane.trumbowyg-disable .trumbowyg-button-group::before,
-  .trumbowyg-disabled .trumbowyg-button-pane .trumbowyg-button-group::before {
-    background: #e3e9eb; }
+
   .trumbowyg-button-pane button:not(.trumbowyg-disable):hover,
   .trumbowyg-button-pane button:not(.trumbowyg-disable):focus,
   .trumbowyg-button-pane button.trumbowyg-active {
@@ -191,8 +189,7 @@
     border-top: none;
     background: #FFF;
     margin-left: -6px;
-    /* box-shadow: rgba(0, 0, 0, 0.1) 0 2px 3px; */
-    margin-top: -8px;
+    margin-top: -41px;
 }
   .trumbowyg-dropdown button {
     display: block;

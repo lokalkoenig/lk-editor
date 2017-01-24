@@ -11,7 +11,7 @@ use LK\PXEdit\Preset;
 class OnlineArgumentation extends Preset {
     //put your code here
     
-    var $category = 'print';
+    var $category = 'online';
     var $title = 'Onlineargumentation';
     
     function getDefaultValues(){
@@ -27,7 +27,7 @@ class OnlineArgumentation extends Preset {
                 ]
         ];
         
-        $text_value = '<h1>'. $this -> title .'</h1><h2>Subtitel</h2><p>Text</p>';
+        $text_value = '<h2>Subtitel</h2><p>Text</p>';
         
         $value = new \stdClass();
         $value -> layout = 'layout-50-50-right';

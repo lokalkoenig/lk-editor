@@ -1,0 +1,54 @@
+
+// PDF Typo
+#PXEdit .pdf {
+  line-height: 1;  
+  font-size: $doc_p_size;
+     
+  h1 {
+    margin: 0;
+    font-size: $doc_h1_size;
+    margin-bottom: $doc_hx_margin;
+    font-weight: bold;
+    
+    &.page-title {
+      margin-bottom: $doc_hx_margin + $doc_hx_margin / 2;
+    }
+    
+    strong, span {
+      font-weight: bold !important;
+    }
+  }
+    
+  h2 {
+    margin: 0;
+    font-size: $doc_h2_size;
+    margin-bottom: $doc_hx_margin;
+    font-weight: norma !important;
+    
+    strong, span {
+      font-weight: normal !important;
+    }
+  }
+    
+  p, 
+  ul, 
+  ol {
+    margin: 0;
+    font-size: $doc_p_size;
+        margin-bottom: $doc_p_margin;
+        line-height: 1;
+    } 
+    
+  ul, ol {
+    margin-left: 0px;
+    padding-left: 15px;
+    
+    li {
+      font-size: $doc_p_size;
+      margin-bottom: $doc_p_margin / 2;
+      line-height: 1;
+      margin-left: 0px;
+      padding-left: 3px;
+    }
+  }   
+}

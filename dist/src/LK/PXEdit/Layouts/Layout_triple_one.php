@@ -15,7 +15,8 @@ class Layout_triple_one extends Doctype {
     var $field_instances = 2;
     
     function getMockup(){
-      return '<div class="float-3 float-col" data-height="100">
+      return '<h1 class="page-title"></h1> 
+              <div class="float-3 float-col" data-height="100">
                    <div class="float-100 widget" data-height="50" data-width="33" data-index="1" data-widget=""></div>   
                    <div class="float-100 widget" data-height="50" data-width="33" data-index="2" data-widget=""></div>   
                </div>

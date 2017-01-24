@@ -15,6 +15,7 @@ class Layout_full extends Doctype {
     var $field_instances = 1;
     
     function getMockup(){
-      return '<div class="float-100 widget" data-height="100" data-width="100" data-index="1" data-widget=""></div>';  
+      return '<h1 class="page-title"></h1>'
+      . '<div class="float-100 widget" data-height="100" data-width="100" data-index="1" data-widget=""></div>';  
     }
 }

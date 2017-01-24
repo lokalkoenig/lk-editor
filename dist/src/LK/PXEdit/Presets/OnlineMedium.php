@@ -37,7 +37,7 @@ class OnlineMedium extends Preset {
         $value -> content[] = [
             'id' => 2,
             'widget' => 'editor',
-            'value' => '<h1>Medientitel</h1><h2>Formate</h2><p>Beschreibung</p>'
+            'value' => '<h2>Formate</h2><p>Beschreibung</p>'
         ];
         
     return $value;    

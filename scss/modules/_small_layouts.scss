@@ -1,36 +1,40 @@
 .small-format-presentation .layout-template {
-    width: 120px;
-    height: 100px;
+  
+  h1 {
+    display: none;
+  }
+  
+  width: 120px;
+  height: 100px;
+  float: left;
+  margin-right: 10px;
+  border: 1px Silver solid;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  .widget {
+    margin: 5px;
+    margin-right: 0;
+    background: #EEE; 
+    height: 90px;
     float: left;
-    margin-right: 10px;
-    border: 1px Silver solid;
-    cursor: pointer;
-    margin-bottom: 10px;
-    
-    .widget {
-        margin: 5px;
-        margin-right: 0;
-        background: #EEE; 
-        height: 90px;
-        float: left;
-        transition: 0.2s background ease;
-        width: 110px;
-        
-        &.selected {
-            background: #428bca;
-        }
-        
-        &.changed {
-            background: lightsalmon;
-        }
-        
-    }    
-    
-    &.layout-50-50 {
-        .widget {
-           width: 52px;
-        }
+    transition: 0.2s background ease;
+    width: 110px;
+
+    &.selected {
+        background: #428bca;
     }
+
+    &.changed {
+        background: lightsalmon;
+    }
+  }    
+    
+  &.layout-50-50 {
+    .widget {
+       width: 52px;
+    }
+  }
     
     .float-2 {
       width: 52px;

@@ -31,6 +31,7 @@ gulp.task('scripts-editor-pack', function() {
                    "js-source/types/editor.js",
                    "js-source/types/image.js",
                    "js-source/types/cell.js",
+                   "js-source/types/pagetitle.js",
                    "js-source/types/table.js",
                    "js-source/types/online_medium_chooser.js",
                    "js-source/PXEdit.js"

@@ -16,7 +16,7 @@ class OpenDokument extends OnlineArgumentation {
         $value -> content[] = [
             'id' => 1,
             'widget' => 'editor',
-            'value' => '<h1>Freies Dokument</h1><h2>Überschrift</h2><p>Sie können das Format frei auswählen.</p>'
+            'value' => '<h2>Überschrift</h2><p>Sie können das Format frei auswählen.</p>'
         ];
          
     return $value;    

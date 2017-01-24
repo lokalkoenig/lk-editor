@@ -15,8 +15,8 @@ class Layout_preistable_two extends Doctype {
     var $field_instances = 3;
     
     function getMockup(){
-      return '<div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
-        
+      return '<h1 class="page-title"></h1> 
+              <div class="float-100 widget widget-flexibile" data-height="50" data-width="50" data-index="1" data-widget="editor"></div>
               <div class="float-2 float-col" data-height="50">
                    <div class="float-100 widget widget-table-fixed" data-height="50" data-width="50" data-index="2" data-widget="table"></div>   
                </div>

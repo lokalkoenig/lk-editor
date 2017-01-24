@@ -16,7 +16,8 @@ class Layout_50_50_double extends Doctype {
     
     function getMockup(){
         
-      return '<div class="float-2 float-col" data-height="100">
+      return '<h1 class="page-title"></h1>
+              <div class="float-2 float-col" data-height="100">
                    <div class="float-100 widget" data-height="50" data-width="50" data-index="1" data-widget=""></div>   
                    <div class="float-100 widget" data-height="50" data-width="50" data-index="2" data-widget=""></div>   
                </div>

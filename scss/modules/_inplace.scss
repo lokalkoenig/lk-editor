@@ -234,8 +234,10 @@ a.editable-click.editable-disabled:hover {
 }
 
 .trumbowyg-Format-button {
-  width: 80px !important;
+  width: 90px !important;
   text-align: left !important;
+  text-indent: 5px;
+  background: #fff !important;
 }
 
 .trumbowyg-unorderedList-button  {
@@ -245,6 +247,7 @@ a.editable-click.editable-disabled:hover {
     content: '';
     width: 16px;
     display: block;
+    margin-left: 6px;
     height: 36px;
     line-height: 36px;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAk1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6eSN1AAAAMHRSTlMAAQIFBgcICQoiIyQmJygrLjk8PUBBQkVGSk1OT1FUVlyqq77AyszOz9PV2tzx8/2dc+tPAAAAuUlEQVQ4y+2Ttw7CQBBE3xkwOedokzM3//91FBi6s69AQiBes1OMtNLuDHwDQXy8LisevrUkaQgUF5GTFrEkSTaEhdxYTonqQJRiFLdETLKMq0Q0soyVxzwY6KX4zjCykg4lgJwbA4Tdad185odhZ+K1emQl7UsAeTfmeZ69gX7KeS4sE1V/2wu9Q+Eds2DzCm44mztpQhCfbj5V+Nf1Pb9+pqeWZSw/5i67rgMraVv0qGuhPa7yE9wBlq56vRz5h7sAAAAASUVORK5CYII=");
@@ -260,6 +263,7 @@ a.editable-click.editable-disabled:hover {
   &:before {
     content: '';
     width: 16px;
+    margin-left: 5px;    
     display: block;
     height: 36px;
     line-height: 36px;
@@ -267,6 +271,8 @@ a.editable-click.editable-disabled:hover {
     background-size: contain;
     background-position: center 10px;
     background-repeat: no-repeat;
+    top: -2px;
+    position: relative;
   }  
 }
 
@@ -277,8 +283,8 @@ a.editable-click.editable-disabled:hover {
 }
 
 .trumbowyg-button-pane {
-	background: White;
-	border: 1px Silver solid;
+  background: White;
+  border: 1px Silver solid;
 }
 
 .trumbowyg-box {
@@ -291,12 +297,59 @@ a.editable-click.editable-disabled:hover {
     }
     
     .trumbowyg-button-pane {
-        position: relative;
-    	margin-top: -36px;
-    	top: -10px;
+        position: fixed;
+        margin-top: 0;
+        width: auto;
+        transition: all 0.2s ease-in-out;
+        
+        &:after {
+          display: none;
+        }
         
         button {
-            width: 30px;
+            width: 36px;
+            background: White;
+            
+            &.trumbowyg-active {
+              background: rgb(245, 245, 245);
+            }
         }
     }    
 }
+
+  .trumbowyg-box {
+    .trumbowyg-button-pane {
+      
+      .trumbowyg-unorderedList-button,
+      .trumbowyg-orderedList-button {
+        width: 44px;
+      }
+      
+      margin-left: -5px;
+      z-index: -1;
+      opacity: 0;
+      padding-bottom: 20px;
+      transition: opacity 0.2s ease;
+      background: transparent;
+      border: 0;
+      pointer-events: none;
+      
+      .trumbowyg-button-group {
+        background: white;
+        pointer-events: all;
+        border: 1px #eee solid;
+        
+        &:before {
+          display: none !important;
+        }
+      }
+    }
+    
+    &:hover {
+      .trumbowyg-button-pane {
+        z-index: 100;
+        opacity: 1;
+        margin-top: -45px;
+      }
+    }
+  }

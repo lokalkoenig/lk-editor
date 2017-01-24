@@ -7,7 +7,7 @@ class Preisliste extends Preset {
     //put your code here
     
     var $category = 'sonstiges';
-    var $title = 'Preisliste';
+    var $title = 'Preiskalkulation';
     
     function getDefaultValues(){
       
@@ -28,14 +28,14 @@ class Preisliste extends Preset {
         
         $value = new \stdClass();
         $value -> layout = 'layout-preistable_three';
-        $value -> title = 'Preisliste';
+        $value -> title = 'Preiskalkulation';
         $value -> active = 0;
         
         $value -> content = array();
         $value -> content[] = [
             'id' => 1,
             'widget' => 'editor',
-            'value' => '<h1>Preisliste</h1><p>Erklärung zur Preisliste</p>',
+            'value' => '<p>Erklärung zur Preiskalkulation</p>',
         ];
         
         $value -> content[] = [

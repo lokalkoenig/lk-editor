@@ -41,6 +41,7 @@ $(function(){
         
         activate: function() {
             $.fn.editabletypes.text.prototype.activate.call(this);
+            this.$input.height(this.$input.closest('td').height() + 4);
         },
         
         
