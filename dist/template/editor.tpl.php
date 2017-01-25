@@ -1,4 +1,4 @@
-<div id="PXEdit" data-callback="<?php print $callback; ?>" data-callback-id="<?php print $pxeditid; ?>">
+<div id="PXEdit" class="pxedit" data-callback="<?php print $callback; ?>" data-callback-id="<?php print $pxeditid; ?>">
             <div class="container pdf">
                 <div class="settings-panel">
                     <button class="btn btn-default btn-sm" title="Schliessen" id="document-reset">
@@ -13,34 +13,47 @@
                     <button class="btn btn-danger btn-sm" title="Löschen Sie das Dokument" id="PXEdit-document-remove">
                             <span class="glyphicon glyphicon-trash"></span><span class="label-in">Löschen</span>
                     </button>
-                </div>    
-            
+                </div>
+
 		<header>
 			<span class="label label-primary pull-right label-editor">PDF-Editor</span>
                         <div class="logo">
                             <img src="<?php print $header_logo; ?>" />
-                        </div>    
+                        </div>
           	</header>
-            
+
                 <div id="pdf-visibile-editor"></div>
                 <div id="footnote" title="">
-                  
+
                 </div>
                 <footer>
                         <div class="float-xs-8">
                             <div class="footer-logos">
                                 <?php foreach($footer_logos as $logo): ?>
-                                  <img src="<?php print $logo; ?>" />  
+                                  <img src="<?= $logo; ?>" />
                                 <?php endforeach; ?>
-                            </div> 
+                            </div>
                         </div>
                 </footer>
 	</div>
+
+    <div id="available-inputs" class="hidden">
+      <div class="form-group">
+        <p><label for="choose-type" style="margin-bottom: 0;">Inhaltsart</label></p>
+        <button data-widget="editor" class="btn btn-block btn-default">Text</button>
+        <button data-widget="image" class="btn btn-block btn-default">Bild</button>
+        <button data-widget="table" class="btn btn-block btn-default">Tabelle</button>
+       </div>
+    </div>
+
     <div id="available-layouts" class="hidden"></div>
-</div>  
-<div id="PXEdit-backdrop"></div>   
+    <div id="available-new-layout" class="hidden"></div>
+</div>
+<div id="PXEdit-backdrop"></div>
 <div id="PXEdit-message" class="layout-menu well well-white"></div>
 <div id="PXEdit-message-bkdrp" class="layout-menu-backdrop"></div>
+
+
 
 <div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
         <div class="modal-dialog" role="document">
@@ -56,35 +69,35 @@
                         <p>Bitte wählen Sie ein Layout für Ihr Dokument aus.</p>
                         <div id="pdfdoc-alter-layout"></div>
                     </div>
-                    
+
                     <hr />
                 </div>
-               
+
                 <div class="clearfix collapse in" id="current-layout">
                     <p><strong>Inhalt auswählen</strong></p>
-                    <p>Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p> 
-                    
+                    <p>Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>
+
                     <div class="row">
                         <div class="col-xs-4">
                              <p><label>Bereiche</label></p>
                              <div id="pdf-current-layout"><!-- Current Layout --></div>
                         </div>
-                        
+
                         <div class="col-xs-8 col-select">
                              <div class="form-group">
                                <p><label for="choose-type">Inhaltsart auswählen</label></p>
                                <div class="btn-group" role="group">
-                                   <button data-widget="editor" class="btn btn-default">Text</button>   
-                                   <button data-widget="image" class="btn btn-default">Bild</button>   
+                                   <button data-widget="editor" class="btn btn-default">Text</button>
+                                   <button data-widget="image" class="btn btn-default">Bild</button>
                                    <button data-widget="table" class="btn btn-default">Tabelle</button>
                                 </div>
                                </div>
-                               <p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p> 
+                               <p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p>
                         </div>
                     </div>
-                </div>    
-                
-                
+                </div>
+
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>

@@ -1,0 +1,31 @@
+
+.pxedit #footnote {
+  top: -18px;
+  position: relative;
+  font-size: ($doc-p-size - 2px);
+  color: #888;
+  margin: 0 ($doc-80);
+  text-align: right;
+  z-index: 100;
+
+  input {
+    background: transparent;
+    display: block;
+    border: 0;
+    font-size: ($doc-p-size - 2px);
+    color: #888;
+    width: 100%;
+    text-align: right;
+    padding: 0;
+    top: -1px;
+    position: relative;
+    box-shadow: none;
+    padding-right: 0 !important;
+    outline: none;
+  }
+
+  >div {
+    height: 17px;
+    display: block;
+  }
+}

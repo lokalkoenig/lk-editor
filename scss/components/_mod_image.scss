@@ -1,0 +1,72 @@
+// Editor-widget
+.pxedit .editor-widget-image {
+  cursor: pointer;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 3 -1px rgba(0, 0, 0, .75);
+
+  &[data-fid="0"] {
+    background: url('placeholder.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    img {
+      display: none;
+    }
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+
+  .progress {
+    position: absolute;
+    top: 0;
+    height: 5px;
+    border-radius: 0;
+    width: 100%;
+    display: none;
+  }
+
+  &.in-progress {
+    .progress {
+      display: block;
+    }
+
+    img {
+      opacity: .2;
+    }
+  }
+
+  .btn {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    opacity: 0;
+    transition: bottom .4s ease;
+  }
+
+  &:hover {
+    .btn {
+      opacity: 1;
+      bottom: 0;
+    }
+  }
+
+  .fileinput-button {
+    overflow: hidden;
+ 
+    input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      opacity: 0;
+      font-size: 200px !important;
+      direction: ltr;
+      cursor: pointer;
+    }
+  }
+}

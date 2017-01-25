@@ -1,0 +1,16 @@
+
+// placeholder
+.pxedit .widget-placeholder {
+  background: rgba(240, 240, 240, .1);
+  border: 1px #eee dashed;
+  position: relative;
+
+  &::before {
+    content: 'Platzhalter';
+    text-transform: uppercase;
+    font-size: 9px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}

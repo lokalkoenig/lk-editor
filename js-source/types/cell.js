@@ -18,7 +18,7 @@ $(function(){
 **/
 (function ($) {
     "use strict";
-    
+
     var Cell = function (options) {
         this.init('cell', options, Cell.defaults);
     };
@@ -29,8 +29,8 @@ $(function(){
         render: function () {
             this.setClass();
             this.setAttr('placeholder');
-            this.setAttr('rows');                        
-            
+            this.setAttr('rows');
+
             //ctrl + enter
             this.$input.keydown(function (e) {
                 if (e.ctrlKey && e.which === 13) {
@@ -38,17 +38,17 @@ $(function(){
                 }
             });
         },
-        
+
         activate: function() {
             $.fn.editabletypes.text.prototype.activate.call(this);
             this.$input.height(this.$input.closest('td').height() + 4);
         },
-        
-        
-        input2value: function() { 
+
+
+        input2value: function() {
             PDFForm.setChanged();
             return this.$input.val();
-        } 
+        }
     });
 
     Cell.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
@@ -76,8 +76,8 @@ $(function(){
         @property rows
         @type integer
         @default 7
-        **/        
-        rows: 7        
+        **/
+        rows: 7
     });
 
     $.fn.editabletypes.cell = Cell;
