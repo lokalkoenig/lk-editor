@@ -35,18 +35,18 @@ gulp.task('css-minfy', function() {
 gulp.task('scripts-editor-pack', function() {
   return gulp.src([
                    'js-source/bootstrap-editable.js',
-                   "js-source/types/editor.js",
                    "js-source/types/image.js",
                    "js-source/types/cell.js",
                    "js-source/types/footnote.js",
+                   "js-source/types/table-edit.js",
                    "js-source/types/pagetitle.js",
-                   "js-source/types/table.js",
                    "js-source/types/online_medium_chooser.js",
-                   "js-source/PXEdit.js"
+                   "js-source/PXEdit.js",
+                   "js-source/types/editor.js",
                  ])
     .pipe(concat('PXEdit-packed.js'))
-    .pipe(strip())
-    .pipe(minify())
+    //.pipe(strip())
+    //.pipe(minify())
     .pipe(gulp.dest('./dist/js/'));
 });
 
@@ -70,7 +70,7 @@ gulp.task('scripts-trumbowyg-pack', function() {
                  ])
     .pipe(concat('trumbowyg.js'))
     .pipe(strip())
-    .pipe(minify())
+    //.pipe(minify())
     .pipe(gulp.dest('./dist/js/'));
 });
 

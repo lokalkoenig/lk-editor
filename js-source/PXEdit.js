@@ -485,7 +485,7 @@ $ = jQuery;
           if(this.options.id){
             this.performAjax({'action': 'remove-document', 'id': this.options.id}, function(data){
               reference.destroy();
-              reference.cb();
+              reference.cb(data);
               reference.createMessage(data.message, 2500);
             });
           }
