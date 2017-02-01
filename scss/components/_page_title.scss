@@ -2,7 +2,6 @@
 .pxedit h1.page-title {
   margin-right: $doc-content-spacing;
   height: 24px;
-  overflow: hidden;
   position: relative;
 
   input {
@@ -10,6 +9,7 @@
     padding: 0;
     margin: 0;
     font-size: $doc_h1_size;
+    color: $editor-color;
     font-weight: bold;
     box-shadow: none;
     border: 0;

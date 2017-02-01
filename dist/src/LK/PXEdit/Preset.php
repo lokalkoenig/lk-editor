@@ -65,7 +65,7 @@ abstract class Preset {
 
      $inputs['status'] = [
           'type' => 'checkbox',
-          'label' => 'Dokument für Mitarbeiter veröffentlichen.',
+          'label' => 'Dokument für Mitarbeiter aktivieren.',
           'desc' => '',
           'value' => 0,
           'required' => 0
@@ -96,6 +96,7 @@ abstract class Preset {
             'change_input' => 1,
             'change_category' => 0,
             'message_on_setup' => '',
+            'title_edit' => true,
             'footnote' => 1,
         ];
 

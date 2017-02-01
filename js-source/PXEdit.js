@@ -194,9 +194,9 @@ $ = jQuery;
             <div class="row">\n\
             <div class="col-xs-6"><p style="margin-bottom: 0"><label>Bereiche *</label></p>\n\
             <div id="pdf-current-layout"><!-- Current Layout --></div>\n\
-            </div><div class="col-xs-6 col-select"></div></div></div></div>';
+            </div><div class="col-xs-6 col-select"></div></div>';
 
-          msg += '<hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
+          msg += '<p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
 
           this.createMessage(msg);
           var current = this.getActiveLayout();
@@ -206,7 +206,7 @@ $ = jQuery;
 
         showLayoutChooser_select_layout: function(layout){
 
-          var current = this.getActiveLayout();
+          var current_layout = this.getActiveLayout();
 
           $('#PXEdit-message .layouts .layout-template.active').removeClass('active');
           $('#PXEdit-message .layouts .layout-template[data-id="'+ layout +'"]').addClass('active');
@@ -214,6 +214,7 @@ $ = jQuery;
           $('#pdf-current-layout .layout-template').addClass('active');
 
           var data = this.data;
+          var sample = this.options.sample_data;
           var reference = this;
 
           $('#pdf-current-layout .widget').each(function(){
@@ -221,7 +222,8 @@ $ = jQuery;
             $(this).attr("data-change-widget", "");
 
             if(typeof data[index] === "undefined"){
-              $(this).attr("data-widget", "").html("<span class='label label-primary'>???</span>");
+              var widget = sample[layout][index].widget;
+              $(this).attr("data-widget", widget).html("<span class='label label-primary'>"+ widget +"</span>");
             }
             else {
               $(this).attr("data-widget", data[index].widget);
@@ -244,6 +246,10 @@ $ = jQuery;
             $(".col-select button[data-widget='"+ widget_changed +"']").addClass('active');
             $(".col-select").show();
 
+            if($('#pdf-current-layout .widget.changed').length || current_layout !== layout){
+              $('.btn-change-layout').removeAttr('disabled');
+            }
+            
             event.preventDefault();
           });
 
@@ -265,34 +271,21 @@ $ = jQuery;
                 $(element).attr("data-change-widget", selected).addClass('changed');
               }
 
-              if($('#pdf-current-layout .widget.changed').length || current !== layout){
+              if($('#pdf-current-layout .widget.changed').length || current_layout !== layout){
                 $('.btn-change-layout').removeAttr('disabled');
               }
           });
 
+          // CTA
           $('.btn-change-layout').click(function(event){
             event.stopImmediatePropagation();
-            $('#available-new-layout').html($('#pdf-current-layout .layout-template').html());
+            //$('#available-new-layout').html($('#pdf-current-layout .layout-template').html());
             $('#PXEdit-message').removeClass('open');
-
-            setTimeout(function(){
-              var msg = '<p><strong>Hinweis</strong></p>\n\
-                      <hr /><p>Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p>\n\
-                      <button type="button" class="btn btn-success btn-close"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>';
-              reference.createMessage(msg);
-            }, 1000);
+            reference.saveLayoutChanges($('#pdf-current-layout .layout-template'));
           });
 
           $('#pdf-current-layout .widget').first().click();
         },
-
-        transformWidgets: function(){
-          //reference.saveLayoutChanges($('#available-new-layout'));
-        },
-
-
-
-
         /**
          * Adds the necessary listeners
          * to the editor
@@ -344,7 +337,6 @@ $ = jQuery;
 
             // change layout
             $('#PXEdit-message').on("click", ".layout-template:not(.active)", function(){
-
               if($('.pxedit-layout-changer').length === 0){
                 $('#PXEdit-message .layout-template.active').removeClass('active');
                 $(this).addClass('active');
@@ -598,8 +590,14 @@ $ = jQuery;
             var reference = this;
             this.data = data;
 
-            $('#PXEdit h1.page-title').createPageTitleWidget({'value': this.options.page_title});
-
+            // Can be disabled by preset
+            if(this.options.title_edit){
+              $('#PXEdit h1.page-title').createPageTitleWidget({'value': this.options.page_title});
+            }
+            else {
+              $('#PXEdit h1.page-title').text(this.options.page_title);
+            }
+            
             var x = 0;
             jQuery('.row-editor .widget').each(function(){
                if(typeof data[x] === "undefined"){

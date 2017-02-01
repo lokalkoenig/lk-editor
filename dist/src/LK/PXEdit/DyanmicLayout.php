@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace LK\PXEdit;
 
 /**
@@ -19,20 +12,44 @@ class DyanmicLayout {
     var $verlag = 0;
     
     var $image_presets = [
-        'w100xh100' => ['width' => 2310, 'height' => 1272, 'title' => '2310px (Breite) × 1272px (Höhe)'],
-        'w50xh50' => ['width' => 1080, 'height' => 600, 'title' => '1080px (Breite) × 600px (Höhe)'],
-        'w50xh100' => ['width' => 1080, 'height' => 1272, 'title' => '1080px (Breite) × 1272px (Höhe)'],
-        'w33xh50' => ['width' => 762, 'height' => 600, 'title' => '762px (Breite) × 600px (Höhe)'], 
+        'w100xh100' => ['width' => 770 * 3, 'height' => 368 * 3],
+        'w50xh50' => ['width' => 372 * 3, 'height' => 172 * 3],
+        'w50xh100' => ['width' => 400 * 3, 'height' => 368 * 3],
+        'w33xh50' => ['width' => 240 * 3, 'height' => 172 * 3],
+    ];
+
+    var $presets = [
+        'OnlineArgumentation' => '\\LK\PXEdit\\Presets\\OnlineArgumentation',
+        'OnlineMedium' => '\\LK\PXEdit\\Presets\\OnlineMedium',
+        'OnlineMediumCollection' => '\\LK\PXEdit\\Presets\\OnlineMediumCollection',
+        'OpenDokument' => '\\LK\PXEdit\\Presets\\OpenDokument',
+        'Preisliste' => '\\LK\PXEdit\\Presets\\Preisliste',
+        'RegionalArgumentation' => '\\LK\PXEdit\\Presets\\RegionalArgumentation',
     ];
     
     function __construct($verlagsmodus = 0){ 
       $this -> verlag = $verlagsmodus;
+      
+      while(list($key, $val) = each($this -> image_presets)){
+        $this -> image_presets[$key]['title'] = $val['width'] .'px (Breite) × '. $val['height'] .'px (Höhe)';
+      }
     }
     
     function getImagePresets(){
         return $this -> image_presets;
     }
     
+    /**
+     * Adds a Preset
+     * Can also overwrite Presets
+     * 
+     * @param string $key
+     * @param string $classpath
+     */
+    function addPreset($key, $classpath){
+      $this -> presets[$key] = $classpath;
+    }
+
     /**
      * Gets the Image-styles for the Frontend
      * 
@@ -62,17 +79,9 @@ class DyanmicLayout {
      * @return \LK\PXEdit\Preset
      */
     function loadPreset($preset_id){
-        
-        $preset_class_name = "\\LK\PXEdit\\Presets\\" . $preset_id;
-        
-        // Force an Autoload
-        \PXEdit_Autoload($preset_class_name);
-        
-        if(!class_exists($preset_class_name)){
-            $this ->sendError('Preset ' . $preset_class_name . " is not existing.");
-        }
-        
-        $preset = new $preset_class_name($this);   
+      
+      $preset_class_name = $this->presets[$preset_id];
+      $preset = new $preset_class_name($this);   
     
     return $preset;    
     }

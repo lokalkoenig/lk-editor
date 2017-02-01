@@ -27,7 +27,7 @@
         }
 
         $(this).html('<div id="'+ element_id +'" class="'+  element_class +'"><textarea>'+ options.value +'</textarea></div>');
-
+        
         var reference = this;
         $.trumbowyg.btnsGrps = {
                 //formatting: ['strong', 'em', 'underline', 'strikethrough'],
@@ -50,7 +50,7 @@
                btnsDef: {
                   // Customizables dropdowns
                   Format: {
-                      dropdown: ['h1','h2'],
+                      dropdown: ['p','h1','h2'],
                       ico: 'formatting' // Apply formatting icon
                   }
               },
@@ -67,7 +67,6 @@
             }).on('tbwinit', function(){
 
               var content = $(reference).find('.trumbowyg-editor').text();
-
               if(content === ''){
                 $(reference).addClass('editor-empty');
               }
@@ -77,6 +76,10 @@
 
             }).on('tbwchange', function(){
                 var content = $(reference).find('.trumbowyg-editor').text();
+          
+                setTimeout(function(){
+                  editor_widget_check_length(reference);
+                }, 200);
 
                 if(content === ''){
                   $(reference).addClass('editor-empty');
@@ -92,5 +95,21 @@
               $(reference).removeClass('widget-active');
             });
    };
+
+  function editor_widget_check_length(reference){
+    var height = $(reference).outerHeight(true) + 5;
+    console.log(height);
+    var content_height = 0;
+
+    $(reference).find('.trumbowyg-editor > *').each(function(){
+      content_height += $(this).outerHeight(true);
+      if(content_height > height){
+        $(this).addClass('to-long');
+      }
+      else {
+        $(this).removeClass('to-long');
+      }
+    });
+  }
 
 }(window.jQuery));

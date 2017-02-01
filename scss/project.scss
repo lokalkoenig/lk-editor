@@ -326,11 +326,10 @@ a.editable-click:hover {
 
     .trumbowyg-editor {
       min-height: auto !important;
+      overflow: hidden;
     }
 
     &.editor-empty {
-      display: none;
-
       &:before {
         content: 'Texteditor';
         color: #ccc;
@@ -442,7 +441,7 @@ a.editable-click:hover {
         .label {
           color: #fff;
           font-weight: bold;
-          background: #ef4949;
+          background: #add8e6;
         }
       }
 

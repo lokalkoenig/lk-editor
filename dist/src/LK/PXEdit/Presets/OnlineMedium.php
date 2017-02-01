@@ -51,11 +51,13 @@ class OnlineMedium extends Preset {
     }
 
     function getWidgetOptions(){
-        return array(
-            'change_layout' => 0,
-            'change_input' => 0,
-            'footnote' => 0,
-        );
+        return [
+          'change_layout' => 0,
+          'change_input' => 0,
+          'footnote' => 0,
+          'title_edit' => 0,
+          'page_title' => $this->title,
+        ];
     }
 }
 

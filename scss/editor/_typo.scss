@@ -3,6 +3,11 @@
 .pxedit .pdf {
   line-height: 1;
   font-size: $doc-p-size;
+  color: $editor-color;
+
+  *.to-long {
+    color: #DD1144;
+  }
 
   h1 {
     margin: 0;
@@ -38,7 +43,7 @@
     margin: 0;
     font-size: $doc-p-size;
     margin-bottom: $doc-p-margin;
-    line-height: 1;
+    line-height: 1.1;
   }
 
   ul,
@@ -49,9 +54,15 @@
     li {
       font-size: $doc-p-size;
       margin-bottom: $doc-p-margin / 2;
-      line-height: 1;
+      line-height: 1.1;
       margin-left: 0;
       padding-left: 3px;
+    }
+  }
+
+  .trumbowyg-editor {
+    > *:last-child {
+      margin-bottom: 0;
     }
   }
 }

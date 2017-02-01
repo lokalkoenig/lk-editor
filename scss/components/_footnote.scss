@@ -8,6 +8,12 @@
   text-align: right;
   z-index: 100;
 
+  .editable-empty {
+    &:before {
+      content: 'Fu\00dfzeile (optional)';
+    }
+  }
+
   input {
     background: transparent;
     display: block;

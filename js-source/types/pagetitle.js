@@ -27,15 +27,14 @@
             this.setAttr('placeholder');
             this.$input.attr('maxlength', 60);
         },
-
         activate: function() {
             $.fn.editabletypes.text.prototype.activate.call(this);
         },
-
-
         input2value: function() {
-            PXEdit_changed();
-            return this.$input.val();
+          var editor = PXEdit();
+          editor.setChanged();
+          editor.options.page_title = this.$input.val();
+          return this.$input.val();
         }
     });
 

@@ -79,7 +79,7 @@
   }
 
   &.widget-table-fixed {
-    .text {
+    div.text {
       display: none !important;
     }
   }
@@ -131,8 +131,9 @@
     position: absolute;
     right: 22px;
     height: 22px;
-    top: 0;
+    top: -22px;
     margin: 0;
+
 
     li {
       display: inline-block;
@@ -143,12 +144,13 @@
       background: White;
       transition: color .2s ease-in;
       cursor: pointer;
-      line-height: 16px !important;
+      line-height: 15.5px !important;
       border-right: 0;
+      height: 21px;
 
       &:hover,
       &.active {
-        color: #333;
+        color: #000;
       }
     }
   }
@@ -213,6 +215,8 @@
     .glyphicon-cog {
       color: Silver;
       border-color: Silver;
+      top: -22px;
+      right: 1px;
     }
 
     table {
@@ -239,6 +243,8 @@
 
   div.text {
     min-height: 20px;
+    margin-bottom: $doc-hx-margin;
+    max-height: 45px;
 
     &.editor-empty {
       display: none;
