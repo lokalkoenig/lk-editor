@@ -46,7 +46,7 @@ gulp.task('scripts-editor-pack', function() {
                  ])
     .pipe(concat('PXEdit-packed.js'))
     //.pipe(strip())
-    //.pipe(minify())
+    .pipe(minify())
     .pipe(gulp.dest('./dist/js/'));
 });
 

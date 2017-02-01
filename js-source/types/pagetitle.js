@@ -1,26 +1,25 @@
-
+// Page-Title
 (function ($) {
   "use strict";
 
    // options.value
-   $.fn.createPageTitleWidget = function(options) {
-       $(this).html('<div>' +  options.value + '</div>');
-       $(this).children('div').editable({
-        type: 'pagetitle'
-       });
-   };
+  $.fn.createPageTitleWidget = function(options) {
+    $(this).html('<div>' +  options.value + '</div>');
+    $(this).children('div').editable({
+      type: 'pagetitle'
+    });
+  };
 
 }(window.jQuery));
 
 (function ($) {
     "use strict";
 
-    var Pagetitle = function (options) {
-      this.init('Pagetitle', options, Pagetitle.defaults);
-    };
+  var Pagetitle = function (options) {
+    this.init('Pagetitle', options, Pagetitle.defaults);
+  };
 
-    $.fn.editableutils.inherit(Pagetitle, $.fn.editabletypes.abstractinput);
-
+  $.fn.editableutils.inherit(Pagetitle, $.fn.editabletypes.abstractinput);
     $.extend(Pagetitle.prototype, {
         render: function () {
             this.setClass();
@@ -43,7 +42,6 @@
       inputclass: '',
       placeholder: '',
     });
-
-    $.fn.editabletypes.pagetitle = Pagetitle;
-
+  
+  $.fn.editabletypes.pagetitle = Pagetitle;
 }(window.jQuery));

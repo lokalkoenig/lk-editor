@@ -97,7 +97,7 @@
    };
 
   function editor_widget_check_length(reference){
-    var height = $(reference).outerHeight(true) + 5;
+    var height = $(reference).height() + 5;
     console.log(height);
     var content_height = 0;
 

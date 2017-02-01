@@ -12,10 +12,10 @@ class DyanmicLayout {
     var $verlag = 0;
     
     var $image_presets = [
-        'w100xh100' => ['width' => 770 * 3, 'height' => 368 * 3],
-        'w50xh50' => ['width' => 372 * 3, 'height' => 172 * 3],
-        'w50xh100' => ['width' => 400 * 3, 'height' => 368 * 3],
-        'w33xh50' => ['width' => 240 * 3, 'height' => 172 * 3],
+        'w100xh100' => ['width' => 770, 'height' => 368],
+        'w50xh50' => ['width' => 372, 'height' => 172],
+        'w50xh100' => ['width' => 400, 'height' => 368],
+        'w33xh50' => ['width' => 240, 'height' => 172],
     ];
 
     var $presets = [
@@ -31,7 +31,10 @@ class DyanmicLayout {
       $this -> verlag = $verlagsmodus;
       
       while(list($key, $val) = each($this -> image_presets)){
-        $this -> image_presets[$key]['title'] = $val['width'] .'px (Breite) × '. $val['height'] .'px (Höhe)';
+        $this -> image_presets[$key]['width'] = $this -> image_presets[$key]['width'] * 3;
+        $this -> image_presets[$key]['height'] = $this -> image_presets[$key]['height'] * 3;
+
+        $this -> image_presets[$key]['title'] = ($val['width'] * 3) .'px (Breite) × '. ($val['height'] * 3) .'px (Höhe)';
       }
     }
     
