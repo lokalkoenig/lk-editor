@@ -294,7 +294,12 @@ $ = jQuery;
           var reference = this;
 
           $('#PXEdit-document-save').click(function(){
-            reference.saveDialoge();
+            if(reference.options.verlagsmodus === 1){
+              reference.saveDialoge();
+            }
+            else {
+              reference.saveAndClose();
+            }
           });
 
           $('#PXEdit-document-remove').click(function(){
@@ -302,7 +307,7 @@ $ = jQuery;
           });
 
           $('body').on('click', ".btn-pxedit-save", function(){
-            reference.saveDialogeFeedback();
+              reference.saveDialogeFeedback();
           });
 
             // cta change layout
@@ -388,8 +393,11 @@ $ = jQuery;
             this.setActiveLayout(data.layout);
             this.createWidgets(data.content);
 
-            if(this.options.id){
+            if(this.options.id && this.options.verlagsmodus === 1){
               $('#PXEdit-document-remove').show();
+            }
+            else {
+              $('#PXEdit-document-remove').hide();
             }
 
             if(typeof data.sample === 'object' && !this.options.id){
@@ -408,7 +416,7 @@ $ = jQuery;
 
           this.performAjax(data, function(data){
             $('#PXEdit').removeClass('open').fadeOut();
-            reference.cb();
+            reference.cb(data);
             reference.createMessage(data.message, 2500);
           });
         },

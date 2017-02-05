@@ -23,17 +23,13 @@
           	</header>
 
                 <div id="pdf-visibile-editor"></div>
-                <div id="footnote" title="">
-
-                </div>
-                <footer>
-                        <div class="float-xs-8">
-                            <div class="footer-logos">
+                <div id="footnote" title=""></div>
+                <footer><div class="float-xs-8"><div class="footer-logos">
                                 <?php foreach($footer_logos as $logo): ?>
                                   <img src="<?= $logo; ?>" />
                                 <?php endforeach; ?>
                             </div>
-                        </div>
+                  </div>
                 </footer>
 	</div>
 
@@ -52,57 +48,3 @@
 <div id="PXEdit-backdrop"></div>
 <div id="PXEdit-message" class="layout-menu well well-white"></div>
 <div id="PXEdit-message-bkdrp" class="layout-menu-backdrop"></div>
-
-
-
-<div class="modal fade" tabindex="-1" id="layoutModal" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content small-format-presentation">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Layout und Inhalt auswählen</h4>
-            </div>
-            <div class="modal-body">
-                <div id="vkudoc-option-change-layout">
-                    <p><strong>Layout auswählen</strong></p>
-                    <div class="clearfix" id="change-layout">
-                        <p>Bitte wählen Sie ein Layout für Ihr Dokument aus.</p>
-                        <div id="pdfdoc-alter-layout"></div>
-                    </div>
-
-                    <hr />
-                </div>
-
-                <div class="clearfix collapse in" id="current-layout">
-                    <p><strong>Inhalt auswählen</strong></p>
-                    <p>Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>
-
-                    <div class="row">
-                        <div class="col-xs-4">
-                             <p><label>Bereiche</label></p>
-                             <div id="pdf-current-layout"><!-- Current Layout --></div>
-                        </div>
-
-                        <div class="col-xs-8 col-select">
-                             <div class="form-group">
-                               <p><label for="choose-type">Inhaltsart auswählen</label></p>
-                               <div class="btn-group" role="group">
-                                   <button data-widget="editor" class="btn btn-default">Text</button>
-                                   <button data-widget="image" class="btn btn-default">Bild</button>
-                                   <button data-widget="table" class="btn btn-default">Tabelle</button>
-                                </div>
-                               </div>
-                               <p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-              <button type="button" class="btn btn-primary" id="document-save-settings">Ändern</button>
-            </div>
-          </div>
-        </div>
-</div>

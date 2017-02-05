@@ -194,7 +194,8 @@ class DyanmicLayout {
       
       include __DIR__ . "/../../../template/editor.tpl.php";
       $html = \ob_get_clean();
-    
-    return $html;  
+      $html = preg_replace('~>\s+<~', '><', $html);
+
+      return $html;
     }
 }
