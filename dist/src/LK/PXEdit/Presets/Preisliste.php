@@ -13,8 +13,8 @@ class Preisliste extends Preset {
       
         $sample_table = [
                 0 => [
-                    'Position',
-                    'Preis',
+                    '<strong>Position</strong>',
+                    '<strong>Preis</strong>',
                 ],
                 1 => [
                     'Werbeform 1',

@@ -8,30 +8,15 @@
   text-align: right;
   z-index: 100;
 
-  .editable-empty {
-    &:before {
-      content: 'Fu\00dfzeile (optional)';
-    }
-  }
-
-  input {
-    background: transparent;
-    display: block;
-    border: 0;
-    font-size: ($doc-p-size - 2px);
-    color: #888;
-    width: 100%;
-    text-align: right;
-    padding: 0;
-    top: -1px;
-    position: relative;
-    box-shadow: none;
-    padding-right: 0 !important;
+  > div {
+    line-height: 1.5;
     outline: none;
-  }
-
-  >div {
-    height: 17px;
-    display: block;
+    
+    &:empty:before{
+      content: 'Fu\00dfzeile (optional)';
+      display: block;
+      color: silver;
+      font-style: italic;
+    }
   }
 }

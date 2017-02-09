@@ -96,7 +96,7 @@
 
           var x = 0;
           $(this).children('td').each(function(){
-            row[x] = $(this).children('.table-edit').html();
+            row[x] = $(this).find('.trumbowyg-editor').html();
             x++;
           });
 
@@ -143,7 +143,7 @@
       markup += '<div class="option2"><span data-action="add-col" title="Spalte hinzufügen" class="PXEdit-table-add-col glyphicon glyphicon-plus"></span></div>';
     }
 
-    markup += '<ul class="option-table"><li data-preset="table-normal">Fett</li><li data-preset="table-simple">Normal</li><li data-preset="table-advanced">Erweitert</li></ul>';
+    //markup += '<ul class="option-table"><li data-preset="table-normal">Fett</li><li data-preset="table-simple">Normal</li><li data-preset="table-advanced">Erweitert</li></ul>';
 
     if(typeof options.tablepreset === 'undefined'){
       options.tablepreset = 'table-normal';
@@ -157,7 +157,7 @@
       for (var key in options.rows[i]) {
 
         var int_key = parseInt(key);
-        var cell = '<span class="table-edit">' + options.rows[i][key] + '</span>';
+        var cell = '<textarea class="table-edit">' + options.rows[i][key] + '</textarea>';
 
         if(i === 0 && int_key >= 2){
           cell = '<span class="option"><span data-col="'+  int_key  + '" title="Spalte löschen" class="PXEdit-table-col-remove glyphicon glyphicon-minus"></span></span>' + cell;
@@ -166,7 +166,7 @@
         if(int_key === (length - 1) && i > 1){
           cell = '<span data-row="'+  i  + '" title="Zeile löschen" class="PXEdit-table-row-remove glyphicon glyphicon-minus"></span>' + cell;
         }
-        markup += '<td>'+  cell +'</td>';
+        markup += '<td><div>'+  cell +'</td>';
       }
       markup += '</tr>';
     }
@@ -178,20 +178,32 @@
       $(this).createEditorWdiget({'id': options.id + "text", 'value': options.title, 'autogrow': true});
     });
 
-    // register
-    $(this).find(".table-edit").each(function(){
-      $(this).editable({
-         type: 'cell'
+    $(this).find("textarea.table-edit").each(function(){
+      
+      var td = this;
+
+      $(this).trumbowyg({
+        btns: [
+              ['bold', 'italic']
+          ],
+          autogrow: true,
+          lang: 'de',
+          semantic: false,
+          removeformatPasted: true
+      }).on('tbwfocus', function(){
+        $(td).closest('.trumbowyg-box').addClass('widget-active');
+        $(td).closest('.widget').removeClass('widget-options');
+       }).on('tbwblur', function(){
+        $(td).closest('.trumbowyg-box').removeClass('widget-active');
       });
     });
 
-    $(this).createTableWdiget('setpreset', options.tablepreset);
   };
 
 }(window.jQuery));
 
 // Listener
-jQuery('document').ready(function(){
+$(function(){
 
   // Show Options
   $("#PXEdit").on('click', '.glyphicon-cog', function(){
@@ -223,11 +235,12 @@ jQuery('document').ready(function(){
   });
 
   // keycode TAB listener
-  $("#PXEdit").keydown(function(event) {
-    if(event.keyCode === 9 && $(event.target).is("textarea")){
-      table_widget_check_tab(event);
-    }
-  });
+  //$("#PXEdit").keydown(function(event) {
+  //  if(event.keyCode === 9 && $(event.target).is(".trumbowyg-editor-table")){
+  //    console.log(event.target);
+  //    table_widget_check_tab(event);
+  //  }
+  //});
 });
 
 // Tab function
@@ -256,9 +269,9 @@ function table_widget_check_tab(event){
     }
   }
 
-  $(target).children('.table-edit').trigger('click');
+  //$(target).children('.table-edit').trigger('click');
 
-  setTimeout(function(){
-    $(target).find('textarea').focus();
-  }, 200);
+  //setTimeout(function(){
+  //  $(target).find('textarea').focus();
+  //}, 200);
 }

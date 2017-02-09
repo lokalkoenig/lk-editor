@@ -4,33 +4,7 @@
   height: 24px;
   position: relative;
 
-  input {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    font-size: $doc_h1_size;
-    color: $editor-color;
-    font-weight: bold;
-    box-shadow: none;
-    border: 0;
-    position: relative;
-    top: -1px;
+  div {
     outline: none;
-  }
-
-  .editable-empty {
-    height: 24px;
-  }
-
-  .editable-open {
-    visibility: hidden;
-    display: block !important;
-    position: relative;
-  }
-
-  .editable-container {
-    position: absolute;
-    top: 0;
-    width: 100%;
   }
 }

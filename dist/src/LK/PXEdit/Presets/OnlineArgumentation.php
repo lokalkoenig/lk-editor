@@ -18,8 +18,8 @@ class OnlineArgumentation extends Preset {
 
         $sample_table = [
                 0 => [
-                    'Spalte 1',
-                    'Spalte 2',
+                    '<strong>Spalte 1</strong>',
+                    '<strong>Spalte 2</strong>',
                 ],
                 1 => [
                     'Inhalt',

@@ -34,9 +34,7 @@ gulp.task('css-minfy', function() {
 
 gulp.task('scripts-editor-pack', function() {
   return gulp.src([
-                   'js-source/bootstrap-editable.js',
                    "js-source/types/image.js",
-                   "js-source/types/cell.js",
                    "js-source/types/footnote.js",
                    "js-source/types/table-edit.js",
                    "js-source/types/pagetitle.js",

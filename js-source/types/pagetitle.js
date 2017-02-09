@@ -1,47 +1,86 @@
+$.fn.PXEdit_inputLimitation = function(option) {
+    'use strict';
+    var self = this,
+        that = option || {};
+
+    return (function () {
+        var text_remaining,
+            textAreas = self,
+            i,
+            textAreasCount = textAreas.length,
+            maxLength,
+            maxLength2,
+            selector = that.selector || false,
+            charTxt = selector?(that.text?' ' + that.text:''):false;
+
+        var textAreasAll = (function () {
+            for (i = 0; i < textAreasCount; i++) {
+
+              // on Enter
+              textAreas[i].onkeypress = function (e) {
+                    if((e.keyCode === 13)) {
+                      e.preventDefault();
+                    }
+                };
+
+               textAreas[i].onkeydown = function (e) {
+                    if(!(e.keyCode === 8)) {
+                        maxLength = this.attributes['data-maxlength'].value;
+                        countText(this, maxLength);
+                        return this.innerText.length < maxLength;
+                    }
+                };
+                textAreas[i].onkeyup = function () {
+                    maxLength2 = this.attributes['data-maxlength'].value;
+                    copyPastePrevent(this, maxLength2);
+                    countText(this, maxLength2);
+                };
+
+                if($(textAreas[i]).text().length === 0){
+                   $(textAreas[i]).addClass('is-empty');
+                }
+            }
+        }());
+        
+        var countText = function (obj, maxChar) {
+            var length = $(obj).text().length;
+            
+            PXEdit_changed();
+
+            if(length === 0){
+               $(obj).addClass('is-empty');
+            }
+            else {
+               $(obj).removeClass('is-empty');
+            }
+
+            return ;
+        };
+
+        var copyPastePrevent = function (obj, max) {
+            var chopped;
+            if ($(obj).text().length > max) {
+                chopped = $(obj).text().substring(0, max);
+                $(obj).html(chopped);
+            }
+        };
+
+
+
+    }());
+};
+
+
+
 // Page-Title
 (function ($) {
   "use strict";
 
    // options.value
   $.fn.createPageTitleWidget = function(options) {
-    $(this).html('<div>' +  options.value + '</div>');
-    $(this).children('div').editable({
-      type: 'pagetitle'
-    });
+    $(this).html('<div data-maxlength="60" contenteditable="true">' +  options.value + '</div>');
+    //$(".textarea").limitText({selector: ".textarea_feedback", text : "chars rem"});
+    $(this).find('div').PXEdit_inputLimitation({});
   };
 
-}(window.jQuery));
-
-(function ($) {
-    "use strict";
-
-  var Pagetitle = function (options) {
-    this.init('Pagetitle', options, Pagetitle.defaults);
-  };
-
-  $.fn.editableutils.inherit(Pagetitle, $.fn.editabletypes.abstractinput);
-    $.extend(Pagetitle.prototype, {
-        render: function () {
-            this.setClass();
-            this.setAttr('placeholder');
-            this.$input.attr('maxlength', 60);
-        },
-        activate: function() {
-            $.fn.editabletypes.text.prototype.activate.call(this);
-        },
-        input2value: function() {
-          var editor = PXEdit();
-          editor.setChanged();
-          editor.options.page_title = this.$input.val();
-          return this.$input.val();
-        }
-    });
-
-    Pagetitle.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
-      tpl:'<input type="text">',
-      inputclass: '',
-      placeholder: '',
-    });
-  
-  $.fn.editabletypes.pagetitle = Pagetitle;
 }(window.jQuery));

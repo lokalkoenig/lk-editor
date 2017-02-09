@@ -37,9 +37,11 @@ $ = jQuery;
 
         options: {
           'id': 0,
+          'is_new': true,
           'action': '',
           'page_title': '',
           'footnote': 1,
+          'footnote_value': '',
           'verlagsmodus': 1,
           'change_catgegory': 0,
           'message_on_setup': '',
@@ -59,6 +61,23 @@ $ = jQuery;
         // Preset
         preset: '',
 
+        is_new: function(){
+
+          if(this.options.id){
+            return false;
+          }
+
+          if(this.changed === true){
+            return false;
+          }
+
+          if(this.options.is_new === true){
+            return true;
+          }
+
+          return false;
+        },
+
         // Formats
         formats: {
             'editor': 'Text',
@@ -70,7 +89,7 @@ $ = jQuery;
             this.preset = value;
         },
 
-        setChanged: function(element){
+        setChanged: function(){
           this.changed = true;
         },
 
@@ -121,7 +140,7 @@ $ = jQuery;
           this.changed = false;
 
           $('#PXEdit-change-input, #layoutModal #current-layout, #PXEdit-document-remove').hide();
-          $('#PXEdit #footnote').html('<div class="widget"></div>').hide();
+          $('#PXEdit #footnote').html('').hide();
           $('#PXEdit #pdf-visibile-editor').html('');
 
           this.setPreset('');
@@ -188,16 +207,24 @@ $ = jQuery;
                     <hr /><div class="layouts-scaled"><div class="layouts small-format-presentation">'+ $('#available-layouts').html() +'</div></div>\n\
                     ';
 
-          msg += '<hr /><div class="clearfix collapse in small-format-presentation" id="current-layout">\n\
-            <p style="margin-bottom: 0"><strong>Inhalt auswählen</strong></p>\n\
-            <p class="small">Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>\n\
-            <div class="row">\n\
-            <div class="col-xs-6"><p style="margin-bottom: 0"><label>Bereiche *</label></p>\n\
-            <div id="pdf-current-layout"><!-- Current Layout --></div>\n\
-            </div><div class="col-xs-6 col-select"></div></div>';
 
-          msg += '<p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
+          if(this.options.change_input){
+            msg += '<hr /><div class="clearfix collapse in small-format-presentation" id="current-layout">\n\
+              <p style="margin-bottom: 0"><strong>Inhalt auswählen</strong></p>\n\
+              <p class="small">Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>\n\
+              <div class="row">\n\
+              <div class="col-xs-6"><p style="margin-bottom: 0"><label>Bereiche *</label></p>\n\
+              <div id="pdf-current-layout"><!-- Current Layout --></div>\n\
+              </div><div class="col-xs-6 col-select"></div></div>';
+          }
 
+          if(this.is_new()){
+            msg += '</div></div><hr /><button type="button" class="btn btn-success btn-change-layout"><span class="glyphicon glyphicon-ok"></span> Speichern und weiter</button>';
+          }
+          else {
+            msg += '<p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
+          }
+          
           this.createMessage(msg);
           var current = this.getActiveLayout();
           $('.pxedit-layout-changer .col-select').html($('#available-inputs').html()).hide();
@@ -207,16 +234,37 @@ $ = jQuery;
         showLayoutChooser_select_layout: function(layout){
 
           var current_layout = this.getActiveLayout();
+          var reference = this;
+          
+          // CTA
+          $('.btn-change-layout').click(function(event){
+            event.stopImmediatePropagation();
+            //$('#available-new-layout').html($('#pdf-current-layout .layout-template').html());
+            $('#PXEdit-message').removeClass('open');
+
+            if(reference.is_new() === false){
+              reference.options.is_new = false;
+              reference.saveLayoutChanges($('#pdf-current-layout .layout-template'));
+            }
+          });
 
           $('#PXEdit-message .layouts .layout-template.active').removeClass('active');
           $('#PXEdit-message .layouts .layout-template[data-id="'+ layout +'"]').addClass('active');
+
+          if(!this.options.change_input){
+            this.saveLayoutChanges($('#available-layouts .layout-template[data-id=' +  layout + ']'));
+            return ;
+          }
+
+
+          // when can chnage the input
+
           $('#pdf-current-layout').html($('#available-layouts .layout-template[data-id=' +  layout + ']').clone());
           $('#pdf-current-layout .layout-template').addClass('active');
 
           var data = this.data;
           var sample = this.options.sample_data;
-          var reference = this;
-
+        
           $('#pdf-current-layout .widget').each(function(){
             var index = parseInt($(this).attr("data-index")) - 1;
             $(this).attr("data-change-widget", "");
@@ -249,7 +297,7 @@ $ = jQuery;
             if($('#pdf-current-layout .widget.changed').length || current_layout !== layout){
               $('.btn-change-layout').removeAttr('disabled');
             }
-            
+
             event.preventDefault();
           });
 
@@ -264,7 +312,7 @@ $ = jQuery;
               var selected = $(this).attr('data-widget');
               var current = $(element).attr('data-widget');
 
-              $(element).children('.label').text(PDFForm.formats[selected]);
+              $(element).children('.label').text(reference.formats[selected]);
               $(element).attr("data-change-widget", "").removeClass('changed');
 
               if(current !== selected){
@@ -274,15 +322,15 @@ $ = jQuery;
               if($('#pdf-current-layout .widget.changed').length || current_layout !== layout){
                 $('.btn-change-layout').removeAttr('disabled');
               }
+
+              if(reference.is_new()){
+                reference.saveLayoutChanges($('#pdf-current-layout .layout-template'));
+              }
           });
 
-          // CTA
-          $('.btn-change-layout').click(function(event){
-            event.stopImmediatePropagation();
-            //$('#available-new-layout').html($('#pdf-current-layout .layout-template').html());
-            $('#PXEdit-message').removeClass('open');
+          if(this.is_new()){
             reference.saveLayoutChanges($('#pdf-current-layout .layout-template'));
-          });
+          }
 
           $('#pdf-current-layout .widget').first().click();
         },
@@ -293,32 +341,31 @@ $ = jQuery;
         addListener: function() {
           var reference = this;
 
-          $('#PXEdit-document-save').click(function(){
-            if(reference.options.verlagsmodus === 1){
-              reference.saveDialoge();
-            }
-            else {
-              reference.saveAndClose();
-            }
-          });
+            $('#PXEdit-document-save').click(function(){
+              if(reference.options.verlagsmodus === 1){
+                reference.saveDialoge();
+              }
+              else {
+                reference.saveAndClose();
+              }
+            });
 
-          $('#PXEdit-document-remove').click(function(){
-            reference.removeDialoge();
-          });
+            $('#PXEdit-document-remove').click(function(){
+              reference.removeDialoge();
+            });
 
-          $('body').on('click', ".btn-pxedit-save", function(){
-              reference.saveDialogeFeedback();
-          });
+            $('body').on('click', ".btn-pxedit-save", function(){
+                reference.saveDialogeFeedback();
+            });
 
-            // cta change layout
-          $('#PXEdit #PXEdit-change-input').click(function(){
-            if(reference.options.change_layout){
-              reference.showLayoutChooserCallout();
-              return ;
-            }
-
+              // cta change layout
+            $('#PXEdit #PXEdit-change-input').click(function(){
+                if(reference.options.change_layout){
+                  reference.showLayoutChooserCallout();
+                  return ;
+                }
                 if(reference.options.change_layout_via_menu){
-                  reference.showLayoutCallout();
+                  reference.showLayoutChooserCallout();
                 }
             });
 
@@ -384,10 +431,7 @@ $ = jQuery;
             }
 
             if(this.options.footnote){
-              $('#PXEdit #footnote').show();
-              $('#PXEdit #footnote .widget').editable({
-                type: 'footnote'
-              });
+              $('#PXEdit #footnote').show().createFootnoteWidget({value: this.options.footnote_value});
             }
 
             this.setActiveLayout(data.layout);
@@ -401,8 +445,8 @@ $ = jQuery;
             }
 
             if(typeof data.sample === 'object' && !this.options.id){
-                this.setOptions({'sample_data' : data.sample});
-                this.showLayoutCallout();
+              this.setOptions({'sample_data' : data.sample});
+              this.showLayoutChooserCallout();
             }
         },
 
@@ -629,7 +673,10 @@ $ = jQuery;
             var new_data = {};
             var layout = $(element).attr('data-id');
 
-            this.changed = true;
+            if(!this.is_new()){
+              this.setChanged();
+            }
+
             var reference = this;
 
             var x = 0;
@@ -814,9 +861,6 @@ $ = jQuery;
     };
 
     // Editable Defaults
-    $.fn.editable.defaults.mode = "inline";
-    $.fn.editable.defaults.onblur = "submit";
-    $.fn.editable.defaults.emptytext = "";
     $.trumbowyg.svgPath = false;
 
     // selfregister events & listeners

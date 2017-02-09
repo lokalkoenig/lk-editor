@@ -28,7 +28,7 @@ $html = $doc->getEditorTemplate($variables);
         <script src="js/jquery.fileupload-min.js"></script>
 
         <!-- Inplace Editor -->
-        <script type="text/javascript" src="js/PXEdit-packed-min.js?v<?php print filemtime('js/PXEdit-packed-min.js'); ?>"></script>
+        <script type="text/javascript" src="js/PXEdit-packed.js?v<?php print filemtime('js/PXEdit-packed.js'); ?>"></script>
         <link rel="stylesheet" type="text/css" href="css/project.css?<?php print filemtime('js/PXEdit-packed-min.js'); ?>"></link>
  </head>
 <body class="pdf-editor">
@@ -49,7 +49,7 @@ $html = $doc->getEditorTemplate($variables);
         <h4 class="text-center">Verlagsmodus</h4>
 
         <p>
-            <button class="btn btn-default PXEdit-create" data-preset="OnlineArgumentation">Online Argument.</button>
+            <button class="btn btn-default PXEdit-create btn-2click" data-preset="OnlineArgumentation">Online Argument.</button>
             <button class="btn btn-default PXEdit-create" data-preset="RegionalArgumentation">Regional Argument.</button>
         </p>
 
@@ -59,7 +59,7 @@ $html = $doc->getEditorTemplate($variables);
 
         <p>
             <button class="btn btn-default PXEdit-create" data-preset="Preisliste">Preisliste</button>
-            <button class="btn btn-default PXEdit-create btn-2click" data-preset="OpenDokument">Eigenes Dokument</button>
+            <button class="btn btn-default PXEdit-create" data-preset="OpenDokument">Eigenes Dokument</button>
         </p>
 
         <hr />
