@@ -97,6 +97,7 @@ abstract class Preset {
             'change_category' => 0,
             'message_on_setup' => '',
             'title_edit' => true,
+            'change_layout_via_menu' => 0,
             'footnote' => 1,
         ];
 

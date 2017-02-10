@@ -49,7 +49,7 @@ $html = $doc->getEditorTemplate($variables);
         <h4 class="text-center">Verlagsmodus</h4>
 
         <p>
-            <button class="btn btn-default PXEdit-create btn-2click" data-preset="OnlineArgumentation">Online Argument.</button>
+            <button class="btn btn-default PXEdit-create" data-preset="OnlineArgumentation">Online Argument.</button>
             <button class="btn btn-default PXEdit-create" data-preset="RegionalArgumentation">Regional Argument.</button>
         </p>
 
@@ -58,7 +58,7 @@ $html = $doc->getEditorTemplate($variables);
         </p>
 
         <p>
-            <button class="btn btn-default PXEdit-create" data-preset="Preisliste">Preisliste</button>
+            <button class="btn btn-default PXEdit-create btn-2click" data-preset="Preisliste">Preisliste</button>
             <button class="btn btn-default PXEdit-create" data-preset="OpenDokument">Eigenes Dokument</button>
         </p>
 

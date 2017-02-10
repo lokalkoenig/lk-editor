@@ -2,8 +2,7 @@
 (function ($) {
     "use strict";
 
-
-   $.fn.createEditorWdiget = function(options) {
+  $.fn.createEditorWdiget = function(options) {
         var element_id = 'widget_editor_' + options.id;
 
         var editor_element = this;
@@ -98,7 +97,6 @@
 
   function editor_widget_check_length(reference){
     var height = $(reference).height() + 5;
-    console.log(height);
     var content_height = 0;
 
     $(reference).find('.trumbowyg-editor > *').each(function(){

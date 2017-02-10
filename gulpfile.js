@@ -33,13 +33,12 @@ gulp.task('css-minfy', function() {
 
 
 gulp.task('scripts-editor-pack', function() {
-  return gulp.src([
+  return gulp.src(["js-source/PXEdit.js",
                    "js-source/types/image.js",
                    "js-source/types/footnote.js",
                    "js-source/types/table-edit.js",
                    "js-source/types/pagetitle.js",
                    "js-source/types/online_medium_chooser.js",
-                   "js-source/PXEdit.js",
                    "js-source/types/editor.js",
                  ])
     .pipe(concat('PXEdit-packed.js'))

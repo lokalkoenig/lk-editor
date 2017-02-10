@@ -1,4 +1,5 @@
 
+// Footnote-type, based on
 // Page-Title
 (function ($) {
   "use strict";

@@ -398,21 +398,6 @@ a.editable-click:hover {
   }
 }
 
-#current-layout {
-  p.small {
-    line-height: 1.4;
-    font-size: 0.85em;
-    margin: 0 0 5px;
-  }
-
-  .col-select {
-    .btn {
-      margin-top: 1px;
-      padding: 4px 12px;
-    }
-  }
-}
-
 #pdf-current-layout {
   .layout-template {
     .widget {
@@ -436,15 +421,7 @@ a.editable-click:hover {
         font-size: 9px;
         font-weight: normal;
       }
-
-      &.changed {
-        .label {
-          color: #fff;
-          font-weight: bold;
-          background: #add8e6;
-        }
-      }
-
+      
       &:hover,
       &.selected {
         .label {

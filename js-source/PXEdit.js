@@ -4,7 +4,7 @@
  */
 
  var PDFForm = null;
-$ = jQuery;
+ $ = jQuery;
 
 (function ($) {
     "use strict";
@@ -18,10 +18,10 @@ $ = jQuery;
        cb: function(){},
 
        // Version
-       version: '0.1.4',
+       version: '0.2.0',
 
        // Version Date
-       version_date: '2017-01-11',
+       version_date: '2017-02-10',
 
         // Data
         data: null,
@@ -185,23 +185,6 @@ $ = jQuery;
           return $('.layout-template.' + layout).html();
         },
 
-        /**
-         * Shows the Callout to change the layout
-         */
-        showLayoutCallout : function(){
-
-          var msg = '<p><strong>Wählen Sie ein Layout für das Dokument aus</strong></p>\n\
-                    <p>Das Layout können Sie später jederzeit über <button class="btn btn-default btn-sm" style="pointer-events: none;"><span class="glyphicon glyphicon-cog"></span></button> Einstellungen verändern.</p>\n\
-                    <hr /><div class="layouts small-format-presentation">'+ jQuery('#available-layouts').html() +'</div>\n\
-                    <hr /><button type="button" class="btn btn-success btn-close"><span class="glyphicon glyphicon-ok"></span> Speichern und Weiter</button>';
-
-          this.createMessage(msg);
-
-          // get active layout
-          var current = this.getActiveLayout();
-          $('#PXEdit-message .layouts .layout-template[data-id="'+ current +'"]').addClass('active');
-        },
-
         showLayoutChooserCallout: function(){
          var msg = '<div class="pxedit-layout-changer"><p><strong>Layout und Inhalt auswählen</strong></p>\n\
                     <hr /><div class="layouts-scaled"><div class="layouts small-format-presentation">'+ $('#available-layouts').html() +'</div></div>\n\
@@ -211,18 +194,20 @@ $ = jQuery;
           if(this.options.change_input){
             msg += '<hr /><div class="clearfix collapse in small-format-presentation" id="current-layout">\n\
               <p style="margin-bottom: 0"><strong>Inhalt auswählen</strong></p>\n\
-              <p class="small">Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>\n\
+              <p class="pxedit-small">Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>\n\
               <div class="row">\n\
               <div class="col-xs-6"><p style="margin-bottom: 0"><label>Bereiche *</label></p>\n\
               <div id="pdf-current-layout"><!-- Current Layout --></div>\n\
               </div><div class="col-xs-6 col-select"></div></div>';
           }
 
+          msg += '</div></div>';
+
           if(this.is_new()){
-            msg += '</div></div><hr /><button type="button" class="btn btn-success btn-change-layout"><span class="glyphicon glyphicon-ok"></span> Speichern und weiter</button>';
+            msg += '<hr /><button type="button" class="btn btn-success btn-change-layout"><span class="glyphicon glyphicon-ok"></span> Speichern und weiter</button>';
           }
           else {
-            msg += '<p class="small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
+            msg += '<hr /><p class="pxedit-small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
           }
           
           this.createMessage(msg);
@@ -239,20 +224,34 @@ $ = jQuery;
           // CTA
           $('.btn-change-layout').click(function(event){
             event.stopImmediatePropagation();
-            //$('#available-new-layout').html($('#pdf-current-layout .layout-template').html());
-            $('#PXEdit-message').removeClass('open');
-
-            if(reference.is_new() === false){
+            
+            if(!reference.options.change_input && reference.is_new() === false){
+              layout = $('.pxedit-layout-changer .layout-template.active').data('id');
+              reference.saveLayoutChanges($('#available-layouts .layout-template[data-id=' +  layout + ']'));
+            }
+            else if(reference.is_new() === false){
               reference.options.is_new = false;
               reference.saveLayoutChanges($('#pdf-current-layout .layout-template'));
             }
+
+             $('#PXEdit-message').removeClass('open');
           });
 
           $('#PXEdit-message .layouts .layout-template.active').removeClass('active');
           $('#PXEdit-message .layouts .layout-template[data-id="'+ layout +'"]').addClass('active');
 
+          // if you can not change the input
           if(!this.options.change_input){
-            this.saveLayoutChanges($('#available-layouts .layout-template[data-id=' +  layout + ']'));
+            if(layout === current_layout){
+              return ;
+            }
+            
+            if(this.is_new()){
+              this.saveLayoutChanges($('#available-layouts .layout-template[data-id=' +  layout + ']'));
+            }
+            else {
+              $('.btn-change-layout').removeAttr('disabled');
+            }
             return ;
           }
 
@@ -271,7 +270,7 @@ $ = jQuery;
 
             if(typeof data[index] === "undefined"){
               var widget = sample[layout][index].widget;
-              $(this).attr("data-widget", widget).html("<span class='label label-primary'>"+ widget +"</span>");
+              $(this).attr("data-widget", widget).html("<span class='label label-primary'>"+ reference.formats[widget] +"</span>");
             }
             else {
               $(this).attr("data-widget", data[index].widget);
@@ -375,7 +374,10 @@ $ = jQuery;
                   reference.close();
               }
               else {
-                reference.createMessage('<p>Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?</p><hr /><p><button class="btn btn-danger" id="PXEdit-cancel">Änderungen verwerfen</button></p>');
+                reference.createMessage('<p><strong>Hinweis</strong></p>\n\
+                  <p>Sie haben ungespeicherte Änderungen. Möchten Sie den Editor wirklich beenden?</p>\n\
+                  <hr /><p><button class="btn btn-danger" id="PXEdit-cancel">Änderungen verwerfen</button></p>'
+                );
               }
             });
 
