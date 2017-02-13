@@ -154,10 +154,14 @@ p.pxedit-small {
 
         //table
         .float-3 {
-          width: 22px;
+          width: 23px;
           float: left;
-          margin-right: 3px;
+          margin-right: 2px;
           overflow: hidden;
+
+          &:last-child {
+            margin-right: 0;
+          }
         }
 
 
@@ -184,9 +188,15 @@ p.pxedit-small {
           }
         }
 
+        &.layout-preistable_three {
+          .widget {
+            width: 100% !important;
+          }
+        }
+
         .widget {
           height: 45px;
-          width: 22.5px;
+          width: 22px;
           margin: 2px;
 
           &.widget-flexibile {

@@ -11,12 +11,30 @@
   > div {
     line-height: 1.5;
     outline: none;
-    
-    &:empty:before{
-      content: 'Fu\00dfzeile (optional)';
-      display: block;
-      color: silver;
-      font-style: italic;
+    text-align: right;
+
+    &.is-empty{
+      width: 100px;
+      float: right;
+      min-height: 10px;
+
+      &:before{
+        content: 'Fu\00dfzeile (optional)';
+        display: block;
+        color: silver;
+        font-style: italic;
+        width: 100px;
+        position: absolute;
+        text-align: right;
+        z-index: -1;
+      }
     }
+
+    //&:empty:before{
+    //  content: 'Fu\00dfzeile (optional)';
+    //  display: block;
+    //  color: silver;
+    //  font-style: italic;
+    //}
   }
 }

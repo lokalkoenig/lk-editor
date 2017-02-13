@@ -138,22 +138,13 @@
          */
         resetEditor: function(){
           this.changed = false;
-
+          this.options.footnote_value = '';
+        
           $('#PXEdit-change-input, #layoutModal #current-layout, #PXEdit-document-remove').hide();
           $('#PXEdit #footnote').html('').hide();
           $('#PXEdit #pdf-visibile-editor').html('');
 
           this.setPreset('');
-
-          // Change layout - CTA
-          if(this.options.change_layout === 1 || this.options.change_layout_via_menu === 1){
-            $('#PXEdit-change-input').show();
-          }
-
-          // Show input-changer
-         if(this.options.change_input === 1){
-            $('#layoutModal #current-layout').show();
-          }
         },
 
         /**
@@ -410,8 +401,6 @@
          * @returns {undefined}
          */
         setup: function(data, layouts){
-            this.resetEditor();
-
             $('#available-layouts').html(layouts);
 
             if(this.options.verlagsmodus){
@@ -446,9 +435,21 @@
               $('#PXEdit-document-remove').hide();
             }
 
-            if(typeof data.sample === 'object' && !this.options.id){
-              this.setOptions({'sample_data' : data.sample});
-              this.showLayoutChooserCallout();
+            // Change layout - CTA
+            if(this.options.change_layout === 1 || this.options.change_layout_via_menu === 1){
+              $('#PXEdit-change-input').show();
+            }
+
+            // Show input-changer
+            if(this.options.change_input === 1){
+              $('#layoutModal #current-layout').show();
+            }
+          
+            if(!this.options.id){
+              if(typeof data.sample === 'object'){
+                this.setOptions({'sample_data' : data.sample});
+                this.showLayoutChooserCallout();
+              }
             }
         },
 
@@ -826,6 +827,19 @@
         },
 
         /**
+         * Warns the User on leaving the Page
+         *
+         * @returns {undefined}
+         */
+        keepAlive: function(){
+           $(window).on('beforeunload', function(){
+            if($('#PXEdit').hasClass('open')){
+              return 'Sind Sie sicher, dass Sie diese Seite verlassen möchten? Nicht gespeicherte Daten gehen dann verloren.';
+            }
+          });
+        },
+
+        /**
          * Loads a Document from a ressource
          * This is the starting-point for the integration
          *
@@ -849,7 +863,7 @@
                       reference.createMessage(data.message);
                       return ;
                     }
-
+                    reference.resetEditor();
                     reference.inputs = data.inputs;
                     reference.setPreset(data.preset);
                     reference.setOptions(data.options);
@@ -870,6 +884,7 @@
       var editor = PXEdit();
 
       editor.addListener();
+      editor.keepAlive();
       editor.callback_url = $("#PXEdit").data('callback');
       editor.callback_id = $("#PXEdit").data('callback-id');
 
