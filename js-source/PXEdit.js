@@ -91,6 +91,23 @@
 
         setChanged: function(){
           this.changed = true;
+          this.testOverflow();
+        },
+
+        testOverflow: function(){
+          console.log('Test overvflow');
+
+          $('.row-editor .widget').each(function(){
+            var type = $(this).attr('data-widget');
+
+            if(type === 'editor'){
+              $(this).createEditorWdiget('check');
+            }
+
+            if(type === 'table'){
+              $(this).createTableWdiget('check');
+            }
+          });
         },
 
         // Sets Editor options
@@ -667,6 +684,10 @@
 
             // if Editor has still loading state
             this.loading(-1);
+
+            setTimeout(function(){
+              reference.testOverflow();
+            }, 500);
         },
 
         // saves the layout and rerender

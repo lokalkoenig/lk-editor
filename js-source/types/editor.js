@@ -3,30 +3,42 @@
     "use strict";
 
   $.fn.createEditorWdiget = function(options) {
-        var element_id = 'widget_editor_' + options.id;
+    
+    if(typeof options === 'string'){
+      if(options === 'check'){
+        editor_widget_check_length(this);
+      }
+      return ;
+    }
 
-        var editor_element = this;
+    var element_id = 'widget_editor_' + options.id;
+    var editor_element = this;
 
-        if(typeof options.value === 'undefined'){
-            options.value = "<p>Text</p>";
-        }
+    if(typeof options.value === 'undefined'){
+        options.value = "<p>Text</p>";
+    }
 
-        if(typeof options.autogrow === 'undefined'){
-          options.autogrow = false;
-        }
+    if(typeof options.autogrow === 'undefined'){
+      options.autogrow = false;
+    }
 
-        if($(this).hasClass('widget-flexibile')){
-          options.autogrow = true;
-        }
+    if($(this).hasClass('widget-flexibile')){
+      options.autogrow = true;
+    }
 
-        var editor_autogrow = options.autogrow;
-        var element_class = 'editor-widget editor-widget-editor';
-        if(editor_autogrow){
-          element_class += ' widget-flexibile';
-        }
+    var editor_autogrow = options.autogrow;
+    var element_class = 'editor-widget editor-widget-editor';
+    if(editor_autogrow){
+      element_class += ' widget-flexibile';
+    }
 
-        $(this).html('<div id="'+ element_id +'" class="'+  element_class +'"><textarea>'+ options.value +'</textarea></div>');
-        
+     // Add Empty Option
+    if($(this).hasClass('widget-empty-disabled') && !options.value){
+      return ;
+    }
+
+    $(this).html('<div id="'+ element_id +'" class="'+  element_class +'"><textarea>'+ options.value +'</textarea></div>');
+
         var reference = this;
         $.trumbowyg.btnsGrps = {
                 //formatting: ['strong', 'em', 'underline', 'strikethrough'],
@@ -63,31 +75,8 @@
               lang: 'de',
               semantic: false,
               removeformatPasted: true
-            }).on('tbwinit', function(){
-
-              var content = $(reference).find('.trumbowyg-editor').text();
-              if(content === ''){
-                $(reference).addClass('editor-empty');
-              }
-              else {
-                $(reference).removeClass('editor-empty');
-              }
-
             }).on('tbwchange', function(){
-                var content = $(reference).find('.trumbowyg-editor').text();
-          
-                setTimeout(function(){
-                  editor_widget_check_length(reference);
-                }, 200);
-
-                if(content === ''){
-                  $(reference).addClass('editor-empty');
-                }
-                else {
-                  $(reference).removeClass('editor-empty');
-                }
-
-                PDFForm.setChanged(reference);
+              PDFForm.setChanged();
             }).on('tbwfocus', function(){
               $(reference).addClass('widget-active');
             }).on('tbwblur', function(){

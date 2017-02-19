@@ -50,7 +50,7 @@ class OnlineArgumentation extends Preset {
         $value -> content[] = [
             'id' => 3,
             'widget' => 'table',
-            'title' => '<h2>Tabelle</h2>',
+            'title' => 'Tabelle',
             'rows' => $sample_table,
         ];
 

@@ -29,7 +29,9 @@
       return ;
     }
 
-
+     if(typeof options === 'string'){
+       return ;
+     }
 
     var editor = PXEdit();
     $(this).addClass('online-medium-chooser');
@@ -53,9 +55,6 @@
 
     if(editor.options.verlagsmodus === 0){
       $(widget).find('select').hide();
-      if(selected){
-        $(widget).find('.editor-widget').append('<div><label class="label label-primary">'+ selected_label + '</label></div>');
-      }
     }
   };
 

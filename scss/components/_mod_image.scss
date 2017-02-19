@@ -70,3 +70,9 @@
     }
   }
 }
+
+.pxedit .widget-edit-disabled {
+  .editor-widget-image {
+    cursor: default;
+  }
+}

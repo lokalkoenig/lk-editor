@@ -6,6 +6,11 @@
 
     if(typeof options === "string"){
 
+      if(options === 'check'){
+        check_table_out_of_bounds(this);
+        return ;
+      }
+
       // Remove-Col
       if(options === 'removecol'){
         var data = $(this).createTableWdiget("serialize");
@@ -85,8 +90,7 @@
 
         var data = {
           'widget': 'table',
-          'tablepreset': $(this).find('table').attr('data-preset'),
-          'title': $(this).find('.editor-widget-editor .trumbowyg-editor').html(),
+          'title': $(this).find('.text h2>div').html(),
           'rows': []
         };
 
@@ -134,19 +138,16 @@
     var tableFixed = $(this).hasClass('widget-table-fixed');
     $(this).addClass('widget-table');
 
-    var markup = '<div><div class="text ">'+ options.title +'</div><span class="glyphicon glyphicon-cog table-options"></span>';
+    var markup = '<div>';
+    markup += '<div class="text"></div>';
+    markup += '<span class="glyphicon glyphicon-cog table-options"></span>';
 
     // We limit the maximum length to
     var length = Object.keys(options.rows[0]).length;
+    var element = this;
 
     if(length < 4){
       markup += '<div class="option2"><span data-action="add-col" title="Spalte hinzufügen" class="PXEdit-table-add-col glyphicon glyphicon-plus"></span></div>';
-    }
-
-    //markup += '<ul class="option-table"><li data-preset="table-normal">Fett</li><li data-preset="table-simple">Normal</li><li data-preset="table-advanced">Erweitert</li></ul>';
-
-    if(typeof options.tablepreset === 'undefined'){
-      options.tablepreset = 'table-normal';
     }
 
     markup += '<table class="table table-'+ length + '">';
@@ -179,7 +180,6 @@
     });
 
     $(this).find("textarea.table-edit").each(function(){
-      
       var td = this;
       $(this).trumbowyg({
         btns: [['bold', 'italic']],
@@ -199,11 +199,27 @@
       })
       // Change
       .on('tbwchange', function(){
-          //var content = $(reference).find('.trumbowyg-editor').text();
           PXEdit_changed();
-          //setTimeout(function(){ editor_widget_check_length(reference); }, 200);
         });
       });
+
+    // Ueberschrift
+    if($(this).find('div.text').length === 1){
+
+      var maxlength = 27;
+
+      var parent_height = parseInt($(this).data('width'));
+      if(parent_height === 50){
+        maxlength = 40;
+      }
+      
+      if(parent_height === 100){
+        maxlength = 80;
+      }
+
+      $(this).find('div.text').html('<h2><div data-maxlength="'+ maxlength +'" contenteditable="true">'+ options.title +'<div></h2>');
+      $(this).find('div.text h2>div').text($(this).find('div.text h2>div').text()).PXEdit_inputLimitation();
+    }
   };
 
 // Listener
@@ -237,57 +253,56 @@ $(function(){
   $("#PXEdit").on('click', 'table .PXEdit-table-row-remove', function(){
     $(this).closest('.widget').createTableWdiget('removerow', parseInt($(this).attr('data-row')));
   });
-  
-   $("#PXEdit").on('keypress', '.trumbowyg-editor', function(e){
-     var element = this;
-    
-     if ((element.offsetHeight < element.scrollHeight) || (element.offsetWidth < element.scrollWidth)) {
-       e.preventDefault();
-       return false;
-     }
-   });
-   
-  // keycode TAB listener
-  //$("#PXEdit").keydown(function(event) {
-  //  if(event.keyCode === 9 && $(event.target).is(".trumbowyg-editor-table")){
-  //    console.log(event.target);
-  //    table_widget_check_tab(event);
-  //  }
-  //});
+
+   //$("#PXEdit").on('keypress', '.trumbowyg-editor', function(e){
+   //  var element = this;
+   //
+   //  if ((element.offsetHeight < element.scrollHeight) || (element.offsetWidth < element.scrollWidth)) {
+   //    e.preventDefault();
+   //    return false;
+   //  }
+   //});
 });
 
 }(window.jQuery));
 
 
-// Tab function
-function table_widget_check_tab(event){
+function check_table_out_of_bounds(element){
 
-  var table = $(event.target).closest('.widget').first();
-  var test = $(event.target).closest('td').next('td').length;
-  var target = $(event.target).closest('td').next('td');
+  // Fixed Table, used in Price-Calculations
+  if($(element).hasClass('widget-table-fixed')){
 
-  // test if there is a new row
-  if(test === 0){
-    target = $(event.target).closest('tr').next('tr').children('td').first();
+    var space_taken = $('.widget-flexibile').height() + $('h1.page-title').height();
+    var space_avail = $('.row-editor').height();
+    var diff = space_avail - space_taken - parseInt($(element).css('margin-bottom'));
 
-    // when we need to add a new line
-    if(target.length === 0){
-      // We trigger another element to save the current
-      $(table).find('tr').last().children('td').first().children('.table-edit').trigger('click');
+    $(element).height(diff).children('div').height(diff);
+    $(element).parent('div').height(diff);
 
-      setTimeout(function(){
-         $(table).createTableWdiget('addrow');
-         var target = $(table).find('tr').last().children('td').first();
-         $(target).children('.table-edit').trigger('click');
-      }, 200);
-
-      return ;
-    }
+    console.log(diff);
   }
 
-  //$(target).children('.table-edit').trigger('click');
+  var max_height = $(element).height();
+  max_height -= $(element).find('.text').height();
 
-  //setTimeout(function(){
-  //  $(target).find('textarea').focus();
-  //}, 200);
+  var table_height = $(element).find('table').height();
+
+  if((max_height - table_height) <= 20){
+    $(element).addClass('widget-overflow');
+    var calculation = max_height;
+
+    $(element).find('.to-long').removeClass('to-long');
+    $(element).find('tr').each(function(){
+      var tr_height = $(this).height();
+      calculation -= tr_height;
+      
+      if(calculation < 0){
+        $(this).addClass('to-long');
+      }
+    });
+  }
+  else {
+    $(element).removeClass('widget-overflow');
+    $(element).find('.to-long').removeClass('to-long');
+  }
 }

@@ -162,7 +162,7 @@ class OnlineMediumCollection extends Preset {
       'change_layout' => 0,
       'change_input' => 0,
       'online_medium_chooser_values' => $this->getOnlineMediumOptions(),  
-      'message_on_setup' => "<p><strong>Hinweis</strong></p><p>Bitte wählen Sie aus den vorhandenen Online-Medien pro Spalte aus. Sie können den Inhalt bearbeiten.</p>",  
+      //'message_on_setup' => "<p><strong>Hinweis</strong></p><p>Bitte wählen Sie aus den vorhandenen Online-Medien pro Spalte aus. Sie können den Inhalt bearbeiten.</p>",
     );
   }    
 }

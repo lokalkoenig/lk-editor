@@ -1,6 +1,8 @@
 
 .pxedit #footnote {
   top: -18px;
+  background: #fff;
+  height: 20px;
   position: relative;
   font-size: ($doc-p-size - 2px);
   color: #888;
@@ -12,7 +14,6 @@
     line-height: 1.5;
     text-align: right;
     outline: none;
-    direction: rtl;
    
     &:focus {
       outline: 1px dotted #add8e6;
@@ -26,9 +27,11 @@
     &.is-empty{
       min-height: 16px;
       text-align: right;
+      direction: rtl;
 
       &:before {
         content: 'Fu\00dfzeile (optional)';
+        direction: ltr;
         display: block;
         color: silver;
         font-style: italic;

@@ -44,6 +44,9 @@ $.fn.PXEdit_inputLimitation = function(option) {
         
         var countText = function (obj, maxChar) {
             var length = $(obj).text().length;
+
+            console.log(length);
+            
             PXEdit_changed();
             if(length === 0){
                $(obj).addClass('is-empty');
