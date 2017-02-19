@@ -10,20 +10,30 @@
 
   > div {
     line-height: 1.5;
-    outline: none;
     text-align: right;
+    outline: none;
+    direction: rtl;
+   
+    &:focus {
+      outline: 1px dotted #add8e6;
+      outline-offset: 2px;
 
+      &:before {
+        display: none !important;
+      }
+    }
+    
     &.is-empty{
-      width: 100px;
-      float: right;
-      min-height: 10px;
+      min-height: 16px;
+      text-align: right;
 
-      &:before{
+      &:before {
         content: 'Fu\00dfzeile (optional)';
         display: block;
         color: silver;
         font-style: italic;
         width: 100px;
+        top: 0;
         position: absolute;
         text-align: right;
         z-index: -1;

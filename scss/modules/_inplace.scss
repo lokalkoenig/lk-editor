@@ -337,3 +337,27 @@ a.editable-click.editable-disabled:hover {
       margin-top: -45px !important;
     }
 }
+
+.widget-active {
+  .trumbowyg-editor {
+    outline: 1px dotted #add8e6;
+    outline-offset: -1px;
+  }
+}
+
+.table {
+  .widget-active {
+    .trumbowyg-editor {
+      outline-offset: 2px;
+    }
+  }
+
+  tr:nth-child(2n) {
+    .widget-active {
+      .trumbowyg-editor {
+        outline-color: #add8e6;
+      }
+    }
+  }
+
+}

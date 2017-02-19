@@ -84,6 +84,9 @@
 .widget-table {
   position: relative;
 
+
+
+
   &:hover {
     .glyphicon-cog {
       color: #333;
@@ -169,10 +172,10 @@
   }
 
   .glyphicon-cog {
-    right: 0;
+    right: 1px;
     display: inline-block;
     left: auto;
-    top: 0;
+    top: 2px;
     color: #eee;
     border-color: #fff;
     z-index: 2;
@@ -260,11 +263,18 @@
   div.text {
     min-height: 20px;
     margin-bottom: $doc-hx-margin;
-    max-height: 45px;
+    max-height: 50px;
+  
+    .trumbowyg-editor {
+      max-height: 50px;
+      overflow: hidden;
+    }
 
     &.editor-empty {
       display: none;
     }
+
+
 
     &.editable-open {
       display: block !important;

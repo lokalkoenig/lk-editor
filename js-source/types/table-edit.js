@@ -185,7 +185,7 @@
         btns: [['bold', 'italic']],
         autogrow: true,
         lang: 'de',
-        semantic: false,
+        semantic: true,
         removeformatPasted: true
       })
       // Fobus
@@ -237,7 +237,16 @@ $(function(){
   $("#PXEdit").on('click', 'table .PXEdit-table-row-remove', function(){
     $(this).closest('.widget').createTableWdiget('removerow', parseInt($(this).attr('data-row')));
   });
-
+  
+   $("#PXEdit").on('keypress', '.trumbowyg-editor', function(e){
+     var element = this;
+    
+     if ((element.offsetHeight < element.scrollHeight) || (element.offsetWidth < element.scrollWidth)) {
+       e.preventDefault();
+       return false;
+     }
+   });
+   
   // keycode TAB listener
   //$("#PXEdit").keydown(function(event) {
   //  if(event.keyCode === 9 && $(event.target).is(".trumbowyg-editor-table")){

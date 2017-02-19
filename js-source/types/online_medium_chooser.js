@@ -29,6 +29,8 @@
       return ;
     }
 
+
+
     var editor = PXEdit();
     $(this).addClass('online-medium-chooser');
     var element_id = 'widget_editor_' + options.id;
@@ -37,15 +39,24 @@
     var select_options = editor.options.online_medium_chooser_values;
     var widget = this;
     var selected = parseInt(options.value);
+    var selected_label = '';
 
     Object.keys(select_options).forEach(function (key) {
-      if(selected === key){
+      if(selected == key){
         $(widget).find('select').append('<option selected value="'+ key +'">' + select_options[key] + '</option>');
+        selected_label = select_options[key];
       }
       else {
         $(widget).find('select').append('<option value="'+ key +'">' + select_options[key] + '</option>');
       }
     });
+
+    if(editor.options.verlagsmodus === 0){
+      $(widget).find('select').hide();
+      if(selected){
+        $(widget).find('.editor-widget').append('<div><label class="label label-primary">'+ selected_label + '</label></div>');
+      }
+    }
   };
 
   // Listener

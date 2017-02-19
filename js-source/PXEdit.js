@@ -281,7 +281,6 @@
 
             $(".col-select button").removeClass('btn-primary active');
             $(".col-select button[data-widget='"+ widget_type +"']").addClass('btn-primary');
-            $(".col-select button[data-widget='"+ widget_changed +"']").addClass('active');
             $(".col-select").show();
 
             if($('#pdf-current-layout .widget.changed').length || current_layout !== layout){
@@ -295,8 +294,10 @@
           $('.col-select button').click(function(event){
               event.stopImmediatePropagation();
 
-              $('.col-select button').removeClass('active');
-              $(this).addClass('active');
+              $('.col-select button').removeClass('btn-primary');
+              $(this).addClass('btn-primary');
+
+              $('.col-select').click();
 
               var element = $('#pdf-current-layout .widget.selected');
               var selected = $(this).attr('data-widget');

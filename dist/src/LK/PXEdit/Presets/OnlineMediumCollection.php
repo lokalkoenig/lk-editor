@@ -41,6 +41,7 @@ class OnlineMediumCollection extends Preset {
     $value -> layout = "layout-triple-online";
     $value -> title = $this -> title;
     $value -> active = 1;
+    $value -> sample = [];
     $value -> content = array();
     
     $value -> content[] = [

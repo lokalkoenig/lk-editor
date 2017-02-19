@@ -15,7 +15,6 @@
         'versions': versions
       };
 
-      data.editable = parseInt($(this).children('.editor-widget-image').data('editable'));
       return data;
     }
 
@@ -28,11 +27,11 @@
     var key = 'w' + width + 'xh' + height;
     var sizetitle = editor.options.image_presets[key].title;
 
-    if(typeof options.editable === 'undefined'){
-      options.editable = 1;
-    }
+    options.editable = 1;
 
-    options.editable = parseInt(options.editable);
+    if($(this).hasClass('widget-edit-disabled')){
+      options.editable = 0;
+    }
 
     if(typeof options.fid === 'undefined' || options.fid === "0" || options.fid === 0){
       options.url = '';

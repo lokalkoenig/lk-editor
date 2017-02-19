@@ -356,33 +356,6 @@
   display: none;
   z-index: 10; }
 
-/**
- * Fullscreen
- */
-body.trumbowyg-body-fullscreen {
-  overflow: hidden; }
-
-.trumbowyg-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  z-index: 99999; }
-  .trumbowyg-fullscreen.trumbowyg-box,
-  .trumbowyg-fullscreen .trumbowyg-editor {
-    border: none; }
-  .trumbowyg-fullscreen .trumbowyg-editor,
-  .trumbowyg-fullscreen .trumbowyg-textarea {
-    height: calc(100% - 37px) !important;
-    overflow: auto; }
-  .trumbowyg-fullscreen .trumbowyg-overlay {
-    height: 100% !important; }
-  .trumbowyg-fullscreen .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
-    color: #222;
-    fill: transparent; }
 
 .trumbowyg-editor {
   /*

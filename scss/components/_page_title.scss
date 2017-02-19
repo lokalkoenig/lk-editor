@@ -6,5 +6,10 @@
 
   div {
     outline: none;
+
+    &:focus {
+      outline: 1px dotted #add8e6;
+      outline-offset: -1px;
+    }
   }
 }
