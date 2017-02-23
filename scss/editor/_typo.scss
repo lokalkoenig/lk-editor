@@ -67,6 +67,8 @@
   }
 
   .trumbowyg-editor {
+    word-wrap: break-word;
+
     > *:last-child {
       margin-bottom: 0;
     }

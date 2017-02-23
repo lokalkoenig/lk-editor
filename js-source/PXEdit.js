@@ -95,8 +95,6 @@
         },
 
         testOverflow: function(){
-          console.log('Test overvflow');
-
           $('.row-editor .widget').each(function(){
             var type = $(this).attr('data-widget');
 

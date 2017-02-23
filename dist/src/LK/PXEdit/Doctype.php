@@ -19,7 +19,11 @@ abstract class Doctype {
     var $field_instances = 0;
     
     abstract function getMockup();
-    
+    function getDefinition(){
+      return [];
+    }
+
+
     function getId(){
         return $this -> id;
     }    
