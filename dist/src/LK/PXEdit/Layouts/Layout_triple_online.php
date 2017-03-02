@@ -13,6 +13,34 @@ class Layout_triple_online extends Doctype {
     
     var $id = 'layout-triple-online';
     var $field_instances = 9;
+
+     function getDefinition() {
+      $def = [];
+
+      for($x = 0; $x < 3; $x++){
+        $def[$x] = [
+          'width' => 33,
+          'height' => 100,
+        ];
+
+        $def[$x]['fields'][] = [
+          'width' => 100,
+          'height' => 0,
+        ];
+
+        $def[$x]['fields'][] = [
+          'width' => 100,
+          'height' => 50,
+        ];
+
+        $def[$x]['fields'][] = [
+          'width' => 100,
+          'height' => 50,
+        ];
+      }
+  
+      return $def;
+    }
     
     function getMockup(){
       return '<h1 class="page-title"></h1>

@@ -43,12 +43,4 @@ class OpenDokument extends OnlineArgumentation {
     
       return $inputs;
     }
- 
-    function getWidgetOptions(){
-        return array(
-            'change_layout' => 1,
-            'change_input' => 1,
-            'change_category' => 1
-        );
-    }   
 }

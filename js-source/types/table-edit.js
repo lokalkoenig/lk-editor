@@ -270,18 +270,6 @@ $(function(){
 function check_table_out_of_bounds(element){
 
   // Fixed Table, used in Price-Calculations
-  if($(element).hasClass('widget-table-fixed')){
-
-    var space_taken = $('.widget-flexibile').height() + $('h1.page-title').height();
-    var space_avail = $('.row-editor').height();
-    var diff = space_avail - space_taken - parseInt($(element).css('margin-bottom'));
-
-    $(element).height(diff).children('div').height(diff);
-    $(element).parent('div').height(diff);
-
-    console.log(diff);
-  }
-
   var max_height = $(element).height();
   max_height -= $(element).find('.text').height();
 
@@ -300,9 +288,16 @@ function check_table_out_of_bounds(element){
         $(this).addClass('to-long');
       }
     });
+
+    if($(element).find('.to-long').length){
+       $(element).addClass('widget-is-overflown');
+    }
+    else {
+       $(element).removeClass('widget-is-overflown');
+    }
   }
   else {
-    $(element).removeClass('widget-overflow');
+    $(element).removeClass('widget-overflow widget-is-overflown');
     $(element).find('.to-long').removeClass('to-long');
   }
 }

@@ -11,20 +11,20 @@
   }
 
   tr td {
-    font-size: ($doc-p-size - 1px);
-    line-height: 13px;
-    padding: 5px 4px;
+    font-size: ($doc-p-size);
+    padding: 2.5px 3.5px;
+    line-height: 16px;
     word-break: break-word;
     vertical-align: top;
     border: 0;
     position: relative;
     white-space: normal;
     min-height: 20px;
-    height: 24.8px;
+    height: auto;
 
     p {
       margin: 0;
-      font-size: ($doc-p-size - 1px);
+      font-size: ($doc-p-size);
     }
 
     .trumbowyg-editor,

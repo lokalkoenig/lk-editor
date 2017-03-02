@@ -17,14 +17,14 @@ class OnlineArgumentation extends Preset {
     function getDefaultValues(){
 
         $sample_table = [
-                0 => [
-                    '<strong>Spalte 1</strong>',
-                    '<strong>Spalte 2</strong>',
-                ],
-                1 => [
-                    'Inhalt',
-                    'Inhalt',
-                ]
+          0 => [
+            '<strong>Spalte 1</strong>',
+            '<strong>Spalte 2</strong>',
+          ],
+          1 => [
+            'Inhalt',
+            'Inhalt',
+          ]
         ];
 
         $text_value = '<h2>Subtitel</h2><p>Text</p>';
@@ -110,10 +110,11 @@ class OnlineArgumentation extends Preset {
     }
 
     function getWidgetOptions(){
-        return array(
-            'layout_content' => 1,
-            'change_layout' => 1,
-            'change_input' => 1
-        );
+      return array(
+        'layout_content' => 1,
+        'change_layout' => 1,
+        'change_input' => 1,
+        'page_title' => 'Überschrift', 
+      );
     }
 }

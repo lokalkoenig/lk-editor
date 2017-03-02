@@ -232,10 +232,10 @@ a.editable-click:hover {
 
     .label-editor {
       position: absolute;
-      top: 42px;
+      top: 43px;
       border-radius: 0;
       transform: rotate(270deg);
-      margin-left: -43px;
+      margin-left: -44px;
       width: $doc-header-height;
       text-align: center;
     }
@@ -295,7 +295,7 @@ a.editable-click:hover {
 
   .row-editor {
     overflow: visible;
-    height: $doc-content-height - $doc-content-spacing;
+    height: $doc-content-height - $doc-content-spacing !important;
   }
 
   // Layout full needs an extra spacing
@@ -369,6 +369,11 @@ a.editable-click:hover {
       min-height: ($doc-content-height-relative) - $doc-content-spacing;
       overflow: hidden;
     }
+  }
+
+  // Table 100%
+  .float-100.widget.widget-table-fixed {
+    margin-right: $doc-content-spacing;
   }
 
   .float-2, .float-3 {

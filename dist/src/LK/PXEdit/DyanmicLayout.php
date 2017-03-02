@@ -109,8 +109,11 @@ class DyanmicLayout {
         $callback['options']['action'] = 'load-preset';
         $callback['options']['title'] = $obj ->getTitle();
         $callback['options']['id'] = 0;
-        $callback['options']['page_title'] = $obj ->getTitle();
-        
+
+        if(!isset($callback['options']['page_title'])){
+          $callback['options']['page_title'] = $obj ->getTitle();
+        }
+      
         $callback['inputs'] = $obj -> getManagedInputs();
         $callback['values'] -> preset = $preset_id;  
         

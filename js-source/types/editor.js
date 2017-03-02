@@ -73,10 +73,13 @@
 
               autogrow: editor_autogrow,
               lang: 'de',
-              semantic: false,
+              semantic: true,
               removeformatPasted: true
             }).on('tbwchange', function(){
+              PDFForm.cleanupMarkup($(reference).find('.trumbowyg-editor'));
               PDFForm.setChanged();
+
+
             }).on('tbwfocus', function(){
               $(reference).addClass('widget-active');
             }).on('tbwblur', function(){
@@ -88,6 +91,15 @@
     var height = $(reference).height() + 5;
     var content_height = 0;
 
+    // Special Tabellen-Widget
+    if($(reference).hasClass('widget-flexibile')){
+      var element_height = $(reference).outerHeight(true);
+      var container_height = $('.row-editor').height() - $('.row-editor .page-title').outerHeight(true);
+      var test = container_height - element_height - parseInt($(reference).css('margin-bottom'));
+      $('.row-editor .widget-table-fixed, .row-editor .widget-table-fixed>div').height(test);
+    }
+
+
     $(reference).find('.trumbowyg-editor > *').each(function(){
       content_height += $(this).outerHeight(true);
       if(content_height > height){
@@ -97,6 +109,13 @@
         $(this).removeClass('to-long');
       }
     });
+
+    if($(reference).find('.to-long').length){
+      $(reference).addClass('widget-is-overflown');
+    }
+    else {
+      $(reference).removeClass('widget-is-overflown');
+    }
   }
 
 }(window.jQuery));

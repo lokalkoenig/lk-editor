@@ -94,6 +94,26 @@
           this.testOverflow();
         },
 
+        cleanupMarkup: function(element){
+          var ref = this;
+
+          // what todo with italic an span
+          $(element).find('span').each(function(){
+            var span = $(this);
+            $(span).replaceWith($(span).text());
+          });
+
+          $(element).children('h2, p, h1').children('p,h2,ul,ol').each(function(){
+            $($(this)[0].outerHTML).insertBefore($(this).parent());
+            $(this).remove();
+          });
+
+          // remove empty elements
+          $(element).find('h2:empty, h1:empty').remove();
+
+          // remove all style
+          $(element).find('*').removeAttr('style');
+        },
         testOverflow: function(){
           $('.row-editor .widget').each(function(){
             var type = $(this).attr('data-widget');

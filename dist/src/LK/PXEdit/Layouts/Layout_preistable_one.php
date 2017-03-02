@@ -13,7 +13,34 @@ class Layout_preistable_one extends Doctype {
     
     var $id = 'layout-preistable_one';
     var $field_instances = 2;
-    
+
+    function getDefinition() {
+      $def = [];
+      $def[0] = [
+          'width' => 100,
+          'height' => 'auto',
+      ];
+
+      $def[0]['fields'][] = [
+        'width' => 100,
+        'height' => 100,
+      ];
+
+
+      $def[1] = [
+        'width' => 100,
+        'height' => 'calc',
+      ];
+
+      $def[1]['fields'][] = [
+        'left' => 0,
+        'width' => 100,
+        'height' => 100,
+      ];
+
+      return $def;
+    }
+
     function getMockup(){
       return '<h1 class="page-title"></h1>
              <div class="float-100 widget widget-flexibile" data-height="50" data-width="100" data-index="1" data-widget="editor"></div>

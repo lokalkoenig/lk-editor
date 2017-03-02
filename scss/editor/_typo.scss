@@ -24,23 +24,13 @@
     &.page-title {
       margin-bottom: $doc-hx-margin + $doc-hx-margin / 2;
     }
-
-    strong,
-    span {
-      font-weight: bold !important;
-    }
   }
 
   h2 {
     margin: 0;
     font-size: $doc-h2-size;
     margin-bottom: $doc-hx-margin;
-    font-weight: normal !important;
-
-    strong,
-    span {
-      font-weight: normal !important;
-    }
+    font-weight: normal;
   }
 
   p,
@@ -49,7 +39,7 @@
     margin: 0;
     font-size: $doc-p-size;
     margin-bottom: $doc-p-margin;
-    line-height: 13px;
+    line-height: 16px;
   }
 
   ul,
@@ -59,10 +49,11 @@
 
     li {
       font-size: $doc-p-size;
-      margin-bottom: $doc-p-margin / 2;
-      line-height: 1.1;
+      margin-bottom: 0;
+      line-height: 16px;
       margin-left: 0;
       padding-left: 3px;
+      margin-bottom: -2px;
     }
   }
 
@@ -74,3 +65,18 @@
     }
   }
 }
+
+.pxedit .widget-is-overflown {
+  > div {
+    &:before {
+      position: absolute;
+      border-bottom: 1px rgba(240, 128, 128, 0.3) dashed;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+      z-index: 100;
+      content: '';
+    }
+  }
+}
+

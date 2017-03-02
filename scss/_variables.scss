@@ -3,6 +3,8 @@ $doc-pdf-height: 794px;
 $doc-header-height: 125px;
 $doc-footer-height: 95px;
 
+$editor_top: 40px;
+
 // PXEdit
 $doc-content-height: 560px;
 $doc-title-height: 70px;
@@ -26,11 +28,11 @@ $doc-header-height: $doc-header-height * $doc-pdf-zoom;
 $doc-pdf-width: $doc-pdf-width * $doc-pdf-zoom;
 $doc-pdf-height: $doc-pdf-height * $doc-pdf-zoom;
 
-$doc-h1-size: (28px * $doc-pdf-zoom);
-$doc-h2-size: (22px * $doc-pdf-zoom);
+$doc-h1-size: (24pt * $doc-pdf-zoom);
+$doc-h2-size: (18pt * $doc-pdf-zoom);
 $doc-hx-margin: (12px * $doc-pdf-zoom);
 $doc-p-margin: (10px * $doc-pdf-zoom);
-$doc-p-size: (16px * $doc-pdf-zoom);
+$doc-p-size: (10pt * $doc-pdf-zoom);
 $editor-top: 73px;
 
 $editor-color: #3e5266;

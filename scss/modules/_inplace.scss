@@ -25,6 +25,10 @@
   }
 }
 
+.trumbowyg-overlay {
+  display: none !important;
+}
+
 .trumbowyg-Format-button {
   width: 90px !important;
   text-align: left !important;
@@ -34,12 +38,13 @@
 
 .trumbowyg-unorderedList-button  {
   overflow: hidden;
+  opacity: .7;
 
   &:before {
     content: '';
     width: 16px;
     display: block;
-    margin-left: 6px;
+    margin-left: 8px;
     height: 36px;
     line-height: 36px;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAk1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6eSN1AAAAMHRSTlMAAQIFBgcICQoiIyQmJygrLjk8PUBBQkVGSk1OT1FUVlyqq77AyszOz9PV2tzx8/2dc+tPAAAAuUlEQVQ4y+2Ttw7CQBBE3xkwOedokzM3//91FBi6s69AQiBes1OMtNLuDHwDQXy8LisevrUkaQgUF5GTFrEkSTaEhdxYTonqQJRiFLdETLKMq0Q0soyVxzwY6KX4zjCykg4lgJwbA4Tdad185odhZ+K1emQl7UsAeTfmeZ69gX7KeS4sE1V/2wu9Q+Eds2DzCm44mztpQhCfbj5V+Nf1Pb9+pqeWZSw/5i67rgMraVv0qGuhPa7yE9wBlq56vRz5h7sAAAAASUVORK5CYII=");
@@ -51,11 +56,12 @@
 
 .trumbowyg-orderedList-button  {
   overflow: hidden;
+  opacity: .7;
 
   &:before {
     content: '';
     width: 16px;
-    margin-left: 5px;
+    margin-left: 8px;
     display: block;
     height: 36px;
     line-height: 36px;
@@ -63,7 +69,7 @@
     background-size: contain;
     background-position: center 10px;
     background-repeat: no-repeat;
-    top: -2px;
+    top: -1px;
     position: relative;
   }
 }

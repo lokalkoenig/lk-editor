@@ -24,6 +24,8 @@ class Layout_50_50 extends Doctype {
         $def[0]['fields'][] = [
           'width' => 100,
           'height' => 100,
+          'left' => 0,
+          'top' => 0,
         ];
 
       $def[1] = [
@@ -34,6 +36,8 @@ class Layout_50_50 extends Doctype {
         $def[1]['fields'][] = [
           'width' => 100,
           'height' => 100,
+          'left' => 50,
+          'top' => 0,
         ];
 
       return $def;

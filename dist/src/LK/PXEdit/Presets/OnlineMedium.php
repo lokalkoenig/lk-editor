@@ -12,7 +12,7 @@ use LK\PXEdit\Preset;
 class OnlineMedium extends Preset {
     //put your code here
     var $category = 'online';
-    var $title = 'Online-Medien';
+    var $title = 'Online-Werbeformen';
 
 
     function getId() {
@@ -37,7 +37,7 @@ class OnlineMedium extends Preset {
         $value -> content[] = [
             'id' => 2,
             'widget' => 'editor',
-            'value' => '<h2>Formate</h2><p>Beschreibung</p>'
+            'value' => '<h2>Name der Werbeform</h2><p>Beschreibung</p>'
         ];
 
     return $value;
@@ -56,7 +56,7 @@ class OnlineMedium extends Preset {
           'change_input' => 0,
           'footnote' => 0,
           'title_edit' => 0,
-          'page_title' => $this->title,
+          'page_title' => 'Online-Werbeformen',
         ];
     }
 }
