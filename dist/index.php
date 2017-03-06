@@ -54,11 +54,11 @@ $html = $doc->getEditorTemplate($variables);
         </p>
 
         <p>
-            <button class="btn btn-default PXEdit-create" data-preset="OnlineMedium">Online-Medium (Part)</button>
+            <button class="btn btn-default PXEdit-create btn-2click" data-preset="OnlineMedium">Online-Medium (Part)</button>
         </p>
 
         <p>
-            <button class="btn btn-default PXEdit-create btn-2click" data-preset="Preisliste">Preisliste</button>
+            <button class="btn btn-default PXEdit-create" data-preset="Preisliste">Preisliste</button>
             <button class="btn btn-default PXEdit-create" data-preset="OpenDokument">Eigenes Dokument</button>
         </p>
 

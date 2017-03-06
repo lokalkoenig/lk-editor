@@ -40,6 +40,7 @@ gulp.task('scripts-editor-pack', function() {
                    "js-source/types/pagetitle.js",
                    "js-source/types/online_medium_chooser.js",
                    "js-source/types/editor.js",
+                   "node_modules/croppie/croppie.js"
                  ])
     .pipe(concat('PXEdit-packed.js'))
     //.pipe(strip())

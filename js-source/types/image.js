@@ -6,13 +6,13 @@
    $.fn.createImageWidget = function(options) {
     // serialize
     if(typeof options === "string"){
-      var versions = $(this).children('.editor-widget-image').data('versions');
       var data = {
         'widget': 'image',
-        'url': $(this).find('img').attr('src'),
-        'fid': $(this).children('.editor-widget-image').attr('data-fid'),
+        'url': $(this).children('.editor-widget-image').data('url'),
+        'fid': $(this).children('.editor-widget-image').data('fid'),
         'preset': $(this).children('.editor-widget-image').attr('data-image-present'),
-        'versions': versions
+        'zoom': $(this).children('.editor-widget-image').data('zoom'),
+        'points': $(this).children('.editor-widget-image').data('points'),
       };
 
       return data;
@@ -36,22 +36,29 @@
     if(typeof options.fid === 'undefined' || options.fid === "0" || options.fid === 0){
       options.url = '';
       options.fid = 0;
-      options.versions = {};
     }
-    else {
-      options.url =  options.versions[key];
-    }
-
+  
     if(options.editable === 0){
-      $(this).html('<div id="'+ image_id +'" data-editable="0" data-image-present="' + key  +'" data-fid="'+ options.fid +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"></div>');
-      $(this).children('div').data('versions', options.versions);
+      $(this).html('<div id="'+ image_id +'" data-editable="0" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"></div>');
       return ;
     }
 
     // init element
-    $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
+    $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
     var image_reference = $('#widget_image_' + options.id);
-    $(this).children('div').data('versions', options.versions);
+
+    if(options.url){
+      $(image_reference).data('zoom', options.zoom);
+      $(image_reference).data('points', options.points);
+    }
+
+    if(options.fid){
+      $(image_reference).find('img').hide();
+
+      setTimeout(function(){
+        initializeCroppieTool(image_reference);
+      }, 500);
+    }
 
     // Change this to the location of your server-side upload handler:
     $('#fileupload_' + image_id).fileupload({
@@ -83,11 +90,13 @@
             return ;
         }
 
-        editor.setChanged();
+        editor.setChanged(true);
 
-        $(image_reference).data('versions', data.result['versions']);
-        $(image_reference).attr('data-fid', data.result.image_id);
-        $(image_reference).find("img").attr('src', data.result['versions'][key]);
+        $(image_reference).data('fid', data.result.image_id);
+        $(image_reference).data('url', data.result.url);
+        
+        editor.createMessage("Das Bild wurde erfolgreich hochgeladen und in das Dokument eingepasst. Die können die Position des Bildes durch Verschieben verändern.", 2000);
+        initializeCroppieTool(image_reference, true);
       },
       progressall: function (e, data) {
          $(image_reference).addClass("in-progress");
@@ -106,3 +115,48 @@
     return this;
   };
 }(window.jQuery));
+
+
+var initializeCroppieTool = function(element, reset){
+  
+  var element_options = $(element).data();
+  var id = $(element).attr('id');
+  var crop_id = id + '_crop';
+
+  if($('#' + crop_id).length !== 0){
+    $('#' + crop_id).remove();
+  }
+
+  if(element_options.url !== ''){
+    $('#' + crop_id).remove();
+    $('<div id="'+ crop_id +'" style="position: absolute; left: 0; top: 0;"></div>').insertBefore(element);
+      var croppie_div = $('#' + crop_id).croppie({
+        //url: options.url,
+        viewport: { width: $(element).width(), height: $(element).height() },
+        boundary: { width: $(element).width(), height: $(element).height() },
+        showZoomer: false,
+
+        update: function (data) { }
+      });
+
+      var croppiechangelistener = function(){
+        $('#' + crop_id).on('update', function(ev, data) {
+          PXEdit_changed(true);
+          $(element).data('zoom', data.zoom);
+          $(element).data('points', data.points);
+        });
+      };
+      
+      if(typeof element_options.points !== 'undefined' && reset !== true){
+        croppie_div.croppie('bind', {url: element_options.url, 'points': element_options.points}).then(function(){
+          croppiechangelistener();
+        });
+      }
+      else {
+        croppie_div.croppie('bind', {url: element_options.url}).then(function(){
+          croppiechangelistener();
+          croppie_div.croppie('setZoom', '0.1');
+        });
+      }
+   }
+};

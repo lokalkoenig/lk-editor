@@ -89,9 +89,12 @@
             this.preset = value;
         },
 
-        setChanged: function(){
+        setChanged: function(skip){
           this.changed = true;
-          this.testOverflow();
+
+          if(typeof skip === 'undefined'){
+            this.testOverflow();
+          }
         },
 
         cleanupMarkup: function(element){
@@ -999,7 +1002,7 @@ function PXEdit(){
   return PDFForm;
 }
 
-function PXEdit_changed(){
+function PXEdit_changed(skip){
  var form = PXEdit();
- form.setChanged();
+ form.setChanged(skip);
 }

@@ -206,11 +206,11 @@
     // Ueberschrift
     if($(this).find('div.text').length === 1){
 
-      var maxlength = 27;
+      var maxlength = 24;
 
       var parent_height = parseInt($(this).data('width'));
       if(parent_height === 50){
-        maxlength = 40;
+        maxlength = 35;
       }
       
       if(parent_height === 100){

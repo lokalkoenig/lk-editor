@@ -13,6 +13,8 @@
 
 @import 'modules/editor';
 @import 'modules/inplace';
+@import 'modules/croppie';
+
 
 #PXEdit-message {
   position: fixed;
@@ -123,7 +125,7 @@ a.editable-click:hover {
 
   &.loading {
     + #PXEdit-backdrop {
-      background-image: url('/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif');
+      background-image: url('spinner.svg');
       background-position: center center;
       background-repeat: no-repeat;
     }
@@ -137,7 +139,7 @@ a.editable-click:hover {
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url('/sites/all/modules/lokalkoenig/vku/css/ajax-loader.gif');
+        background-image: url('spinner.svg');
         background-position: center center;
         background-repeat: no-repeat;
         background-color: rgba(255, 255, 255, .5);

@@ -30,14 +30,8 @@ class ImageUploader extends \UploadHandler {
            foreach ($content["files"] as $file){
                $json = [];
                $json['image_id'] = time();
-               $json['image_url'] = $file -> url;
-               
-               $json['versions'] = [];
-               while(list($key, $val) = each($derivates)){
-                  $json['versions'][$key] = $file -> url;
-               }
-               
-               // set Chmod
+               $json['url'] = $file -> url;
+
                chmod("files/" . $file -> name, 0644);
                $manager ->sendJson($json);
            }

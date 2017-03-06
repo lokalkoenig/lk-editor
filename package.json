@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "trumbowyg": "2.3.0",
-    "blueimp-file-upload": "9.14.1"
+    "blueimp-file-upload": "9.14.1",
+    "croppie": "2.4.0"
   },
   "devDependencies": {
     "gulp-clean-css": "^2.3.2",

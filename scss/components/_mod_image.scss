@@ -1,3 +1,8 @@
+
+.pxedit .widget[data-widget='image'] {
+  position: relative;
+}
+
 // Editor-widget
 .pxedit .editor-widget-image {
   cursor: pointer;
@@ -45,6 +50,7 @@
     bottom: -40px;
     left: 0;
     opacity: 0;
+    z-index: 100;
     transition: bottom .4s ease;
   }
 
