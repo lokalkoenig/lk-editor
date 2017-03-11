@@ -7,6 +7,7 @@ var minify = require('gulp-minify');
 var cleanCSS = require('gulp-clean-css');
 var stripCssComments = require('gulp-strip-css-comments');
 var scsslint = require('gulp-scss-lint');
+const autoprefixer = require('gulp-autoprefixer');
 
 var plugins = require('gulp-load-plugins')({
   scope: [
@@ -18,6 +19,10 @@ var plugins = require('gulp-load-plugins')({
 gulp.task('sass', () =>
     sass('scss/project.scss')
         .on('error', sass.logError)
+        .pipe(autoprefixer({
+            browsers: ['> 5%'],
+            cascade: false
+        }))
         .pipe(gulp.dest('dist/css/'))
 );
 
@@ -26,7 +31,7 @@ gulp.task('css-minfy', function() {
                    'dist/css/project.css'
                  ])
     .pipe(stripCssComments())
-    .pipe(cleanCSS())
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('./dist/css/'));
 });
 
@@ -68,7 +73,6 @@ gulp.task('scripts-trumbowyg-pack', function() {
                  ])
     .pipe(concat('trumbowyg.js'))
     .pipe(strip())
-    //.pipe(minify())
     .pipe(gulp.dest('./dist/js/'));
 });
 

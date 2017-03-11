@@ -40,12 +40,13 @@
   
     if(options.editable === 0){
       $(this).html('<div id="'+ image_id +'" data-editable="0" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"></div>');
-      return ;
+    }
+    else {
+      // init element
+      $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
     }
 
-    // init element
-    $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
-    var image_reference = $('#widget_image_' + options.id);
+     var image_reference = $('#widget_image_' + options.id);
 
     if(options.url){
       $(image_reference).data('zoom', options.zoom);
@@ -57,7 +58,11 @@
 
       setTimeout(function(){
         initializeCroppieTool(image_reference);
-      }, 500);
+      }, 100);
+    }
+
+    if(options.editable === 0){
+      return ;
     }
 
     // Change this to the location of your server-side upload handler:
@@ -129,7 +134,7 @@ var initializeCroppieTool = function(element, reset){
 
   if(element_options.url !== ''){
     $('#' + crop_id).remove();
-    $('<div id="'+ crop_id +'" style="position: absolute; left: 0; top: 0;"></div>').insertBefore(element);
+    $('<div id="'+ crop_id +'" class="editor-croppie"></div>').insertBefore(element);
       var croppie_div = $('#' + crop_id).croppie({
         //url: options.url,
         viewport: { width: $(element).width(), height: $(element).height() },
