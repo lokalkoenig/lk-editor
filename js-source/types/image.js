@@ -123,7 +123,7 @@
 
 
 var initializeCroppieTool = function(element, reset){
-  
+
   var element_options = $(element).data();
   var id = $(element).attr('id');
   var crop_id = id + '_crop';
