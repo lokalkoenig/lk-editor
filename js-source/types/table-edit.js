@@ -31,11 +31,17 @@
         var length = Object.keys(data.rows[0]).length;
 
         for (var i = 0; i < data.rows.length; i++) {
-          data.rows[i][length] = 'Neu';
+          if(i === 0) {
+            data.rows[i][length] = '<strong>Neue Spalte</strong>';
+          }
+          else {
+            data.rows[i][length] = '';
+          }
         }
 
         PXEdit_changed();
         $(this).createTableWdiget(data);
+        check_table_out_of_bounds(this);
         return ;
       }
 
@@ -47,6 +53,7 @@
         $(this).find('.option-table li[data-preset="'+ additional+'"]').addClass('active');
         $(this).find('table').attr('data-preset', additional);
         PXEdit_changed();
+        check_table_out_of_bounds(this);
         return ;
       }
 
@@ -66,6 +73,7 @@
         data.rows = new_data;
         PXEdit_changed();
         $(this).createTableWdiget(data);
+        check_table_out_of_bounds(this);
         return true;
       }
 
@@ -82,6 +90,7 @@
         data.rows[data.rows.length] = new_set;
         PXEdit_changed();
         $(this).createTableWdiget(data);
+        check_table_out_of_bounds(this);
         return true;
       }
 

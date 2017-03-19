@@ -215,28 +215,33 @@
         },
 
         showLayoutChooserCallout: function(){
-         var msg = '<div class="pxedit-layout-changer"><p><strong>Layout und Inhalt auswählen</strong></p>\n\
-                    <hr /><div class="layouts-scaled"><div class="layouts small-format-presentation">'+ $('#available-layouts').html() +'</div></div>\n\
+
+          // save the current title as option
+          var saved = this.generateSave();
+          this.options.page_title = saved.page_title;
+
+         var msg = '<div class="pxedit-layout-changer"><p style="margin-bottom: 0"><strong>Layout auswählen</strong></p><p class="pxedit-small" style="margin-bottom: 10px;">Bitte wählen Sie das Layout Ihres Dokuments aus.</p>\n\
+                    <div class="layouts-scaled"><div class="layouts small-format-presentation">'+ $('#available-layouts').html() +'</div></div><hr />\n\
                     ';
 
 
           if(this.options.change_input){
-            msg += '<hr /><div class="clearfix collapse in small-format-presentation" id="current-layout">\n\
+            msg += '<div class="clearfix collapse in small-format-presentation" id="current-layout">\n\
               <p style="margin-bottom: 0"><strong>Inhalt auswählen</strong></p>\n\
               <p class="pxedit-small">Bitte wählen Sie für den jeweiligen Bereich eine Inhaltsart aus.</p>\n\
               <div class="row">\n\
               <div class="col-xs-6"><p style="margin-bottom: 0"><label>Bereiche *</label></p>\n\
               <div id="pdf-current-layout"><!-- Current Layout --></div>\n\
-              </div><div class="col-xs-6 col-select"></div></div>';
+              </div><div class="col-xs-6 col-select"></div></div><hr />';
           }
 
           msg += '</div></div>';
 
           if(this.is_new()){
-            msg += '<hr /><button type="button" class="btn btn-success btn-change-layout"><span class="glyphicon glyphicon-ok"></span> Speichern und weiter</button>';
+            msg += '<button type="button" class="btn btn-success btn-change-layout"><span class="glyphicon glyphicon-ok"></span> Speichern und weiter</button>';
           }
           else {
-            msg += '<hr /><p class="pxedit-small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
+            msg += '<p class="pxedit-small">* Durch das Ändern der Vorlage oder Eingabeformate gehen bereits eingegebene Daten verloren.</p></div></div><hr /><button type="button" class="btn btn-success btn-change-layout" disabled><span class="glyphicon glyphicon-ok"></span> Layout ändern</button>';
           }
           
           this.createMessage(msg);

@@ -39,16 +39,24 @@
     }
   
     if(options.editable === 0){
-      $(this).html('<div id="'+ image_id +'" data-editable="0" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"></div>');
+      $(this).html('<div id="'+ image_id +'" data-editable="0" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"></div>');
     }
     else {
       // init element
-      $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><img src="'+ options.url +'"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div><span class="btn btn-default fileinput-button"><i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...</span><br /><small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small><input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div>');
+      $(this).html('<div id="'+ image_id +'" data-editable="1" data-image-present="' + key  +'" data-fid="'+ options.fid +'" data-url="'+ options.url +'" class="editor-widget editor-widget-image"><div class="progress"><div class="progress-bar progress-bar-primary"></div></div>\n\
+      <div class="btn btn-default fileinput-button">\n\
+        <div class="image-new">\n\
+          <i class="glyphicon glyphicon-plus"></i><span> Bild auswählen...<br />\n\
+          <small>JPG, PNG (Maximal 2MB, <br />' + sizetitle + '</small>\n\
+        </div>\n\
+        <div class="image-uploaded">Sie können das Bild verschieben und durch das Mausrad den sichtbaren Ausschnitt vergrößern. <strong class="pull-right">Anderes Bild auswählen</strong></div>\n\
+      <input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div></div>');
     }
 
      var image_reference = $('#widget_image_' + options.id);
 
     if(options.url){
+      $(image_reference).addClass('has-image');
       $(image_reference).data('zoom', options.zoom);
       $(image_reference).data('points', options.points);
     }
@@ -96,11 +104,12 @@
         }
 
         editor.setChanged(true);
-
+        $(image_reference).attr('data-fid', data.result.image_id);
         $(image_reference).data('fid', data.result.image_id);
         $(image_reference).data('url', data.result.url);
+        $(image_reference).addClass('has-image');
         
-        editor.createMessage("Das Bild wurde erfolgreich hochgeladen und in das Dokument eingepasst. Die können die Position des Bildes durch Verschieben verändern.", 2000);
+        editor.createMessage("Das Bild wurde erfolgreich hochgeladen und in das Dokument eingepasst. Sie können die Position des Bildes durch Verschieben verändern.", 3000);
         initializeCroppieTool(image_reference, true);
       },
       progressall: function (e, data) {
@@ -134,7 +143,7 @@ var initializeCroppieTool = function(element, reset){
 
   if(element_options.url !== ''){
     $('#' + crop_id).remove();
-    $('<div id="'+ crop_id +'" class="editor-croppie"></div>').insertBefore(element);
+    $(element).append('<div id="'+ crop_id +'" class="editor-croppie"></div>');
       var croppie_div = $('#' + crop_id).croppie({
         //url: options.url,
         viewport: { width: $(element).width(), height: $(element).height() },

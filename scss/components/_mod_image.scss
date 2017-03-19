@@ -15,15 +15,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-
-    img {
-      display: none;
-    }
-  }
-
-  img {
-    height: 100%;
-    width: auto;
   }
 
   .progress {
@@ -39,10 +30,6 @@
     .progress {
       display: block;
     }
-
-    img {
-      opacity: .2;
-    }
   }
 
   .btn {
@@ -57,13 +44,45 @@
   &:hover {
     .btn {
       opacity: 1;
-      bottom: 0;
+      bottom: 0 !important;
+    }
+  }
+
+  &.has-image {
+    .fileinput-button {
+      right: 0;
+      background: #fff;
+      border: 0;
+      bottom: -50px;
+      opacity: .8;
+      white-space: normal;
+      transition: .2;
+      
+      &:hover {
+        opacity: 1;
+      }
+     
+      .image-new {
+        display: none;
+      }
+
+      .image-uploaded {
+        display: block;
+        font-size: small;
+        line-height: 15px;
+        text-align: left;
+      }
     }
   }
 
   .fileinput-button {
     overflow: hidden;
- 
+    cursor: pointer;
+
+    .image-uploaded {
+      display: none;
+    }
+
     input {
       position: absolute;
       top: 0;
