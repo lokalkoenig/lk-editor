@@ -6,8 +6,7 @@
 
    // options.value
   $.fn.createFootnoteWidget = function(options) {
-    $(this).html('<div data-maxlength="120" contenteditable="true">' +  options.value + '</div>');
-    //$(".textarea").limitText({selector: ".textarea_feedback", text : "chars rem"});
+    $(this).html('<div data-maxlength="200" contenteditable="true">' +  options.value + '</div>');
     $(this).find('div').PXEdit_inputLimitation({});
   };
 

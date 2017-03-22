@@ -14,7 +14,8 @@
     line-height: 1.5;
     text-align: right;
     outline: none;
-   
+    white-space: nowrap;
+    
     &:focus {
       outline: 1px dotted #add8e6;
       outline-offset: 2px;

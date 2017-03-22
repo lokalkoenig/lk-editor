@@ -84,7 +84,7 @@
         var length = Object.keys(data.rows[0]).length;
 
         for(var i = 0; i < length; i++){
-            new_set[i] = "";
+          new_set[i] = "";
         }
 
         data.rows[data.rows.length] = new_set;
@@ -123,10 +123,20 @@
       return true;
    }
 
+   var col_max = parseInt($(this).data('col-max'));
+   var col_min = parseInt($(this).data('col-min'));
+   
+   if(!col_max) {
+     col_max = 4;
+   }
 
-    if(typeof options.title === "undefined"){
-        options.title = '<h2>Tabelle</h2>';
-    }
+   if(!col_min) {
+    col_min = 2;
+   }
+
+   if(typeof options.title === "undefined"){
+      options.title = '<h2>Tabelle</h2>';
+   }
 
     // add a heading here
     if(typeof options.rows === "undefined"){
@@ -155,7 +165,7 @@
     var length = Object.keys(options.rows[0]).length;
     var element = this;
 
-    if(length < 4){
+    if(length < col_max){
       markup += '<div class="option2"><span data-action="add-col" title="Spalte hinzufügen" class="PXEdit-table-add-col glyphicon glyphicon-plus"></span></div>';
     }
 
@@ -169,7 +179,7 @@
         var int_key = parseInt(key);
         var cell = '<textarea class="table-edit">' + options.rows[i][key] + '</textarea>';
 
-        if(i === 0 && int_key >= 2){
+        if(i === 0 && int_key >= col_min){
           cell = '<span class="option"><span data-col="'+  int_key  + '" title="Spalte löschen" class="PXEdit-table-col-remove glyphicon glyphicon-minus"></span></span>' + cell;
         }
 

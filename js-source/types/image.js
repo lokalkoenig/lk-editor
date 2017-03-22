@@ -4,6 +4,7 @@
     "use strict";
 
    $.fn.createImageWidget = function(options) {
+
     // serialize
     if(typeof options === "string"){
       var data = {
@@ -18,9 +19,9 @@
       return data;
     }
 
-    var image_id = 'widget_image_' + options.id;
+    var image_id = 'widget_image_' + $(this).data('index');
     var editor = PXEdit();
-
+    
     // sizes are multiplied by 3
     var width = $(this).attr('data-width');
     var height = $(this).attr('data-height');
@@ -52,9 +53,9 @@
         <div class="image-uploaded">Sie können das Bild verschieben und durch das Mausrad den sichtbaren Ausschnitt vergrößern. <strong class="pull-right">Anderes Bild auswählen</strong></div>\n\
       <input id="fileupload_'+ image_id +'" type="file" name="files[]"></span></div></div>');
     }
-
-     var image_reference = $('#widget_image_' + options.id);
-
+  
+    var image_reference = $('#' + image_id);
+  
     if(options.url){
       $(image_reference).addClass('has-image');
       $(image_reference).data('zoom', options.zoom);
@@ -99,8 +100,8 @@
         $(image_reference).removeClass("in-progress");
 
         if(typeof data.result.image_id === 'undefined'){
-            editor.createMessage("Leider gab es einen Fehler beim hochladen der Bilddatei. Bitte versuchen Sie es erneut.");
-            return ;
+          editor.createMessage("Leider gab es einen Fehler beim hochladen der Bilddatei. Bitte versuchen Sie es erneut.");
+          return ;
         }
 
         editor.setChanged(true);
@@ -108,8 +109,7 @@
         $(image_reference).data('fid', data.result.image_id);
         $(image_reference).data('url', data.result.url);
         $(image_reference).addClass('has-image');
-        
-        editor.createMessage("Das Bild wurde erfolgreich hochgeladen und in das Dokument eingepasst. Sie können die Position des Bildes durch Verschieben verändern.", 3000);
+        editor.createMessage("Das Bild wurde erfolgreich hochgeladen und in das Dokument eingepasst. Sie können die Position des Bildes durch Verschieben verändern.", 4000);
         initializeCroppieTool(image_reference, true);
       },
       progressall: function (e, data) {

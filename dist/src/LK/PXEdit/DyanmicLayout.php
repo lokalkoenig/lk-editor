@@ -19,12 +19,12 @@ class DyanmicLayout {
     ];
 
     var $presets = [
-        'OnlineArgumentation' => '\\LK\PXEdit\\Presets\\OnlineArgumentation',
-        'OnlineMedium' => '\\LK\PXEdit\\Presets\\OnlineMedium',
-        'OnlineMediumCollection' => '\\LK\PXEdit\\Presets\\OnlineMediumCollection',
-        'OpenDokument' => '\\LK\PXEdit\\Presets\\OpenDokument',
-        'Preisliste' => '\\LK\PXEdit\\Presets\\Preisliste',
-        'RegionalArgumentation' => '\\LK\PXEdit\\Presets\\RegionalArgumentation',
+      'OnlineArgumentation' => '\\LK\PXEdit\\Presets\\OnlineArgumentation',
+      'OnlineMedium' => '\\LK\PXEdit\\Presets\\OnlineMedium',
+      'OnlineMediumCollection' => '\\LK\PXEdit\\Presets\\OnlineMediumCollection',
+      'OpenDokument' => '\\LK\PXEdit\\Presets\\OpenDokument',
+      'Preisliste' => '\\LK\PXEdit\\Presets\\Preisliste',
+      'RegionalArgumentation' => '\\LK\PXEdit\\Presets\\RegionalArgumentation',
     ];
     
     function __construct($verlagsmodus = 0){ 

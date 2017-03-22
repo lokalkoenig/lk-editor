@@ -13,3 +13,17 @@
     }
   }
 }
+
+.row-editor[data-layout="layout-full"] {
+  h1.page-title {
+    margin-right: 0 !important;
+  }
+}
+
+.pxedit-maxlength {
+  white-space: nowrap;
+
+  &.is-overflowed {
+    text-decoration: line-through;
+  }
+}
