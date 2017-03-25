@@ -4,6 +4,8 @@
 
   $.fn.createTableWdiget = function(options, additional) {
 
+    var tableFixed = $(this).hasClass('widget-table-fixed');
+
     if(typeof options === "string"){
 
       if(options === 'check'){
@@ -32,10 +34,10 @@
 
         for (var i = 0; i < data.rows.length; i++) {
           if(i === 0) {
-            data.rows[i][length] = '<strong>Neue Spalte</strong>';
+            data.rows[i][length] = '<p><strong>Neue Spalte</strong></p>';
           }
           else {
-            data.rows[i][length] = '';
+            data.rows[i][length] = '<p></p>';
           }
         }
 
@@ -84,7 +86,7 @@
         var length = Object.keys(data.rows[0]).length;
 
         for(var i = 0; i < length; i++){
-          new_set[i] = "";
+          new_set[i] = "<p></p>";
         }
 
         data.rows[data.rows.length] = new_set;
@@ -97,9 +99,15 @@
       // serialize
       if(options === "serialize"){
 
+        var title =  $(this).find('.text h2>div').text();
+
+        if(tableFixed) {
+          title = '';
+        }
+
         var data = {
           'widget': 'table',
-          'title': $(this).find('.text h2>div').html(),
+          'title': title,
           'rows': []
         };
 
@@ -123,8 +131,8 @@
       return true;
    }
 
-   var col_max = parseInt($(this).data('col-max'));
-   var col_min = parseInt($(this).data('col-min'));
+   var col_max = parseInt($(this).data('max-cols'));
+   var col_min = parseInt($(this).data('min-cols'));
    
    if(!col_max) {
      col_max = 4;
@@ -154,7 +162,7 @@
       ];
     }
 
-    var tableFixed = $(this).hasClass('widget-table-fixed');
+    
     $(this).addClass('widget-table');
 
     var markup = '<div>';
@@ -199,6 +207,7 @@
     });
 
     $(this).find("textarea.table-edit").each(function(){
+
       var td = this;
       $(this).trumbowyg({
         btns: [['bold', 'italic']],
@@ -218,9 +227,10 @@
       })
       // Change
       .on('tbwchange', function(){
-          PXEdit_changed();
-        });
+        PDFForm.cleanupMarkup($(td).closest('.trumbowyg-box').find('.trumbowyg-editor'));
+        PXEdit_changed();
       });
+    });
 
     // Ueberschrift
     if($(this).find('div.text').length === 1){
@@ -272,15 +282,6 @@ $(function(){
   $("#PXEdit").on('click', 'table .PXEdit-table-row-remove', function(){
     $(this).closest('.widget').createTableWdiget('removerow', parseInt($(this).attr('data-row')));
   });
-
-   //$("#PXEdit").on('keypress', '.trumbowyg-editor', function(e){
-   //  var element = this;
-   //
-   //  if ((element.offsetHeight < element.scrollHeight) || (element.offsetWidth < element.scrollWidth)) {
-   //    e.preventDefault();
-   //    return false;
-   //  }
-   //});
 });
 
 }(window.jQuery));

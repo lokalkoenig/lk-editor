@@ -28,11 +28,13 @@ $doc-header-height: $doc-header-height * $doc-pdf-zoom;
 $doc-pdf-width: $doc-pdf-width * $doc-pdf-zoom;
 $doc-pdf-height: $doc-pdf-height * $doc-pdf-zoom;
 
-$doc-h1-size: (24pt * $doc-pdf-zoom);
+$doc-h1-size: (26pt * $doc-pdf-zoom);
 $doc-h2-size: (18pt * $doc-pdf-zoom);
 $doc-hx-margin: (12px * $doc-pdf-zoom);
 $doc-p-margin: (10px * $doc-pdf-zoom);
 $doc-p-size: (10pt * $doc-pdf-zoom);
 $editor-top: 73px;
+$doc-general-line-height: 15px;
+
 
 $editor-color: #3e5266;

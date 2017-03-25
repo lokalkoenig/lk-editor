@@ -39,7 +39,11 @@
     margin: 0;
     font-size: $doc-p-size;
     margin-bottom: $doc-p-margin;
-    line-height: 16px;
+    line-height: $doc-general-line-height;
+  }
+
+  p:empty {
+    min-height: $doc-general-line-height;
   }
 
   ul,
@@ -50,7 +54,7 @@
     li {
       font-size: $doc-p-size;
       margin-bottom: 0;
-      line-height: 16px;
+      line-height: $doc-general-line-height;
       margin-left: 0;
       padding-left: 3px;
       margin-bottom: -2px;

@@ -78,8 +78,6 @@
             }).on('tbwchange', function(){
               PDFForm.cleanupMarkup($(reference).find('.trumbowyg-editor'));
               PDFForm.setChanged();
-
-
             }).on('tbwfocus', function(){
               $(reference).addClass('widget-active');
             }).on('tbwblur', function(){

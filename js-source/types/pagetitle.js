@@ -30,7 +30,7 @@ $.fn.PXEdit_inputLimitation = function(option) {
         };
 
         var isOverflowed = function (obj){
-          if(obj.scrollWidth > obj.clientWidth) {
+          if((obj.scrollWidth) > (obj.clientWidth)) {
             $(obj).addClass('is-overflowed');
           }
           else {
@@ -46,17 +46,27 @@ $.fn.PXEdit_inputLimitation = function(option) {
 
               // on Enter
               textAreas[i].onkeypress = function (e) {
-                    if((e.keyCode === 13)) {
-                      e.preventDefault();
-                    }
+                  
+                  if((e.keyCode === 13)) {
+                    e.preventDefault();
+                  }
                 };
 
                textAreas[i].onkeydown = function (e) {
-                    if(!(e.keyCode === 8)) {
-                        maxLength = this.attributes['data-maxlength'].value;
-                        countText(this, maxLength);
-                        return this.innerText.length < maxLength;
+                 if(e.keyCode === 37 || e.keyCode === 39) {
+                   return true;
+                 }
+
+                 if(!(e.keyCode === 8)) {
+                    maxLength = this.attributes['data-maxlength'].value;
+                    countText(this, maxLength);
+
+                    if($(this).hasClass('is-overflowed')) {
+                      return false;
                     }
+
+                    return this.innerText.length < maxLength;
+                  }
                 };
                 textAreas[i].onkeyup = function () {
                     maxLength2 = this.attributes['data-maxlength'].value;

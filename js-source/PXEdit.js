@@ -100,6 +100,9 @@
         cleanupMarkup: function(element){
           var ref = this;
 
+         
+          $(element).children('br').replaceWith('<p><br></p>');
+
           // what todo with italic an span
           $(element).find('span').each(function(){
             var span = $(this);
@@ -116,6 +119,8 @@
 
           // remove all style
           $(element).find('*').removeAttr('style');
+
+          console.log($(element).html());
         },
         testOverflow: function(){
           $('.row-editor .widget').each(function(){
