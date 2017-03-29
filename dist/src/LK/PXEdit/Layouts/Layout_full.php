@@ -15,17 +15,15 @@ class Layout_full extends Doctype {
     var $field_instances = 1;
     
     function getDefinition() {
-      $def = [];
-      $def[0] = [
-          'width' => 100,
-          'height' => 100,
-      ];
-      
-      $def[0]['fields'][] = [
+      $def = ['regions' => 1];
+
+      $def['fields'][] = [
         'width' => 100,
         'height' => 100,
+        'left' => 0,
+        'top' => 0,
+        'last' => TRUE,
       ];
-      
       return $def;
     }
 

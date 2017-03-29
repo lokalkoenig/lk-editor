@@ -14,45 +14,41 @@ class Layout_preistable_three extends Doctype {
     var $field_instances = 4;
 
     function getDefinition() {
-      $def = [];
-      $def[0] = [
-          'width' => 100,
-          'height' => 'auto',
-      ];
+      
+      $def = ['regions' => 3];
 
-      $def[0]['fields'][] = [
-        'width' => 100,
-        'height' => 100,
-      ];
-
-
-      $def[1] = [
-        'width' => 100,
-        'height' => 'calc',
-      ];
-
-      $def[1]['fields'][] = [
+      $def['fields'][] = [
+        'width' => 'full',
+        'height' => 'auto',
         'left' => 0,
+        'top' => 0,
+        'last' => TRUE,
+      ];
+      
+      $def['fields'][] = [
         'width' => 33,
-        'height' => 100,
+        'height' => 'calc',
+        'left' => 0,
+        'top' => 'calc',
       ];
 
-      $def[1]['fields'][] = [
+      $def['fields'][] = [
+        'width' => 33,
+        'height' => 'calc',
         'left' => 33,
-        'width' => 33,
-        'height' => 100,
+        'top' => 'calc',
       ];
-
-      $def[1]['fields'][] = [
+      
+      $def['fields'][] = [
+        'width' => 33,
+        'height' => 'calc',
         'left' => 66,
-        'width' => 33,
-        'height' => 100,
+        'top' => 'calc',
+        'last' => TRUE,
       ];
-
+      
       return $def;
     }
-
-
 
     function getMockup(){
       return '<h1 class="page-title"></h1>

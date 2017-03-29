@@ -223,11 +223,11 @@
       })
       // Blur
       .on('tbwblur', function(){
+        PDFForm.cleanExtensiveMarkup($(td).closest('.trumbowyg-box').find('.trumbowyg-editor'));
         $(td).closest('.trumbowyg-box').removeClass('widget-active');
       })
       // Change
       .on('tbwchange', function(){
-        PDFForm.cleanupMarkup($(td).closest('.trumbowyg-box').find('.trumbowyg-editor'));
         PXEdit_changed();
       });
     });

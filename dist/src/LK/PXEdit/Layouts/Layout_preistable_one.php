@@ -16,26 +16,21 @@ class Layout_preistable_one extends Doctype {
 
     function getDefinition() {
       $def = [];
-      $def[0] = [
-          'width' => 100,
-          'height' => 'auto',
-      ];
+      $def = ['regions' => 1];
 
-      $def[0]['fields'][] = [
-        'width' => 100,
-        'height' => 100,
-      ];
-
-
-      $def[1] = [
-        'width' => 100,
-        'height' => 'calc',
-      ];
-
-      $def[1]['fields'][] = [
+      $def['fields'][] = [
+        'width' => 'full',
+        'height' => 'auto',
         'left' => 0,
-        'width' => 100,
-        'height' => 100,
+        'top' => 0,
+        'last' => TRUE,
+      ];
+
+      $def['fields'][] = [
+        'width' => 'full',
+        'height' => 'calc',
+        'left' => 0,
+        'top' => 'calc',
       ];
 
       return $def;

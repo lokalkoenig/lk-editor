@@ -15,31 +15,29 @@ class Layout_50_50_left extends Doctype {
     var $field_instances = 3;
 
     function getDefinition() {
-      $def = [];
-      $def[0] = [
-          'width' => 50,
-          'height' => 100,
+      $def = ['regions' => 2];
+   
+      $def['fields'][] = [
+        'width' => 50,
+        'height' => 50,
+        'left' => 0,
+        'top' => 0,
       ];
 
-        $def[0]['fields'][] = [
-          'width' => 100,
-          'height' => 50,
-        ];
-
-        $def[0]['fields'][] = [
-          'width' => 100,
-          'height' => 50,
-        ];
-
-      $def[1] = [
-          'width' => 50,
-          'height' => 100,
+      $def['fields'][] = [
+        'width' => 50,
+        'height' => 50,
+        'left' => 0,
+        'top' => 50,
+        'last' => TRUE,
       ];
 
-        $def[1]['fields'][] = [
-          'width' => 100,
-          'height' => 100,
-        ];
+      $def['fields'][] = [
+        'width' => 50,
+        'height' => 100,
+        'left' => 50,
+        'top' => 0,
+      ];
 
       return $def;
     }

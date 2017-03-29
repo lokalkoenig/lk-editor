@@ -15,39 +15,33 @@ class Layout_preistable_two extends Doctype {
     var $field_instances = 3;
 
     function getDefinition() {
-      $def = [];
-      $def[0] = [
-          'width' => 100,
-          'height' => 'auto',
-      ];
 
-      $def[0]['fields'][] = [
-        'width' => 100,
-        'height' => 100,
-      ];
+      $def = ['regions' => 2];
 
-      
-      $def[1] = [
-        'width' => 100,
-        'height' => 'calc',
-      ];
-
-      $def[1]['fields'][] = [
+      $def['fields'][] = [
+        'width' => 'full',
+        'height' => 'auto',
         'left' => 0,
-        'width' => 50,
-        'height' => 100,
+        'top' => 0,
+        'last' => TRUE,
       ];
 
-      $def[1]['fields'][] = [
-        'left' => 50,
+      $def['fields'][] = [
         'width' => 50,
-        'height' => 100,
+        'height' => 'calc',
+        'left' => 0,
+        'top' => 'calc',
       ];
-      
+
+      $def['fields'][] = [
+        'width' => 50,
+        'height' => 'calc',
+        'left' => 50,
+        'top' => 'calc',
+      ];
+
       return $def;
     }
-
-
 
     function getMockup(){
       return '<h1 class="page-title"></h1> 

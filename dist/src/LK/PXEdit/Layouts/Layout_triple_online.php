@@ -15,30 +15,32 @@ class Layout_triple_online extends Doctype {
     var $field_instances = 9;
 
      function getDefinition() {
-      $def = [];
+      $def = ['regions' => 3];
 
-      for($x = 0; $x < 3; $x++){
-        $def[$x] = [
+      for($x = 1; $x < 4; $x++){
+
+        $index = $x * 1;
+
+        $def['fields'][] = [
+          'skip' => TRUE,
+        ];
+
+        // image
+        $def['fields'][] = [
           'width' => 33,
-          'height' => 100,
-        ];
-
-        $def[$x]['fields'][] = [
-          'width' => 100,
-          'height' => 0,
-        ];
-
-        $def[$x]['fields'][] = [
-          'width' => 100,
           'height' => 50,
+          'left' => ($index - 1) * 33,
+          'top' => 0,
         ];
 
-        $def[$x]['fields'][] = [
-          'width' => 100,
+        $def['fields'][] = [
+          'width' => 33,
           'height' => 50,
+          'left' => ($index - 1) * 33,
+          'top' => 50,
         ];
       }
-  
+     
       return $def;
     }
     

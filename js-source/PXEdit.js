@@ -97,11 +97,18 @@
           }
         },
 
+        cleanExtensiveMarkup: function(element) {
+
+          $(element).contents().filter(function(){return this.nodeType === 3}).wrap('<p />');
+
+          // remove orphaned BR
+          $(element).children('br').replaceWith('<p><br></p>');
+
+          this.cleanupMarkup(element);
+        },
+
         cleanupMarkup: function(element){
           var ref = this;
-
-         
-          $(element).children('br').replaceWith('<p><br></p>');
 
           // what todo with italic an span
           $(element).find('span').each(function(){
@@ -119,8 +126,7 @@
 
           // remove all style
           $(element).find('*').removeAttr('style');
-
-          console.log($(element).html());
+          //console.log($(element).html());
         },
         testOverflow: function(){
           $('.row-editor .widget').each(function(){

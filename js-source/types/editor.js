@@ -81,6 +81,7 @@
             }).on('tbwfocus', function(){
               $(reference).addClass('widget-active');
             }).on('tbwblur', function(){
+              PDFForm.cleanExtensiveMarkup($(reference).find('.trumbowyg-editor'));
               $(reference).removeClass('widget-active');
             });
    };
