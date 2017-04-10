@@ -98,12 +98,6 @@
         },
 
         cleanExtensiveMarkup: function(element) {
-
-          $(element).contents().filter(function(){return this.nodeType === 3}).wrap('<p />');
-
-          // remove orphaned BR
-          $(element).children('br').replaceWith('<p><br></p>');
-
           this.cleanupMarkup(element);
         },
 
@@ -120,9 +114,6 @@
             $($(this)[0].outerHTML).insertBefore($(this).parent());
             $(this).remove();
           });
-
-          // remove empty elements
-          $(element).find('h2:empty, h1:empty').remove();
 
           // remove all style
           $(element).find('*').removeAttr('style');

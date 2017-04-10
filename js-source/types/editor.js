@@ -76,7 +76,7 @@
               semantic: true,
               removeformatPasted: true
             }).on('tbwchange', function(){
-              PDFForm.cleanupMarkup($(reference).find('.trumbowyg-editor'));
+              //PDFForm.cleanupMarkup($(reference).find('.trumbowyg-editor'));
               PDFForm.setChanged();
             }).on('tbwfocus', function(){
               $(reference).addClass('widget-active');

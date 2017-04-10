@@ -42,10 +42,6 @@
     line-height: $doc-general-line-height;
   }
 
-  p:empty {
-    min-height: $doc-general-line-height;
-  }
-
   ul,
   ol {
     margin-left: 0;
@@ -58,6 +54,23 @@
       margin-left: 0;
       padding-left: 3px;
       margin-bottom: -2px;
+
+      * {
+        display: inline;
+        margin: 0;
+        font-size: $doc-p-size;
+        margin-bottom: 0;
+        line-height: $doc-general-line-height;
+        font-weight: normal;
+      }
+
+      strong, b {
+        font-weight: bold;
+      }
+
+      i, em {
+        font-style: italic;
+      }
     }
   }
 

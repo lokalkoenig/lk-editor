@@ -68,8 +68,9 @@ gulp.task('scripts-fileupload-pack', function() {
 
 gulp.task('scripts-trumbowyg-pack', function() {
   return gulp.src([
-                   'js-source/trumbowyg/trumbowyg.min.js',
-                   "js-source/trumbowyg/langs/de.min.js"
+                   'node_modules/thumbowyg/dist/trumbowyg.min.js',
+                   'node_modules/thumbowyg/dist/plugins/cleanpaste/trumbowyg.cleanpaste.js',
+                   "node_modules/thumbowyg/dist/langs/de.min.js"
                  ])
     .pipe(concat('trumbowyg.js'))
     .pipe(strip())

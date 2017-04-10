@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "trumbowyg": "2.3.0",
+    "trumbowyg": "2.5.1",
     "blueimp-file-upload": "9.14.1",
     "croppie": "2.4.0"
   },
