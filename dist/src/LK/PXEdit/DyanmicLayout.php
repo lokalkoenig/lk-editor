@@ -14,7 +14,7 @@ class DyanmicLayout {
     var $image_presets = [
         'w100xh100' => ['width' => 770, 'height' => 368],
         'w50xh50' => ['width' => 372, 'height' => 172],
-        'w50xh100' => ['width' => 400, 'height' => 368],
+        'w50xh100' => ['width' => 372, 'height' => 368],
         'w33xh50' => ['width' => 240, 'height' => 172],
     ];
 
