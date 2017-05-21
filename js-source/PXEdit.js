@@ -876,6 +876,17 @@
           $('#PXEdit').removeClass('open').fadeOut();
         },
 
+        calculatePosition: function() {
+          var height_calc = $(window).height() - 635;
+          if(height_calc > 0) {
+            console.log(height_calc);
+            $('#PXEdit').css('top', height_calc / 2);
+          }
+          else {
+            $('#PXEdit').css('top', 0);
+          }
+        },
+
         /**
          * Warns the User on leaving the Page
          *
@@ -932,11 +943,15 @@
     // selfregister events & listeners
     jQuery(document).ready(function(){
       var editor = PXEdit();
-
+      editor.calculatePosition();
       editor.addListener();
       editor.keepAlive();
       editor.callback_url = $("#PXEdit").data('callback');
       editor.callback_id = $("#PXEdit").data('callback-id');
+
+      $(window).on('resize', function(){
+        editor.calculatePosition();
+      });
 
       console.log('PXEdit v' + editor.version  + ' ('+ editor.version_date + ')');
 
@@ -985,6 +1000,8 @@
         if($('#PXEdit').hasClass('loading') && !$('#PXEdit').hasClass('open')){
           $('#PXEdit').removeClass('loading');
         }
+
+        $('.layout-menu').css('top', $('#PXEdit').css('top'));
 
         setTimeout(function(){
             $('.layout-menu').addClass('open');
